@@ -1,5 +1,7 @@
 package view;
 
+
+// ceci est un commentaire
 import java.awt.Dimension;
 import java.util.ArrayList;
 
