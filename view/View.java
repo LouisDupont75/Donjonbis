@@ -1,7 +1,6 @@
 package view;
 
-
-// ceci est un commentaire
+import modele.GameObject;
 import java.awt.Dimension;
 import java.util.ArrayList;
 
@@ -20,7 +19,7 @@ public class View extends JFrame implements Observeur {
 		board = new Board(this);
 		this.controlleur=controller;
 		this.setVisible(true);
-		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE); //pour voir l'entierete du quadrillage, çad "Automatically
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE); //pour voir l'entierete du quadrillage, çad "Automatically
 //hide and dispose the frame after invoking any registered WindowListener objects.
 		this.setSize(new Dimension(Board.LENGTH*Board.SIZE+100,Board.HEIGTH*Board.SIZE+100));// Ou Board.LENGTH est un 
 // envoi de message qui nous donne acces a la dimension length
@@ -48,6 +47,10 @@ public class View extends JFrame implements Observeur {
 
 	public ArrayList<Personnage> getPersonnagesToDraw() {
 		ArrayList<Personnage> list= controlleur.listPersonnagesToDraw();
+		return list;
+	}
+	public ArrayList<GameObject> getObjectsToDraw() {
+		ArrayList<GameObject> list= controlleur.listObjectsToDraw();
 		return list;
 	}
 

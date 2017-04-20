@@ -1,5 +1,5 @@
 package view;
-
+import modele.GameObject;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -20,7 +20,8 @@ public class Board extends JPanel { // Attention, variables publiques
 	}
 	public void paint(Graphics g) { // A chaque fois qu'on appelle repaint qui appelle paint, on appelle ces 2 methodes
 		paintGrille(g); 
-		paintPersonnages(g);
+		//paintPersonnages(g);
+		paintObjects(g);
 		}
 	public void paintGrille(Graphics g){
 		for(int i = 0; i<=HEIGTH; i++){							// Vire la valeur 20 et parametrer ca
@@ -36,13 +37,26 @@ public class Board extends JPanel { // Attention, variables publiques
 			}
 		}
 	}
-	public void paintPersonnages(Graphics g){
+	public void paintObjects(Graphics g){
+		ArrayList<GameObject> liste=view.getObjectsToDraw();
+		for (GameObject go : liste){
+			int x = go.getPositionX();
+			int y = go.getPositionY();
+			Color color = go.getColor();
+			g.setColor(color);
+			g.fillRect(x*SIZE, y*SIZE, SIZE-1, SIZE-1);
+			g.setColor(Color.BLACK);
+			g.drawRect(x*SIZE, y*SIZE, SIZE-1, SIZE-1);
+			
+		}
+	}
+	/*public void paintPersonnages(Graphics g){ // Methode pas necessaire
 		ArrayList<Personnage> liste=view.getPersonnagesToDraw();
 		for (Personnage p: liste) {
 			int x = p.getPositionX();
 			int y = p.getPositionY();
-			g.setColor(p.getCouleur());
+			g.setColor(p.getColor());
 			g.fillRect(x*SIZE, y*SIZE, SIZE-1, SIZE-1); 
 		}
-	}
+	}*/
 }

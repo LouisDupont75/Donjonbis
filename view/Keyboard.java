@@ -2,6 +2,10 @@ package view;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+
+import modele.Model;
+import modele.Player;
 
 public class Keyboard implements KeyListener {
 	private View view;
@@ -13,6 +17,39 @@ public class Keyboard implements KeyListener {
 	//quelles clés keyEvent
 	@Override
 	public void keyPressed(KeyEvent event) {
+		int key = event.getKeyCode(); // L'evenement recu est stocke dans key
+		Model model=view.getControlleur().getModel();
+		
+		switch (key){   // Switch est ici un statement particulier. Il est ici prefere à la structure if-then-else 
+			case KeyEvent.VK_RIGHT: 
+				view.getControlleur().move(2); // 2 Droite
+				break;
+			case KeyEvent.VK_LEFT:
+				view.getControlleur().move(0);// 0 Gauche
+				break;
+			case KeyEvent.VK_DOWN:
+				view.getControlleur().move(3);//3bas
+				break;
+			case KeyEvent.VK_UP:
+				view.getControlleur().move(1);//1 haut
+				break;	
+			case KeyEvent.VK_B:
+				model.dropBomb(0);
+				break;		
+			case KeyEvent.VK_U:
+				((Player) model.getPlayer()).addItem(model.getObjects(),model.getInventaire()); 
+				// Downcast de Personnage vers Player
+// Comment faire pour "caster"  l'arraylist GameObject étant dans model en une ArrayList d'Object ? 				
+				
+				break;	
+			default: 
+				System.out.println("Mauvaise touche");
+				break;
+				
+				
+			}
+	}
+	/*public void keyPressed(KeyEvent event) {
 		int key = event.getKeyCode();
 		//switch = else if
 		switch(key) {
@@ -28,6 +65,9 @@ public class Keyboard implements KeyListener {
 		case KeyEvent.VK_RIGHT:
 			view.getControlleur().move(2); // 2 Droite
 			break;
+		case KeyEvent.VK_B:
+			view.getControlleur().getModel().dropBomb(0);
+			break;	
 		default: 
 			System.out.println("Mauvaise touche");
 			break;
@@ -37,7 +77,7 @@ public class Keyboard implements KeyListener {
 		
 		
 		
-	}
+	}*/
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
