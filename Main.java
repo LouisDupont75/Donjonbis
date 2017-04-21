@@ -1,10 +1,11 @@
+
 import controller.Controller;
 import modele.Model;
 import modele.ThrMoveEnnemy;
 import view.Keyboard;
 import view.View;
 import modele.Ennemy;
-public class Main { //salut
+public class Main { 
 	
 	public static void main(String[] args) {
 		int i;
