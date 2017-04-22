@@ -14,7 +14,7 @@ public class Main {
 		View view = new View(controller);
 		Keyboard keyboardListener=new Keyboard(view);
 		model.addObserver(view);
-		for ( i=1; i<=model.getPersonnages().size()-1;i++){// Lance les threads servant à faire bouger les ennemis
+		for ( i=1; i<=model.getPersonnages().size()-1;i++){// Lance les threads servant Ã  faire bouger les ennemis
 			// de maniere automatique
 			Thread t = new Thread((Runnable) model.getPersonnages().get(i));// Cast vers Runnable
 			t.start();
@@ -26,4 +26,4 @@ public class Main {
 }	
 
 
-//dernier commentaire
+
