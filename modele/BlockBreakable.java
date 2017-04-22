@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class BlockBreakable extends Case implements ExplodableObserver,Demisable {
 	private ArrayList<DemisableObserver> demisableobservers =new ArrayList<DemisableObserver>();
+	//commentaire dans block, Donjonbis sur eclipse 
 	public BlockBreakable (int[] position, Color color){ // commentaire ds branche test
 		super(position,color);
 	}
