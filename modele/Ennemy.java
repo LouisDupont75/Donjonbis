@@ -25,11 +25,11 @@ public class Ennemy extends Personnage implements Demisable,ExplodableObserver {
 		return bomb;
 	}
 	
-	public void move(int X, int Y){
+	public synchronized void move(int X, int Y){
 		/*this.position[0] = this.getPositionX() + 2*X;
 		this.position[1] = this.getPositionY() + 2*Y;*/
-		int nextX=this.getPositionX() + 2*X;
-		int nextY=this.getPositionY() + 2*Y;
+		int nextX=this.getPositionX() + X;
+		int nextY=this.getPositionY() + Y;
 		boolean obstacle = false;
 		for(GameObject object : model.getObjects()){
 			if(object.isAtPosition(new int[]{nextX,nextY})){
