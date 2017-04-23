@@ -34,7 +34,7 @@ public class Keyboard implements KeyListener {
 				view.getControlleur().move(1);//1 haut
 				break;	
 			case KeyEvent.VK_B:
-				model.dropBomb(0);
+				model.dropBomb();
 				break;		
 			case KeyEvent.VK_U:
 				((Player) model.getPlayer()).addItem(model.getObjects(),model.getInventaire()); 

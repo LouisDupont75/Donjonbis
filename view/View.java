@@ -5,11 +5,8 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import controller.Controller;
 import modele.Observeur;
-import modele.Personnage;
 
 public class View extends JFrame implements Observeur {
 	private Controller controlleur;
@@ -19,16 +16,17 @@ public class View extends JFrame implements Observeur {
 		board = new Board(this);
 		this.controlleur=controller;
 		this.setVisible(true);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE); //pour voir l'entierete du quadrillage, çad "Automatically
-//hide and dispose the frame after invoking any registered WindowListener objects.
-		this.setSize(new Dimension(Board.LENGTH*Board.SIZE+100,Board.HEIGTH*Board.SIZE+100));// Ou Board.LENGTH est un 
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE); //pour donner l'effet "fermer la fenetre" au X rouge en haut a droite
+		this.setSize(new Dimension(board.getlength()*board.getsize()+18,board.getheight()*board.getsize()+42));// Ou Board.LENGTH est un 
 // envoi de message qui nous donne acces a la dimension length
 		
 		// A QUOI SERVENT LE +18 ET +42 ???
-		
+		//18=> taille de la bordure horizontale de la JFRAME
+		//42=> taille de la bordure verticale de la JFRAME
 		
 		this.setTitle("Donjon");
 		this.setContentPane(board);
+		board.repaint();
 	}
 
 	@Override
@@ -44,14 +42,9 @@ public class View extends JFrame implements Observeur {
 	public Board getBoard() {
 		return board;
 	}
-
-	public ArrayList<Personnage> getPersonnagesToDraw() {
-		ArrayList<Personnage> list= controlleur.listPersonnagesToDraw();
-		return list;
-	}
 	public ArrayList<GameObject> getObjectsToDraw() {
 		ArrayList<GameObject> list= controlleur.listObjectsToDraw();
 		return list;
 	}
-
+	
 }

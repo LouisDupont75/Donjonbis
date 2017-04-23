@@ -5,8 +5,8 @@ import java.awt.Color;
 public abstract class Personnage extends GameObject { // 
 	protected int life; //point de vie pv
 	protected Double dmg;
-	private Model model;
-	private int numberPlayer;
+	protected Model model; //utiliser les get et les set au lieu des protected
+	//private int numberPlayer;
 	/// Constructeur
 	public Personnage(int life,Double dmg, int[] position,Color color) {
 		super(position,color);

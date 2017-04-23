@@ -4,12 +4,11 @@ import modele.GameObject;
 import java.util.ArrayList;
 
 import modele.Model;
-import modele.Personnage;
 import view.Board;
 
 public class Controller {
 	private Model model;
-	static final int player1=0;
+	//private int player1=0;
 	public Controller(Model model) {
 		this.model=model;
 	}
@@ -20,27 +19,26 @@ public class Controller {
 		switch (direction) {
 		case 1:
 			if (oldY>0) {
-				model.movePlayer(0, -1, player1);
-				System.out.println("personnage en " + oldX + " et " + String.valueOf(oldY-1) );
-				}
+				model.movePlayer(0, -1);}//, player1);}
+			//System.out.println("personnage en " + oldX + " et " + String.valueOf(oldY-1) );
 			break;
+			
 		case 0:
 			if (oldX>0) {
-				model.movePlayer(-1, 0, player1);}
-			System.out.println("personnage en " + String.valueOf(oldX-1) + " et " + oldY );
-
+				model.movePlayer(-1, 0);}//, player1);}, player1);}
+			//System.out.println("personnage en " + String.valueOf(oldX-1) + " et " + oldY );
 			break;
+			
 		case 2: //static majuscule
-			if (oldX<Board.LENGTH-1) {
-				model.movePlayer(1, 0, player1);}
-			System.out.println("personnage en " + String.valueOf(oldX+1) + " et " + oldY );
-
+			if (oldX<model.getLength()-1) {
+				model.movePlayer(1, 0);}//, player1);}, player1);}
+			//System.out.println("personnage en " + String.valueOf(oldX+1) + " et " + oldY );
 			break;
+			
 		case 3:
-			if (oldY<Board.HEIGTH-1) {
-				model.movePlayer(0, 1, player1);}
-			System.out.println("personnage en " + oldX + " et " + String.valueOf(oldY+1) );
-
+			if (oldY<model.getHeight()-1) {
+				model.movePlayer(0, 1);}//, player1);}, player1);}
+			//System.out.println("personnage en " + oldX + " et " + String.valueOf(oldY+1) );
 			break;
 			
 		
@@ -49,9 +47,6 @@ public class Controller {
 	
 	public Model getModel(){
 		return this.model;
-	}
-	public ArrayList<Personnage> listPersonnagesToDraw() {
-		return  model.getPersonnages();
 	}
 	public ArrayList<GameObject> listObjectsToDraw() {
 		return  model.getGameObjects();

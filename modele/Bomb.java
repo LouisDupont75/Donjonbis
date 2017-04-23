@@ -8,7 +8,11 @@ public class Bomb extends Case implements Demisable,Runnable,Explodable {
 	private ArrayList<DemisableObserver> demisableObservers = new ArrayList<DemisableObserver>();
 	private ArrayList<ExplodableObserver> explodableObservers = new ArrayList<ExplodableObserver>();
 
-	
+	public Bomb (int[] position){
+		super(position,Color.YELLOW);
+		setDuration(3000);
+		setRange(1);
+	}
 	public Bomb (int[] position,int duration,int range,Color color){
 		super(position,color);
 		setDuration(duration);
@@ -73,7 +77,7 @@ public class Bomb extends Case implements Demisable,Runnable,Explodable {
 	}
 	
 	@Override
-	synchronized public void demisableNotifyObserver() {
+	synchronized public void demisableNotifyObserver() {//TODO ici changer pour faire des explosions en cercle
 		ArrayList<GameObject> loot = new ArrayList<GameObject>();
 		int range = this.getRange();
 		int x = this.getPositionX();
@@ -106,7 +110,5 @@ public class Bomb extends Case implements Demisable,Runnable,Explodable {
 	@Override
 	public boolean isObstacle() {
 		return false;
-	}
-	
-	
+	}	
 }

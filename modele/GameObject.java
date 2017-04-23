@@ -1,7 +1,6 @@
 package modele;
 
 import java.awt.Color;
-import java.util.ArrayList;
 
 
 public abstract class GameObject {
@@ -55,6 +54,11 @@ public abstract class GameObject {
 	       
 	public boolean isAtPosition(int [] pos){
 		return this.position[0] == pos[0] && this.position[1] == pos[1];
+	}
+	
+	public Bomb dropBomb(){
+		System.out.println("blocks ne peuvent pas déposer de bombes");
+		return null;
 	}
 	
 	public abstract boolean isObstacle();

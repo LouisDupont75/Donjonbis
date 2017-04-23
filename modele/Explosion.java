@@ -39,7 +39,7 @@ public class Explosion extends GameObject implements Runnable, Demisable {
 	}
 
 	@Override
-	public void run() {
+	public void run() {//TODO ne pas juste afficher le message d'erreur, mieux: Systeme.out.println("interruption");
 		while(true){
 			try {
 				Thread.sleep(this.duration);

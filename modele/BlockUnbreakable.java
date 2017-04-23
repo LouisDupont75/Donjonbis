@@ -11,5 +11,4 @@ public class BlockUnbreakable extends Case{
 	public boolean isObstacle(){
 		return true;
 	}
-
 }
