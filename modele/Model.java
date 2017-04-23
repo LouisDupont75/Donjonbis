@@ -40,7 +40,12 @@ public class Model implements Observable,DemisableObserver {//Runnable
 
 		//System.out.println("ennemi2 fini");
 		
-		//TODO completer avec map[
+		Map map=new Map();
+		ArrayList<Case> listeDeBlocksPourLaCarte = map.getBlocList();
+		for (Case bloc:listeDeBlocksPourLaCarte) {
+			gameobjects.add(bloc);
+		}
+		/*//TODO completer avec map[
 		BlockBreakable block1 =new BlockBreakable(new int[]{10,2},Color.DARK_GRAY);
 		block1.demisableAttach(this);
 		gameobjects.add(block1);
@@ -52,7 +57,7 @@ public class Model implements Observable,DemisableObserver {//Runnable
 		block2.moveableAttach((Player)this.getPlayer());
 		gameobjects.add(block2);
 		//fin]
-
+*/
 		//System.out.println("bloc2 fini");
 		
 		Object potion =new Potion(new int []{13,2},Color.PINK);

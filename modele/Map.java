@@ -3,13 +3,18 @@ package modele;
 import java.util.ArrayList;
 
 public class Map {
-	ArrayList<Case> blocList= new ArrayList<Case>(); //on appelle le constructeur du truc
-	MapGeneration map1;
+	private ArrayList<Case> blocList= new ArrayList<Case>(); //on appelle le constructeur du truc
+	private MapGeneration map1;
 	public Map() {
 		this.map1=new MapGeneration(150);
-		this.blocList.add(new BlockUnbreakable(null, null)); 
-		this.blocList.add(new BlockBreakable(null, null));
-		
+		int[][] carte=map1.createMap();
+		for(int i=0;i<carte.length;i++) {
+			for(int j=0;j<carte[0].length;j++) {
+				if (carte[i][j]==1) {
+					blocList.add(new BlockUnbreakable(i,j));
+				}
+			}
+		}		
 	}
 	public ArrayList<Case> getBlocList() {
 		return blocList;

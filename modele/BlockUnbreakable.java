@@ -7,6 +7,10 @@ public class BlockUnbreakable extends Case{
 		super(position,color);
 	}
 	
+	public BlockUnbreakable(int i, int j) {
+		super(new int[]{i,j},Color.BLACK);
+	}
+
 	@Override
 	public boolean isObstacle(){
 		return true;
