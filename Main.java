@@ -1,9 +1,10 @@
+
 import controller.Controller;
 import modele.Model;
 import view.Keyboard;
 import view.View;
-public class Main { //salut
-	
+
+public class Main { 
 	public static void main(String[] args) {
 		//System.out.println("start");
 		Model model= new Model();
@@ -18,4 +19,4 @@ public class Main { //salut
 }	
 
 
-//test
+
