@@ -23,7 +23,7 @@ public class InventaireMap extends JPanel {
 	
 	public void paint(Graphics g) { 
 		paintGrille(g); 
-		//paintObjects(g);
+		paintObjects(g);
 		}
 	public void paintGrille(Graphics g){
 		for(int i = 0; i<=HEIGTH; i++){	
@@ -39,23 +39,19 @@ public class InventaireMap extends JPanel {
 	}
 	public void paintObjects(Graphics g){
 		ArrayList<modele.Object> liste = this.view.getObjectsInventaire();
+		int x = 33;
+		int y = 0;
 		for (modele.Object go : liste){
-			int x = 1;
-			int y = 1;
 			Color color = go.getColor();
 			g.setColor(color);
-			/*while (this.isOccupied(x,y)){
-				y++;
-				if(y==5){
-					y=1;
-					x++;
-				}
-			}*/
-			
 			g.fillRect(x*SIZE, y*SIZE, SIZE-1, SIZE-1);
 			g.setColor(Color.BLACK);
 			g.drawRect(x*SIZE, y*SIZE, SIZE-1, SIZE-1);
-			
+			x++;
+			if(x==37){
+				x=33;
+				y++;
+			}
 		}
 	}
 	/*public boolean isOccupied(int x, int y){

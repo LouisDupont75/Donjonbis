@@ -64,6 +64,12 @@ public class Model implements Observable,DemisableObserver {//Runnable
 		objects.add(potion); // A optimiser avec la méthode player.utilize
 		gameobjects.add(potion); //potion c'est une case, un gameObject, il ne faut pas dupliquer les informations
 		potion.demisableAttach(this);
+		invent.addObject(potion); //Ligne ecrite juste pour tester InventaireMap
+		Object potion2 =new Potion(new int []{14,2},Color.ORANGE);
+		objects.add(potion); // A optimiser avec la méthode player.utilize
+		gameobjects.add(potion); //potion c'est une case, un gameObject, il ne faut pas dupliquer les informations
+		potion.demisableAttach(this);
+		invent.addObject(potion2);
 
 		//System.out.println("potion fini");
 		
