@@ -23,7 +23,7 @@ public class Model implements Observable,DemisableObserver {//Runnable
         
  		Inventaire invent = new Inventaire();
  		setInventaire(invent);
-		Player player = new Player(4,1.0,new int[]{5,5},Color.GREEN,this);
+		Player player = new Player(4,1.0,new int[]{3,6},Color.GREEN,this);
 		gameobjects.add(player);
 
 		//System.out.println("player fini");
@@ -40,13 +40,13 @@ public class Model implements Observable,DemisableObserver {//Runnable
 
 		//System.out.println("ennemi2 fini");
 		
-		Map map=new Map();
+		/*Map map=new Map();
 		ArrayList<Case> listeDeBlocksPourLaCarte = map.getBlocList();
 		for (Case bloc:listeDeBlocksPourLaCarte) {
 			gameobjects.add(bloc);
-		}
-		/*//TODO completer avec map[
-		BlockBreakable block1 =new BlockBreakable(new int[]{10,2},Color.DARK_GRAY);
+		}*/
+		//TODO completer avec map[
+		/*BlockBreakable block1 =new BlockBreakable(new int[]{10,2},Color.DARK_GRAY);
 		block1.demisableAttach(this);
 		gameobjects.add(block1);
 
@@ -55,9 +55,9 @@ public class Model implements Observable,DemisableObserver {//Runnable
 		BlockMoveable block2 =new BlockMoveable(new int[]{13,2},Color.GRAY);
 		block2.demisableAttach(this);
 		block2.moveableAttach((Player)this.getPlayer());
-		gameobjects.add(block2);
+		gameobjects.add(block2);*/
 		//fin]
-*/
+
 		//System.out.println("bloc2 fini");
 		
 		Object potion =new Potion(new int []{13,2},Color.PINK);
@@ -152,6 +152,9 @@ public class Model implements Observable,DemisableObserver {//Runnable
 	}
 	public ArrayList<Object> getObjects(){
 		return objects;
+	}
+	public ArrayList <modele.Object> getObjectsInventaire(){
+		return this.inventaire.getObjects();
 	}
 	public void setInventaire(Inventaire inventaire){
 		this.inventaire=inventaire;

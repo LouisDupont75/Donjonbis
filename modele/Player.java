@@ -11,12 +11,9 @@ public class Player extends Personnage implements DemisableObserver,MoveableObse
 	}
 	
 	public boolean isObstacle (){
-		return true;
+		return false;
 	}
-	
-	 
-	
-	///
+		///
 	
     public void utilize(ArrayList<Object> go){ 
     	//
@@ -63,9 +60,6 @@ public class Player extends Personnage implements DemisableObserver,MoveableObse
 		if(obstacle== false){
 			block.move(x, y);
 			this.move(x, y);
-			//System.out.println(x + " et " + y);
-			//System.out.println(block.getPositionX() + " et "+ block.getPositionY());
-			//System.out.println(this.getPositionX() + " et "+ this.getPositionY());
 			model.notifyObserver();
 		}
 		

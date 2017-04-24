@@ -2,6 +2,9 @@ package modele;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Iterator;
+
+//import java.util.Iterator;
 public class Ennemy extends Personnage implements Demisable,ExplodableObserver {
 	private Model model;
 	private int numberEnnemy;
@@ -21,27 +24,24 @@ public class Ennemy extends Personnage implements Demisable,ExplodableObserver {
 	}
 	
 	public Bomb dropBomb (){
-		Bomb bomb=new Bomb(position);
-		return bomb;
+		return null;//les ennemis ne lachent pas encore de bombes
 	}
 	
-	public synchronized void move(int X, int Y){
-		/*this.position[0] = this.getPositionX() + 2*X;
-		this.position[1] = this.getPositionY() + 2*Y;*/
-		int nextX=this.getPositionX() + X;
-		int nextY=this.getPositionY() + Y;
+	public void moveEnnemy(int X, int Y){
 		boolean obstacle = false;
-		for(GameObject object : model.getObjects()){
-			if(object.isAtPosition(new int[]{nextX,nextY})){
-				obstacle = object.isObstacle();
+		ArrayList<GameObject> list =model.getGameObjects();
+		/*synchronized (list) {
+		    for (Iterator it = list.iterator(); it.hasNext(); ) {   //TODO Solve the ConcurrentModificationException
+		        GameObject f = (GameObject) it.next();*/
+		/*for(GameObject object : model.getGameObjects()){
+				obstacle=this.obstacleNextPosition(object, X, Y);
+				if(obstacle == true ){
+					break;
+				}
 			}
-			if(obstacle == true){
-				break;
-			}
-		}
-		if(obstacle == false){
-			this.position[0]=nextX;
-			this.position[1]=nextY;
+		*/
+		if(obstacle == false ){
+			this.move(X, Y);
 			model.notifyObserver();
 		}
 	}	

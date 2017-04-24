@@ -50,17 +50,6 @@ public class Bomb extends Case implements Demisable,Runnable,Explodable {
 		this.demisableNotifyObserver();
 		this.explodableNotifyObserver();
 	}
-	/*@Override                           Cette methode semble peu utile
-	public void exploded(Explodable e){
-		Bomb bomb=(Bomb) e;
-		boolean distanceX = Math.abs(this.getPositionX() - bomb.getPositionX()) <= bomb.getRange() && this.getPositionX() == bomb.getPositionX();
-		boolean distanceY = Math.abs(this.getPositionX() - bomb.getPositionX()) <= bomb.getRange() && this.getPositionX() == bomb.getPositionX();
-		if(distanceX || distanceY){
-			this.detonated = true;
-			this.demisableNotifyObserver();		
-		}
-	}*/
-	
 	@Override
 	public void explodableAttach(ExplodableObserver eo){
 		explodableObservers.add(eo);

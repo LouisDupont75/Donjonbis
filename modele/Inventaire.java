@@ -9,4 +9,10 @@ public class Inventaire {
 	public void addObject(Object object){
 		objectslist.add(object);
 	}
+	public ArrayList<modele.Object> getObjects(){
+		return this.objectslist;
+	}
+	public void setObjects(ArrayList<Object> objectslist){
+		this.objectslist=objectslist;
+	}
 }

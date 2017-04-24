@@ -10,13 +10,13 @@ public  class ThrMoveEnnemy implements Runnable  {
 	public void run(){
 		try {
 			while(true){
-    			ennemy.move(1,0);
+    			ennemy.moveEnnemy(1,0);
     			Thread.sleep(200);
-    			ennemy.move(0,-1);
+    			ennemy.moveEnnemy(0,-1);
     			Thread.sleep(200);
-    			ennemy.move(-1,0);
+    			ennemy.moveEnnemy(-1,0);
     			Thread.sleep(200);
-    			ennemy.move(0,1);
+    			ennemy.moveEnnemy(0,1);
     			Thread.sleep(200);
 			}
 		}
