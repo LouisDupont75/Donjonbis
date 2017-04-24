@@ -30,16 +30,22 @@ public class Ennemy extends Personnage implements Demisable,ExplodableObserver {
 	public void moveEnnemy(int X, int Y){
 		boolean obstacle = false;
 		ArrayList<GameObject> list =model.getGameObjects();
-		/*synchronized (list) {
+		synchronized (list) {
 		    for (Iterator it = list.iterator(); it.hasNext(); ) {   //TODO Solve the ConcurrentModificationException
-		        GameObject f = (GameObject) it.next();*/
+		        GameObject f = (GameObject) it.next();
+		        obstacle=this.obstacleNextPosition(f, X, Y);
+				if(obstacle == true ){
+					break;
+				}
+		    }
+		}
 		/*for(GameObject object : model.getGameObjects()){
 				obstacle=this.obstacleNextPosition(object, X, Y);
 				if(obstacle == true ){
 					break;
 				}
-			}
-		*/
+			}*/
+		
 		if(obstacle == false ){
 			this.move(X, Y);
 			model.notifyObserver();

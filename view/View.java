@@ -19,7 +19,7 @@ public class View extends JFrame implements Observeur {
 
 	public View(Controller controller,Model model) {
 		board = new Board(this);
-		inventaire=new InventaireMap(this);
+		inventaire=new InventaireMap(this);		
 		this.controlleur=controller;
 		this.model=model;
 		this.setVisible(true);
@@ -33,7 +33,7 @@ public class View extends JFrame implements Observeur {
 		
 		this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);//Maximise la fenetre (+simple)
 		this.setTitle("Donjon");
-		this.setContentPane(inventaire);
+		this.setContentPane(board);
 		//this.setContentPane(board);// TODO Faire en sorte que le Jpanel de l'inventaire soit en overlay (transparence)
 		//et non par dessus
 		board.repaint();
