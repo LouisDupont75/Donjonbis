@@ -8,7 +8,6 @@ import view.Board;
 
 public class Controller {
 	private Model model;
-	//private int player1=0;
 	public Controller(Model model) {
 		this.model=model;
 	}

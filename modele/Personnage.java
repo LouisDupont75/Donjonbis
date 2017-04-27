@@ -1,6 +1,7 @@
 package modele;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 public abstract class Personnage extends GameObject { // 
 	protected int life; //point de vie pv
@@ -34,5 +35,8 @@ public abstract class Personnage extends GameObject { //
 	///
 	
 	public abstract Bomb dropBomb();
+	public abstract void utilize(GameObject object);
+	public abstract void addItem(ArrayList<GameObject> objects,Inventaire inventaire);
+	public abstract void dropItem(GameObject object);
 	
 }

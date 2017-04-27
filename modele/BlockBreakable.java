@@ -10,8 +10,6 @@ public class BlockBreakable extends Case implements ExplodableObserver,Demisable
 		super(position,color);
 	}
 	@Override
-	public void utilize (Object object){}
-	@Override
 	public boolean isObstacle(){
 		return true;
 	}
@@ -20,6 +18,8 @@ public class BlockBreakable extends Case implements ExplodableObserver,Demisable
 		demisableobservers.add(demi);
 		
 	}
+	@Override
+	public void demisableRemove(DemisableObserver po){};
 	@Override
 	public void demisableNotifyObserver(){
 		for(DemisableObserver po:demisableobservers){

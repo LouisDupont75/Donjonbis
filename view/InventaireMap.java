@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -45,10 +46,10 @@ public class InventaireMap extends JPanel implements MouseListener {
 		}
 	}
 	public void paintObjects(Graphics g){
-		ArrayList<modele.Object> liste = this.view.getObjectsInventaire();
+		ArrayList<GameObject> liste = this.view.getObjectsInventaire();
 		int x = 0;
 		int y = 0;
-		for (modele.Object go : liste){
+		for (GameObject go : liste){
 			Color color = go.getColor();
 			g.setColor(color);
 			g.fillRect(x*SIZE, y*SIZE, SIZE-1, SIZE-1);
@@ -64,25 +65,23 @@ public class InventaireMap extends JPanel implements MouseListener {
 	public int currentCase(int x, int y){ // Renvoie la case de l'inventaire correspondant a la coordonnee du clic
 		int posX=x/SIZE; // division entière effectuee
 		int posY=y/SIZE;
-		return 4*(posY)+posX; // formule donnant le numéro de la case (numerotation pour un arraylist)
+		return LENGTH*(posY)+posX; // formule donnant le numéro de la case (numerotation pour un arraylist)
 	}
 	///
 	@Override
-	public void mouseClicked(MouseEvent ev) throws IndexOutOfBoundsException { //TODO : gestion de l'exception outofbounds lorsque l'on clique sur
-//une case dont le numero est plus grand que le taille maximale actuelle de l'arraylist de l'inventaire
-		/// -->Check si gestion correcte
-		///TODO 2: Faire disparaitre l'objet de l'inventaire lorsque utilisé
+	public void mouseClicked(MouseEvent ev) { 
 		try{
-		int x=ev.getX();
-		int y=ev.getY();
-		GameObject player = this.view.getGameObjects().get(0);
-		player.utilize(this.view.getModel().getInventaire().getObjects().get(currentCase(x,y)));
-		// utilisation de l'objet par le joueur
-		System.out.println(currentCase(x,y));
-		System.out.println("clic en " + x + " et " + y);
+			int x=ev.getX();
+			int y=ev.getY();
+			Personnage player = this.view.getModel().getPlayer();
+			if((ev.getModifiers()&InputEvent.BUTTON1_MASK)!=0){// si clic gauche enfonce
+				player.utilize(this.view.getObjectsInventaire().get(currentCase(x,y)));
+				// utilisation de l'objet par le joueur
+			}
+			else if((ev.getModifiers()&InputEvent.BUTTON3_MASK)!=0){
+				player.dropItem(this.view.getObjectsInventaire().get(currentCase(x,y)));
+			}
 		}catch(IndexOutOfBoundsException e){
-			e.printStackTrace();
-			e.getMessage();
 		}
 	}
 		

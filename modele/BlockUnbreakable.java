@@ -11,8 +11,6 @@ public class BlockUnbreakable extends Case{
 		super(new int[]{i,j},Color.BLACK);
 	}
 	@Override
-	public void utilize (Object object){}
-	@Override
 	public boolean isObstacle(){
 		return true;
 	}

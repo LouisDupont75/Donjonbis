@@ -52,8 +52,8 @@ public class View extends JFrame implements Observeur {
 		board.repaint();
 		inventaire.repaint();
 	}
-	public ArrayList<modele.Object> getObjectsInventaire(){
-		ArrayList<modele.Object> list=this.model.getObjectsInventaire();
+	public ArrayList<GameObject> getObjectsInventaire(){
+		ArrayList<GameObject> list=this.model.getObjectsInventaire();
 		return list;
 	}
 	@Override

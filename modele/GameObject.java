@@ -60,9 +60,15 @@ public abstract class GameObject {
 		System.out.println("blocks ne peuvent pas déposer de bombes");
 		return null;
 	}
-	
-	public abstract boolean isObstacle();
+	public void demisableNotifyObserver() {// Pour pouvoir utiliser cette méthode avec un object de type Object sans 
+		//faire de downcast ----> Bonne pratique ?? 
+	}
 
-	public abstract void utilize (Object object);
+	public void effect(Player player) {// idem
+	}
+	public void demisableRemove(DemisableObserver po){};
+	public void demisableAttach(DemisableObserver po){};
+	///Abstracts methods
+	public abstract boolean isObstacle();
 }
 

@@ -2,7 +2,6 @@
 import controller.Controller;
 import javafx.scene.control.SplitPane;
 import modele.Model;
-import view.InventaireView;
 import view.Keyboard;
 import view.View;
 

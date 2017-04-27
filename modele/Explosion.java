@@ -20,13 +20,13 @@ public class Explosion extends GameObject implements Runnable, Demisable {
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////
-	@Override
-	public void utilize (Object object){}
+
 	@Override
 	public void demisableAttach(DemisableObserver po) {
 		observers.add(po);		
 	}
-
+	@Override
+	public void demisableRemove(DemisableObserver po){};
 	@Override
 	public void demisableNotifyObserver() {
 		for (DemisableObserver o : observers) {

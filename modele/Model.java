@@ -12,7 +12,8 @@ public class Model implements Observable,DemisableObserver {//Runnable
 	private Inventaire inventaire;
 	private ArrayList<Observeur> listObserveurs = new ArrayList<Observeur>();
 	private ArrayList<GameObject> gameobjects= new ArrayList<GameObject>();
-	private ArrayList<Object> objects = new ArrayList<Object>();
+	private ArrayList<GameObject> objects = new ArrayList<GameObject>();// deuxieme arraylist Gameobjects mais seulement
+	//remplie d'objets destines à l'inventaire. But:utiliser le polymorphisme au maximum
 	
 	private int length=32; // Taille en carres
 	private int height=16;
@@ -21,7 +22,7 @@ public class Model implements Observable,DemisableObserver {//Runnable
 	//
  	public Model() {
         
- 		Inventaire invent = new Inventaire();
+ 		Inventaire invent = new Inventaire(this);
  		setInventaire(invent);
 		Player player = new Player(4,1.0,new int[]{5,6},Color.GREEN,this);
 		synchronized(gameobjects){
@@ -32,14 +33,14 @@ public class Model implements Observable,DemisableObserver {//Runnable
 		Ennemy e1 = new Ennemy(2,1.0,new int[]{5,6},Color.CYAN,this,1);
 		e1.demisableAttach(this);
 		synchronized(gameobjects){
-		gameobjects.add(e1);}
+		gameobjects.add(0, e1);}
 
 		//System.out.println("ennemi fini");
 		
 		Ennemy e2 = new Ennemy(2,1.0,new int[]{15,12},Color.CYAN,this,2);
 		e2.demisableAttach(this);
 		synchronized(gameobjects){
-			gameobjects.add(e2);}
+			gameobjects.add(0,e2);}
 
 		//System.out.println("ennemi2 fini");
 		
@@ -49,48 +50,37 @@ public class Model implements Observable,DemisableObserver {//Runnable
 			gameobjects.add(bloc);
 		}*/
 		//TODO completer avec map[
-		/*BlockBreakable block1 =new BlockBreakable(new int[]{10,2},Color.DARK_GRAY);
+		BlockBreakable block1 =new BlockBreakable(new int[]{10,2},Color.DARK_GRAY);
 		block1.demisableAttach(this);
-		gameobjects.add(block1);
+		gameobjects.add(0,block1);
 
 		//System.out.println("bloc fini");
 		
 		BlockMoveable block2 =new BlockMoveable(new int[]{13,2},Color.GRAY);
 		block2.demisableAttach(this);
 		block2.moveableAttach((Player)this.getPlayer());
-		gameobjects.add(block2);*/
-		//fin]
-
-		//System.out.println("bloc2 fini");
+		gameobjects.add(0,block2);
+		
 		
 		Object potion =new Potion(new int []{13,2},Color.PINK);
 		objects.add(potion); // A optimiser avec la méthode player.utilize
 		synchronized(gameobjects){
-			gameobjects.add(potion);} 
+			gameobjects.add(0,potion);} 
 		potion.demisableAttach(this);
-		invent.addObject(potion); //Ligne ecrite juste pour tester InventaireMap
+		potion.demisableAttach(this.inventaire);
+		
 		Object potion2 =new Potion(new int []{14,2},Color.ORANGE);
 		objects.add(potion2); 
 		synchronized(gameobjects){
-			gameobjects.add(potion2);} 
+			gameobjects.add(0,potion2);} 
 		potion2.demisableAttach(this);
-		invent.addObject(potion2);
+		potion2.demisableAttach(this.inventaire);
 
-		//System.out.println("potion fini");
 		
 	}
- 	
- 	/*public void moveEnnemy() {
- 		for(GameObject element : gameobjects){
-			if(element instanceof Ennemy ){
-				((Ennemy)element).run();
-			}
-		}
- 	}*/
- 	
- 	//contenu devrait etre dans contolleur
- 	public void movePlayer(int x, int y){//, int playerNumber){
-		GameObject player = gameobjects.get(0);//playerNumber));
+
+ 	public void movePlayer(int x, int y){
+		GameObject player = this.getPlayer();
 		boolean obstacle =false;
 		synchronized(gameobjects){
 		for(GameObject object : gameobjects){
@@ -111,7 +101,7 @@ public class Model implements Observable,DemisableObserver {//Runnable
 	}
 	
 	public void dropBomb(){ // au cas où plus tard des ennemis seraient capables d'en lancer aussi
-		GameObject perso = gameobjects.get(0);
+		GameObject perso = this.getPlayer();
 		Bomb bombdropped = perso.dropBomb();
 		bombdropped.demisableAttach(this);
 		synchronized(gameobjects){
@@ -122,8 +112,7 @@ public class Model implements Observable,DemisableObserver {//Runnable
 			}
 		}  
 		}
-		//System.out.println(bombdropped.getExplodableObservers().get(0));
-		gameobjects.add(bombdropped); 
+		gameobjects.add(0,bombdropped); 
 		notifyObserver();
 	
 		}
@@ -161,15 +150,15 @@ public class Model implements Observable,DemisableObserver {//Runnable
 		return inventaire;
 	}
 	public Personnage getPlayer() {
-		return (Personnage) gameobjects.get(0);
+		return (Personnage) gameobjects.get(gameobjects.size()-1);
 	}
 	public ArrayList<GameObject> getGameObjects(){
 		return gameobjects;
 	}
-	public ArrayList<Object> getObjects(){
+	public ArrayList<GameObject> getObjects(){
 		return objects;
 	}
-	public ArrayList <modele.Object> getObjectsInventaire(){
+	public ArrayList <GameObject> getObjectsInventaire(){
 		return this.inventaire.getObjects();
 	}
 	public void setInventaire(Inventaire inventaire){

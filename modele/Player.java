@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import modele.DemisableObserver;
 
 public class Player extends Personnage implements DemisableObserver,MoveableObserver {
+	private Model model;
 	public Player(int life,Double dmg,int[] position,Color color,Model model) {
 		super(life,dmg,position,color);
 		this.model =model;
@@ -14,18 +15,31 @@ public class Player extends Personnage implements DemisableObserver,MoveableObse
 		return false;
 	}
 		///
-	
-    public void utilize(Object object){ 
+	@Override
+    public void utilize(GameObject object){ 
 		object.effect(this);
+		object.demisableNotifyObserver();
 	}
-    
-    public void addItem(ArrayList<Object> objects,Inventaire inventaire){
-    	for (Object object: objects){
-			if (object.isAtPosition(position)){
+    @Override
+    public void addItem(ArrayList<GameObject> objects,Inventaire inventaire){
+    	for (GameObject object: objects){
+			if (object.isAtPosition(this.position)){
+				object.demisableNotifyObserver();// Doit etre fait AVANT l'ajout dans l'inventaire sinon l'inventaire
+//supprimera l'objet qu'il vient de rajouter
 				inventaire.addObject(object);
-				object.demisableNotifyObserver();
+				object.demisableRemove(this.model);
+				model.notifyObserver();
 			}
 		}
+    }
+    @Override
+    public void dropItem(GameObject object){
+    	object.setPositionX(this.getPositionX());
+    	object.setPositionY(this.getPositionY());
+    	object.demisableNotifyObserver();//disparait de l'inventaire
+    	object.demisableAttach(this.model);
+    	model.getGameObjects().add(0,object);
+    	model.notifyObserver();
     }
 	@Override
 	public void demise(Demisable d,ArrayList<GameObject> go){}

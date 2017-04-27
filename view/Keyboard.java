@@ -37,7 +37,7 @@ public class Keyboard implements KeyListener {
 				model.dropBomb();
 				break;		
 			case KeyEvent.VK_U:
-				((Player) model.getPlayer()).addItem(model.getObjects(),model.getInventaire()); 
+				(model.getPlayer()).addItem(model.getObjects(),model.getInventaire()); 
 				// Downcast de Personnage vers Player
 // Comment faire pour "caster"  l'arraylist GameObject étant dans model en une ArrayList d'Object ? 				
 				

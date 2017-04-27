@@ -51,8 +51,6 @@ public class Bomb extends Case implements Demisable,Runnable,Explodable {
 		this.explodableNotifyObserver();
 	}
 	@Override
-	public void utilize (Object object){}
-	@Override
 	public void explodableAttach(ExplodableObserver eo){
 		explodableObservers.add(eo);
 	}
@@ -66,7 +64,8 @@ public class Bomb extends Case implements Demisable,Runnable,Explodable {
 	public void demisableAttach(DemisableObserver po) {
 		demisableObservers.add(po);		
 	}
-	
+	@Override
+	public void demisableRemove(DemisableObserver po){};
 	@Override
 	synchronized public void demisableNotifyObserver() {//TODO ici changer pour faire des explosions en cercle
 		ArrayList<GameObject> loot = new ArrayList<GameObject>();
