@@ -32,20 +32,14 @@ public class View extends JFrame implements Observeur {
 		
 		//Paramètres Fenetre
 		this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);//Maximise la fenetre (+simple)
-		//this.setSize(new Dimension(this.model.getLength()*model.getSize()+18,model.getHeight()*model.getSize()+42));
-		// Ou Board.LENGTH est un  envoi de message qui nous donne acces a la dimension length
-				
-				// A QUOI SERVENT LE +18 ET +42 ???
-				//18=> taille de la bordure horizontale de la JFRAME
-				//42=> taille de la bordure verticale de la JFRAME
 		this.setTitle("Donjon");
 
 		board = new Board(this);
 		inventaire=new InventaireMap(this,board);	
-		JSplitPane contenu = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,board,inventaire);
+		/*JSplitPane contenu = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,board,inventaire);
 		contenu.setOneTouchExpandable(true);
-		contenu.setDividerLocation(0.5);
-		this.getContentPane().add(contenu);	
+		contenu.setDividerLocation(0.5);*/
+		this.getContentPane().add(board);//contenu);	
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE); //pour donner l'effet "fermer la fenetre" au X rouge en haut a droite
 		

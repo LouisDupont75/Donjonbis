@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import modele.Model;
 import view.Board;
 
-public class Controller {
+public class Controller {//sert a controller le joueur, pour eviter de violer la loi de Demeter, pour eviter les trop grosse cohésion entre les classes. et pace tu code pas tout seul (un code plus propre= un code plus lisible)! 
 	private Model model;
 	//private int player1=0;
 	public Controller(Model model) {

@@ -43,11 +43,11 @@ public class Model implements Observable,DemisableObserver {//Runnable
 
 		//System.out.println("ennemi2 fini");
 		
-		/*Map map=new Map();
+		Map map=new Map();
 		ArrayList<Case> listeDeBlocksPourLaCarte = map.getBlocList();
 		for (Case bloc:listeDeBlocksPourLaCarte) {
 			gameobjects.add(bloc);
-		}*/
+		}
 		//TODO completer avec map[
 		/*BlockBreakable block1 =new BlockBreakable(new int[]{10,2},Color.DARK_GRAY);
 		block1.demisableAttach(this);
