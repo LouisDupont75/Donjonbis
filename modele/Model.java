@@ -23,20 +23,23 @@ public class Model implements Observable,DemisableObserver {//Runnable
         
  		Inventaire invent = new Inventaire();
  		setInventaire(invent);
-		Player player = new Player(4,1.0,new int[]{3,6},Color.GREEN,this);
-		gameobjects.add(player);
+		Player player = new Player(4,1.0,new int[]{5,6},Color.GREEN,this);
+		synchronized(gameobjects){
+		gameobjects.add(player);}
 
 		//System.out.println("player fini");
 		
 		Ennemy e1 = new Ennemy(2,1.0,new int[]{5,6},Color.CYAN,this,1);
 		e1.demisableAttach(this);
-		gameobjects.add(e1);
+		synchronized(gameobjects){
+		gameobjects.add(e1);}
 
 		//System.out.println("ennemi fini");
 		
 		Ennemy e2 = new Ennemy(2,1.0,new int[]{15,12},Color.CYAN,this,2);
 		e2.demisableAttach(this);
-		gameobjects.add(e2);
+		synchronized(gameobjects){
+			gameobjects.add(e2);}
 
 		//System.out.println("ennemi2 fini");
 		
@@ -62,13 +65,15 @@ public class Model implements Observable,DemisableObserver {//Runnable
 		
 		Object potion =new Potion(new int []{13,2},Color.PINK);
 		objects.add(potion); // A optimiser avec la méthode player.utilize
-		gameobjects.add(potion); //potion c'est une case, un gameObject, il ne faut pas dupliquer les informations
+		synchronized(gameobjects){
+			gameobjects.add(potion);} 
 		potion.demisableAttach(this);
 		invent.addObject(potion); //Ligne ecrite juste pour tester InventaireMap
 		Object potion2 =new Potion(new int []{14,2},Color.ORANGE);
-		objects.add(potion); // A optimiser avec la méthode player.utilize
-		gameobjects.add(potion); //potion c'est une case, un gameObject, il ne faut pas dupliquer les informations
-		potion.demisableAttach(this);
+		objects.add(potion2); 
+		synchronized(gameobjects){
+			gameobjects.add(potion2);} 
+		potion2.demisableAttach(this);
 		invent.addObject(potion2);
 
 		//System.out.println("potion fini");
@@ -87,6 +92,7 @@ public class Model implements Observable,DemisableObserver {//Runnable
  	public void movePlayer(int x, int y){//, int playerNumber){
 		GameObject player = gameobjects.get(0);//playerNumber));
 		boolean obstacle =false;
+		synchronized(gameobjects){
 		for(GameObject object : gameobjects){
 			obstacle=player.obstacleNextPosition(object, x, y);
 			if(obstacle==true){
@@ -96,6 +102,7 @@ public class Model implements Observable,DemisableObserver {//Runnable
 				}
 				break;
 			}
+		}
 		}
 		if(obstacle==false){
 			player.move(x,y);
@@ -107,16 +114,19 @@ public class Model implements Observable,DemisableObserver {//Runnable
 		GameObject perso = gameobjects.get(0);
 		Bomb bombdropped = perso.dropBomb();
 		bombdropped.demisableAttach(this);
+		synchronized(gameobjects){
 		for(GameObject go: gameobjects){
 			if (go instanceof ExplodableObserver){
 				bombdropped.explodableAttach((ExplodableObserver) go);
 
 			}
-		}    		
+		}  
+		}
 		//System.out.println(bombdropped.getExplodableObservers().get(0));
 		gameobjects.add(bombdropped); 
 		notifyObserver();
-	}
+	
+		}
 	
 	@Override
 	public void addObserver(Observeur observeur) {

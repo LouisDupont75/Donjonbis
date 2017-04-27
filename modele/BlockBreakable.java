@@ -9,7 +9,8 @@ public class BlockBreakable extends Case implements ExplodableObserver,Demisable
 	public BlockBreakable (int[] position, Color color){ // commentaire ds branche test
 		super(position,color);
 	}
-	
+	@Override
+	public void utilize (Object object){}
 	@Override
 	public boolean isObstacle(){
 		return true;

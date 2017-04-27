@@ -1,5 +1,6 @@
 
 import controller.Controller;
+import javafx.scene.control.SplitPane;
 import modele.Model;
 import view.InventaireView;
 import view.Keyboard;
@@ -15,10 +16,9 @@ public class Main {
 		View view = new View(controller,model);
 		Keyboard keyboardListener=new Keyboard(view);
 		model.addObserver(view);
+		view.setKeyListener(keyboardListener);
+		
 	}		
 
 }	
 
-
-
-//salut

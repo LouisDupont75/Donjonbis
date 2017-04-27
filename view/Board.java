@@ -13,6 +13,8 @@ public class Board extends JPanel { // Attention, variables publiques
 		this.setFocusable(true);
 		this.requestFocusInWindow();
 		this.view=view;
+		this.setBackground(Color.orange);
+		//this.setBounds(0, 0, getBoardLength(), getBoardHeight());
 	}
 	
 	public void paint(Graphics g) { // A chaque fois qu'on appelle repaint qui appelle paint, on appelle ces 2 methodes
@@ -35,7 +37,8 @@ public class Board extends JPanel { // Attention, variables publiques
 		}
 	}
 	public void paintObjects(Graphics g){
-		ArrayList<GameObject> liste=view.getObjectsToDraw();
+		ArrayList<GameObject> liste=view.getGameObjects();
+		synchronized(liste){
 		for (GameObject go : liste){
 			int x = go.getPositionX();
 			int y = go.getPositionY();
@@ -45,6 +48,7 @@ public class Board extends JPanel { // Attention, variables publiques
 			g.setColor(Color.BLACK);
 			g.drawRect(x*getsize(), y*getsize(), getsize()-1, getsize()-1);
 			
+			}
 		}
 	}
 	public int getlength() {
@@ -55,5 +59,11 @@ public class Board extends JPanel { // Attention, variables publiques
 	}
 	public int getsize() {
 		return view.getControlleur().getModel().getSize();
+	}
+	public int getBoardHeight(){
+		return getheight()*getsize();
+	}
+	public int getBoardLength(){
+		return getlength()*getsize();
 	}
 }

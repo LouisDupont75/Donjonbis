@@ -11,5 +11,5 @@ public class Potion extends Object {
 		player.setLife(player.getLife() +1);
 		System.out.println("j'ai " + player.getLife() + "vies");
 	}
-
+	public void utilize(Object object){}
 }

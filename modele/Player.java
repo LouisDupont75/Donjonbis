@@ -15,14 +15,8 @@ public class Player extends Personnage implements DemisableObserver,MoveableObse
 	}
 		///
 	
-    public void utilize(ArrayList<Object> go){ 
-    	//
-    	
-		for (Object object: go){
-			if (object.isAtPosition(position)){
-				object.effect(this);
-			}
-		}
+    public void utilize(Object object){ 
+		object.effect(this);
 	}
     
     public void addItem(ArrayList<Object> objects,Inventaire inventaire){
@@ -51,6 +45,7 @@ public class Player extends Personnage implements DemisableObserver,MoveableObse
 	public void moveThing(Moveable m,int x,int y){
 		BlockBreakable block=(BlockBreakable) m;
 		boolean obstacle =false;
+		synchronized(model.getGameObjects()){
 		for(GameObject object : model.getGameObjects()){
 			obstacle=block.obstacleNextPosition(object, x, y);
 			if(obstacle==true){
@@ -63,6 +58,7 @@ public class Player extends Personnage implements DemisableObserver,MoveableObse
 			model.notifyObserver();
 		}
 		
+	}
 	}
 	
 	

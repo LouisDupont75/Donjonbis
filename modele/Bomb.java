@@ -51,6 +51,8 @@ public class Bomb extends Case implements Demisable,Runnable,Explodable {
 		this.explodableNotifyObserver();
 	}
 	@Override
+	public void utilize (Object object){}
+	@Override
 	public void explodableAttach(ExplodableObserver eo){
 		explodableObservers.add(eo);
 	}

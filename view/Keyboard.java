@@ -49,36 +49,6 @@ public class Keyboard implements KeyListener {
 				
 			}
 	}
-	/*public void keyPressed(KeyEvent event) {
-		int key = event.getKeyCode();
-		//switch = else if
-		switch(key) {
-		case KeyEvent.VK_UP:
-			view.getControlleur().move(1); //1 haut
-			break;
-		case KeyEvent.VK_DOWN:
-			view.getControlleur().move(3);//3bas
-			break;
-		case KeyEvent.VK_LEFT:
-			view.getControlleur().move(0);// 0 Gauche
-			break;
-		case KeyEvent.VK_RIGHT:
-			view.getControlleur().move(2); // 2 Droite
-			break;
-		case KeyEvent.VK_B:
-			view.getControlleur().getModel().dropBomb(0);
-			break;	
-		default: 
-			System.out.println("Mauvaise touche");
-			break;
-			
-			
-		}
-		
-		
-		
-	}*/
-
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 
