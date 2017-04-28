@@ -9,7 +9,7 @@ import java.util.Random;
 public class MapGeneration {
 	int taille;
 	int[][] matriceCarte;
-	ArrayList<int[][]> visite=new ArrayList<int[][]>();
+	ArrayList<int[][]> visite=new ArrayList<int[][]>(); //pour les couloirs
 	ArrayList<Integer> direction=new ArrayList<Integer>();
 	ArrayList<ArrayList<int[]>> frontiere= new ArrayList<>();
 	Random rand;
@@ -24,15 +24,15 @@ public class MapGeneration {
 		direction.add(1);
 		direction.add(2);
 		direction.add(3);
-		
+
 	}
-	
+
 	public int[][] createMap() {
 		createBackground();
 		createRooms(0);
 		faireDesCouloirs();
 		faireDesPortes();
-		
+
 		FileWriter filewriter=null;
 		try {
 			filewriter=new FileWriter(new File("./carte/carte.txt"));
@@ -49,7 +49,7 @@ public class MapGeneration {
 		}
 		return matriceCarte;
 	}
-	
+
 	private boolean creuserDansLesUns(ArrayList<int[]> elmt, int indexPorte) {
 		int[] point=elmt.get(indexPorte);
 		boolean succes=false;
@@ -64,51 +64,111 @@ public class MapGeneration {
 		return succes;
 	}
 
-   private void faireDesPortes() {
-	   int nombreDePortes, indexPorte;
-	   for (ArrayList<int[]> elmt:frontiere) {
-		   nombreDePortes=aleatoire(this.nbreMinDePortes,this.nbreMaxDePortes);
-		   while (nombreDePortes>0) {
-			   indexPorte=aleatoire(0,elmt.size()-1);
-			   if (creuserDansLesUns(elmt,indexPorte)){
-				   nombreDePortes--;
-			   }
-			   
-		   }
-		   
-	   }
+	private void faireDesPortes() {
+		int nombreDePortes, indexPorte;
+		for (int i=0; i<frontiere.size();i++){
+			ArrayList<int[]> salle=frontiere.get(i);
+			nombreDePortes=aleatoire(this.nbreMinDePortes,this.nbreMaxDePortes);
+			while (nombreDePortes>0 && salle.size()>0) {
+				recupRectangle(salle);
+				indexPorte=aleatoire(0,salle.size()-1);
+				if (creuserDansLesUns(salle,indexPorte)){
+					nombreDePortes--;
+					retireLesIndex(indexPorte,salle,recupRectangle(salle));
+				}
+			}
+		}
 	}
 
-private void createRooms(int count) {
-	   if (count>500) {
-		   return;
-	   }
-	   int width= aleatoire(10,15);
-	   int height=aleatoire(10,15);
-	   int x=aleatoire(1,taille-width-1);
-	   int y=aleatoire(1,taille-height-1);
-	   int[] rectangle={x,y,width,height};
-	   if (chevauchement(rectangle)) {
-		   createRooms(count+1);
-	   }
-	   else {
-		   //System.out.println("avant makerooms");
-		   makeRoom(rectangle);
-		   createRooms(count+1);
-	   }
-   }
-   
-   	private void faireDesCouloirs() {
-	   while (listeNonVisite.size()!=0) {
+	private int[] recupRectangle(ArrayList<int[]> salle) {
+		int xMin, xMax, yMin, yMax;
+		xMin=salle.get(0)[0];
+		xMax=salle.get(0)[0];
+		yMin=salle.get(0)[1];
+		yMax=salle.get(0)[1];
+		for (int i = 0;i<salle.size();i++) {
+			if (salle.get(i)[0] <= xMin){
+				xMin=salle.get(i)[0];
+			}
+			else if (salle.get(i)[0] >= xMax){
+				xMax=salle.get(i)[0];	
+			}
+			else if (salle.get(i)[1] <= yMin){
+				yMin=salle.get(i)[1];
+			}
+			else if (salle.get(i)[1] >= yMax){
+				yMax=salle.get(i)[1];
+			}
+		} // ordre donné xMin, xMax, yMin puis yMax 
+		return new int[] {xMin,xMax,yMin,yMax};
+		
+	}
+
+	private void retireLesIndex(int indexPorte,ArrayList<int[]> salle, int[] dimensionMajotanteSalle) {
+		if (salle.get(indexPorte)[0]==dimensionMajotanteSalle[0]) {
+			for (int i=0;i<salle.size();i++){
+				int[]elmt=salle.get(i);
+				if (elmt[0] == dimensionMajotanteSalle[0]) {
+					salle.remove(elmt);
+				}
+			}
+		}
+		else if (salle.get(indexPorte)[0]==dimensionMajotanteSalle[1]) {
+			for (int i=0;i<salle.size();i++){
+				int[]elmt=salle.get(i);
+				if (elmt[0] == dimensionMajotanteSalle[1]) {
+					salle.remove(elmt);
+				}
+			}
+		}
+		else if (salle.get(indexPorte)[0]==dimensionMajotanteSalle[2]) {
+			for (int i=0;i<salle.size();i++){
+				int[]elmt=salle.get(i);
+				if (elmt[0] == dimensionMajotanteSalle[2]) {
+					salle.remove(elmt);
+				}
+			}
+		}
+		else if (salle.get(indexPorte)[0]==dimensionMajotanteSalle[3]) {
+			for (int i=0;i<salle.size();i++){
+				int[]elmt=salle.get(i);
+				if (elmt[0] == dimensionMajotanteSalle[3]) {
+					salle.remove(elmt);
+				}
+			}
+		}
+	}
+
+	private void createRooms(int count) {
+		if (count>500) {
+			return;
+		}
+		int width= aleatoire(10,15);
+		int height=aleatoire(10,15);
+		int x=aleatoire(1,taille-width-1);
+		int y=aleatoire(1,taille-height-1);
+		int[] rectangle={x,y,width,height};
+		if (chevauchement(rectangle)) {
+			createRooms(count+1);
+		}
+		else {
+			//System.out.println("avant makerooms");
+			makeRoom(rectangle);
+			createRooms(count+1);
+		}
+	}
+
+	private void faireDesCouloirs() {
+		while (listeNonVisite.size()!=0) {
 			Collections.shuffle(listeNonVisite);
 			faireUnCouloir(listeNonVisite.get(0));
 			//System.out.println("taille: "+listeNonVisite.size());
-	   }
-   }
+		}
+	}
 
-   private void mettreDesTrois(int[] coord,int dir) {
-	   for (int element=0;element<4;element++) {
-		   switch (element) {
+	private void mettreDesTrois(int[] coord,int dir) {
+		for (int element=0;element<4;element++) {
+			switch (element) {
 			case 0:
 				if (matriceCarte[coord[0]-1][coord[1]]==0 && element!=dir){
 					matriceCarte[coord[0]-1][coord[1]]=3;
@@ -134,8 +194,8 @@ private void createRooms(int count) {
 				}
 				break;
 			}
-	   }
-   }
+		}
+	}
 
 	private void faireUnCouloir(int[] coordCouloir) {
 		enleverElementANonVisite(coordCouloir);
@@ -244,28 +304,28 @@ private void createRooms(int count) {
 				break;
 			}
 		}
-		
+
 	}
 
 	public void makeRoom(int[] rectangle) {
 		ArrayList<int[]> bordure=new ArrayList<>();
-	    for (int i=rectangle[0];i<rectangle[2]+rectangle[0]; i++) {
-		   for(int j=rectangle[1];j<rectangle[3]+rectangle[1]; j++) {
-			   if (i==rectangle[0] || i==rectangle[2]+rectangle[0]-1 || j==rectangle[1] || j==rectangle[3]+rectangle[1]-1) {
-				   matriceCarte[i][j]=1;
-				   if (!(rectangle[0]==i && (rectangle[1]==j || rectangle[1]==j-rectangle[3]) || rectangle[0] == i-rectangle[2] && (rectangle[1]==j || rectangle[1]==j-rectangle[3]))) {
-					   bordure.add(new int[] {i,j});
-				   }
-			   }
-			   else {
-				   matriceCarte[i][j]=2;
-			   }
-			   enleverElementANonVisite(new int[] {i,j});
-		   }
-	   }
-	    frontiere.add(bordure);
-   }
-   
+		for (int i=rectangle[0];i<rectangle[2]+rectangle[0]; i++) {
+			for(int j=rectangle[1];j<rectangle[3]+rectangle[1]; j++) {
+				if (i==rectangle[0] || i==rectangle[2]+rectangle[0]-1 || j==rectangle[1] || j==rectangle[3]+rectangle[1]-1) {
+					matriceCarte[i][j]=1;
+					if (!(rectangle[0]==i && (rectangle[1]==j || rectangle[1]==j-rectangle[3]) || rectangle[0] == i-rectangle[2] && (rectangle[1]==j || rectangle[1]==j-rectangle[3]))) {
+						bordure.add(new int[] {i,j});
+					}
+				}
+				else {
+					matriceCarte[i][j]=2;
+				}
+				enleverElementANonVisite(new int[] {i,j});
+			}
+		}
+		frontiere.add(bordure);
+	}
+
 	private boolean chevauchement(int[] rectangle) {
 		boolean check = false;
 		for (int i=rectangle[0];i<rectangle[0]+rectangle[2];i++) {
@@ -277,22 +337,22 @@ private void createRooms(int count) {
 			}
 		}
 		return check;
-}
+	}
 
 	private void createBackground() {
-	   for (int i=0;i<taille;i++) {
-		   for(int j=0;j<taille;j++) {
-			   matriceCarte[i][j]=0;
-			   if (i==0 || i==taille-1 || j==0 || j==taille-1) {
-				   matriceCarte[i][j]=1;
-			   }
-			   else {
-				   listeNonVisite.add(new int[] {i,j});
-			   }
-		   }
-	   }		
-   }
-	
+		for (int i=0;i<taille;i++) {
+			for(int j=0;j<taille;j++) {
+				matriceCarte[i][j]=0;
+				if (i==0 || i==taille-1 || j==0 || j==taille-1) {
+					matriceCarte[i][j]=1;
+				}
+				else {
+					listeNonVisite.add(new int[] {i,j});
+				}
+			}
+		}		
+	}
+
 	/**
 	 * crée un nombre aleatoire entre a et b
 	 * @param a borne inférieure
@@ -302,5 +362,5 @@ private void createRooms(int count) {
 	private int aleatoire(int a,int b) {
 		return rand.nextInt(b-a+1)+a; 
 	}
-   
+
 }
