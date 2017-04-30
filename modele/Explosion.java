@@ -31,6 +31,7 @@ public class Explosion extends GameObject implements Runnable, Demisable {
 	public void demisableNotifyObserver() {
 		for (DemisableObserver o : observers) {
 			o.demise(this, null);
+			System.out.println("explosion out");
 		}	
 	}
 
@@ -40,14 +41,25 @@ public class Explosion extends GameObject implements Runnable, Demisable {
 	}
 
 	@Override
-	public void run() {//TODO ne pas juste afficher le message d'erreur, mieux: Systeme.out.println("interruption");
-		while(true){
+	public void run() {//TODO Résoudre le problème des explosions d'autres objets à la place des cases "Explosion" 
+		/*while(true){
 			try {
 				Thread.sleep(this.duration);
-				this.demisableNotifyObserver();
+				this.demisableNotifyObserver();//Les cases explosions disparaissent au bout de la duree du thread
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		}
+		}*/
+		int count=0;
+		while(count<duration/100.0){
+			try {
+				Thread.sleep(100);
+				count+=1;
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}	
+
+		} 				this.demisableNotifyObserver();
+
 	}
 }

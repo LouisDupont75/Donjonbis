@@ -54,8 +54,11 @@ public class Keyboard implements KeyListener {
 				model.dropBomb();
 				break;		
 			case KeyEvent.VK_U:
-				(model.getPlayer()).addItem(model.getObjects(),model.getInventaire()); 				
+				model.getPlayer().addItem(model.getObjects(),model.getInventaire()); 				
 				break;	
+			case KeyEvent.VK_A:
+				model.getPlayer().launchAttack();
+				break;
 			default: 
 				System.out.println("Mauvaise touche");
 				break;

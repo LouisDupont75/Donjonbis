@@ -62,7 +62,6 @@ public class Ennemy extends Personnage implements Demisable,ExplodableObserver {
 	@Override
 	public void demisableNotifyObserver(){
 		for(DemisableObserver po:demisableobservers){
-			//System.out.println(po.getClass().getName());
 			po.demise(this, null);
 		}
 	}

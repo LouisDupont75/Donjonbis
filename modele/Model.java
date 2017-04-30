@@ -7,7 +7,7 @@ import modele.Player;
 
 import java.awt.Color;
 
-public class Model implements Observable,DemisableObserver {//Runnable
+public class Model implements Observable,DemisableObserver {
 	
 	private Inventaire inventaire;
 	private ArrayList<Observeur> listObserveurs = new ArrayList<Observeur>();
@@ -24,35 +24,35 @@ public class Model implements Observable,DemisableObserver {//Runnable
         
  		Inventaire invent = new Inventaire(this);
  		setInventaire(invent);
-		Player player = new Player(4,1.0,new int[]{5,6},Color.GREEN,this,1);
+		Player player = new Player(10,1.0,new int[]{5,6},Color.GREEN,this,1);
 		synchronized(gameobjects){
 		gameobjects.add(player);}
 
 		//System.out.println("player fini");
 		
-		Ennemy e1 = new Ennemy(2,1.0,new int[]{5,6},Color.CYAN,this,1,1);//direction arbitraire pour l'instant
+		Ennemy e1 = new Ennemy(1,1.0,new int[]{5,6},Color.CYAN,this,1,1);//direction arbitraire pour l'instant
 		e1.demisableAttach(this);
 		synchronized(gameobjects){
 		gameobjects.add(0, e1);}
 
 		//System.out.println("ennemi fini");
 		
-		Ennemy e2 = new Ennemy(2,1.0,new int[]{15,12},Color.CYAN,this,2,1);
+		Ennemy e2 = new Ennemy(3,1.0,new int[]{15,12},Color.CYAN,this,2,1);
 		e2.demisableAttach(this);
 		synchronized(gameobjects){
 			gameobjects.add(0,e2);}
 
 		//System.out.println("ennemi2 fini");
 		
-		Map map=new Map();
+		/*Map map=new Map();
 		ArrayList<Case> listeDeBlocksPourLaCarte = map.getBlocList();
 		for (Case bloc:listeDeBlocksPourLaCarte) {
 			gameobjects.add(0,bloc);
-		}
+		}*/
 		//TODO completer avec map[
-		/*BlockBreakable block1 =new BlockBreakable(new int[]{10,2},Color.DARK_GRAY);
+		BlockBreakable block1 =new BlockBreakable(new int[]{10,2},Color.DARK_GRAY,1);
 		block1.demisableAttach(this);
-		gameobjects.add(0,block1);*/
+		gameobjects.add(0,block1);
 
 		//System.out.println("bloc fini");
 		
@@ -140,8 +140,9 @@ public class Model implements Observable,DemisableObserver {//Runnable
     @Override
     public void demise(Demisable d ,ArrayList<GameObject> loot){
     	gameobjects.remove(d);
+
     	if (loot!= null){
-    		gameobjects.addAll(loot);
+    		gameobjects.addAll(0,loot);
     	}
        	notifyObserver();
     }

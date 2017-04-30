@@ -73,17 +73,17 @@ public class Bomb extends Case implements Demisable,Runnable,Explodable {
 		int x = this.getPositionX();
 		int y = this.getPositionY();
 		for(int i = x-range; i <= x+range; i++){
-			Explosion explosion = new Explosion(new int[]{i,y},Color.BLUE,175);// duration in millisec
-			Thread thread = new Thread(explosion);
-			thread.start();
+			Explosion explosion = new Explosion(new int[]{i,y},Color.BLUE,500);// duration in millisec
 			for(DemisableObserver observer : demisableObservers){
 				explosion.demisableAttach(observer);// on rajoute player et Model a la liste des demisableObserver 
 				// d'explosion
 			}
-			loot.add(explosion); // Ajoute les blocs " explosion" a la liste des objets pour l'update de la map
+			loot.add(explosion);// Ajoute les blocs " explosion" a la liste des objets pour l'update de la map
+			Thread thread = new Thread(explosion);
+			thread.start();
 		}
-		for(int i = y-range; i <= y+range; i++){
-			Explosion explosion = new Explosion(new int[]{x,i},Color.BLUE,175);
+		/*for(int i = y-range; i <= y+range; i++){
+			Explosion explosion = new Explosion(new int[]{x,i},Color.BLUE,500);
 			Thread thread = new Thread(explosion);
 			thread.start();
 			for(DemisableObserver observer : demisableObservers){
@@ -91,7 +91,7 @@ public class Bomb extends Case implements Demisable,Runnable,Explodable {
 			}
 			loot.add(explosion);
 		}
-		
+		*/
 		for (DemisableObserver o : this.demisableObservers) { 
 			o.demise(this, loot); // On supprime la bombe de la liste des objets et on rajoute les explosions
 		}	
