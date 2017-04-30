@@ -24,42 +24,42 @@ public class Model implements Observable,DemisableObserver {//Runnable
         
  		Inventaire invent = new Inventaire(this);
  		setInventaire(invent);
-		Player player = new Player(4,1.0,new int[]{5,6},Color.GREEN,this);
+		Player player = new Player(4,1.0,new int[]{5,6},Color.GREEN,this,1);
 		synchronized(gameobjects){
 		gameobjects.add(player);}
 
 		//System.out.println("player fini");
 		
-		Ennemy e1 = new Ennemy(2,1.0,new int[]{5,6},Color.CYAN,this,1);
+		Ennemy e1 = new Ennemy(2,1.0,new int[]{5,6},Color.CYAN,this,1,1);//direction arbitraire pour l'instant
 		e1.demisableAttach(this);
 		synchronized(gameobjects){
 		gameobjects.add(0, e1);}
 
 		//System.out.println("ennemi fini");
 		
-		Ennemy e2 = new Ennemy(2,1.0,new int[]{15,12},Color.CYAN,this,2);
+		Ennemy e2 = new Ennemy(2,1.0,new int[]{15,12},Color.CYAN,this,2,1);
 		e2.demisableAttach(this);
 		synchronized(gameobjects){
 			gameobjects.add(0,e2);}
 
 		//System.out.println("ennemi2 fini");
 		
-		/*Map map=new Map();
+		Map map=new Map();
 		ArrayList<Case> listeDeBlocksPourLaCarte = map.getBlocList();
 		for (Case bloc:listeDeBlocksPourLaCarte) {
-			gameobjects.add(bloc);
-		}*/
+			gameobjects.add(0,bloc);
+		}
 		//TODO completer avec map[
-		BlockBreakable block1 =new BlockBreakable(new int[]{10,2},Color.DARK_GRAY);
+		/*BlockBreakable block1 =new BlockBreakable(new int[]{10,2},Color.DARK_GRAY);
 		block1.demisableAttach(this);
-		gameobjects.add(0,block1);
+		gameobjects.add(0,block1);*/
 
 		//System.out.println("bloc fini");
 		
-		BlockMoveable block2 =new BlockMoveable(new int[]{13,2},Color.GRAY);
+		/*BlockMoveable block2 =new BlockMoveable(new int[]{13,2},Color.GRAY);
 		block2.demisableAttach(this);
-		block2.moveableAttach((Player)this.getPlayer());
-		gameobjects.add(0,block2);
+		block2.moveableAttach(this.getPlayer());
+		gameobjects.add(0,block2);*/
 		
 		
 		Object potion =new Potion(new int []{13,2},Color.PINK);
@@ -149,8 +149,8 @@ public class Model implements Observable,DemisableObserver {//Runnable
 	public Inventaire getInventaire(){
 		return inventaire;
 	}
-	public Personnage getPlayer() {
-		return (Personnage) gameobjects.get(gameobjects.size()-1);
+	public Player getPlayer() {
+		return (Player) gameobjects.get(gameobjects.size()-1);
 	}
 	public ArrayList<GameObject> getGameObjects(){
 		return gameobjects;

@@ -11,8 +11,8 @@ public class Ennemy extends Personnage implements Demisable,ExplodableObserver {
 	private int numberEnnemy;
 	private Thread t;
 	protected ArrayList<DemisableObserver> demisableobservers = new ArrayList<DemisableObserver>();
-	public Ennemy(int life,Double dmg,int[] position,Color color,Model model,int numberEnnemy) {
-		super(life,dmg,position,color);
+	public Ennemy(int life,Double dmg,int[] position,Color color,Model model,int numberEnnemy,int direction) {
+		super(life,dmg,position,color,direction);
 		this.numberEnnemy=numberEnnemy;
 		this.model=model;
 		t=new Thread(new ThrMoveEnnemy(this));
@@ -28,12 +28,12 @@ public class Ennemy extends Personnage implements Demisable,ExplodableObserver {
 		return null;//les ennemis ne lachent pas encore de bombes
 	}
 	
-	public void moveEnnemy(int X, int Y){
+	public void moveEnnemy(int X, int Y){//TODO : regler la sortie de map pour l'ennemi
 		try{
 		boolean obstacle = false;
 		ArrayList<GameObject> list =model.getGameObjects();
 		synchronized (list) {
-		    for (GameObject go:list ) {   //TODO Solve the ConcurrentModificationException
+		    for (GameObject go:list ) {   
 		        obstacle=this.obstacleNextPosition(go, X, Y);
 				if(obstacle == true ){
 					break;

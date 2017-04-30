@@ -3,16 +3,18 @@ package modele;
 import java.awt.Color;
 import java.util.ArrayList;
 
-public abstract class Personnage extends GameObject { // 
-	protected int life; //point de vie pv
-	protected Double dmg;
-	protected Model model; //utiliser les get et les set au lieu des protected
-	//private int numberPlayer;
+public abstract class Personnage extends GameObject implements MoveableObserver { // 
+	private int life; //point de vie pv
+	private Double dmg;
+	private Model model; //utiliser les get et les set au lieu des protected
+	private int direction;
+	
 	/// Constructeur
-	public Personnage(int life,Double dmg, int[] position,Color color) {
+	public Personnage(int life,Double dmg, int[] position,Color color,int direction) {
 		super(position,color);
 		setLife(life);
 		setDmg(dmg);
+		setDirection(direction);
 		
 	}
 	
@@ -30,7 +32,14 @@ public abstract class Personnage extends GameObject { //
 	public void setDmg(Double dmg) {
 		this.dmg = dmg;
 	}
-	
+	public int getDirection(){
+		return this.direction;
+	}
+	public void setDirection(int direction){
+		this.direction=direction;
+	}
+	@Override
+	public void moveThing(Moveable m,int x,int y){};
 	
 	///
 	

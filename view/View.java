@@ -16,18 +16,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
-import controller.Controller;
 import modele.Observeur;
 
 public class View extends JFrame implements Observeur {
-	private Controller controlleur;
 	private Board board;
 	private Model model;
 	private InventaireMap inventaire;
 
 
-	public View(Controller controller,Model model) {
-		this.controlleur=controller;
+	public View(Model model) {
 		this.model=model;
 		
 		//Paramètres Fenetre
@@ -62,11 +59,6 @@ public class View extends JFrame implements Observeur {
 		inventaire.repaint();
 		
 	}
-	
-	public Controller getControlleur() {
-	return this.controlleur;
-	}
-
 	public Board getBoard() {
 		return board;
 	}
@@ -74,7 +66,7 @@ public class View extends JFrame implements Observeur {
 		return model;
 	}
 	public ArrayList<GameObject> getGameObjects() {
-		ArrayList<GameObject> list= controlleur.listObjectsToDraw();
+		ArrayList<GameObject> list= model.getGameObjects();
 		return list;
 	}
 	public void setKeyListener(KeyListener keyboard){

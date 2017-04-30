@@ -5,16 +5,16 @@ import modele.DemisableObserver;
 
 public class Player extends Personnage implements DemisableObserver,MoveableObserver {
 	private Model model;
-	public Player(int life,Double dmg,int[] position,Color color,Model model) {
-		super(life,dmg,position,color);
+	private int direction;
+	public Player(int life,Double dmg,int[] position,Color color,Model model,int direction) {
+		super(life,dmg,position,color,direction);
 		this.model =model;
-		
 	}
 	
 	public boolean isObstacle (){
 		return false;
 	}
-		///
+	///
 	@Override
     public void utilize(GameObject object){ 
 		object.effect(this);
@@ -57,7 +57,7 @@ public class Player extends Personnage implements DemisableObserver,MoveableObse
 	}
 	@Override
 	public void moveThing(Moveable m,int x,int y){
-		BlockBreakable block=(BlockBreakable) m;
+		GameObject block=(GameObject) m;
 		boolean obstacle =false;
 		synchronized(model.getGameObjects()){
 		for(GameObject object : model.getGameObjects()){
@@ -74,7 +74,4 @@ public class Player extends Personnage implements DemisableObserver,MoveableObse
 		
 	}
 	}
-	
-	
-
 }
