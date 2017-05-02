@@ -6,8 +6,8 @@ import java.util.ArrayList;
 public class BlockMoveable extends BlockBreakable implements Moveable {
 	private ArrayList<MoveableObserver> moveableobservers =new ArrayList<MoveableObserver>();
 
-     public BlockMoveable(int [] position,Color color){
-    	 super(position,color);
+     public BlockMoveable(int [] position,Color color,int life){
+    	 super(position,color,life);
      }
      @Override
      public void moveableAttach(MoveableObserver mv){

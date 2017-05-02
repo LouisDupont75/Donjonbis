@@ -1,7 +1,6 @@
 package view;
 import modele.GameObject;
 import modele.Personnage;
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -16,17 +15,17 @@ public class Board extends JPanel { // Attention, variables publiques
 		this.requestFocusInWindow();
 		this.view=view;
 		this.setBackground(Color.orange);
-		//this.setBounds(0, 0, getBoardLength(), getBoardHeight());
 	}
 	
 	public void paint(Graphics g) { // A chaque fois qu'on appelle repaint qui appelle paint, on appelle ces 2 methodes
 		paintGrille(g);
 		paintObjects(g);
 		paintPlayer(g);
+		//paintPlayerDirection(g);
 	}
 	
 	public void paintGrille(Graphics g){
-		for(int i = 0; i<=getheight(); i++){							// Vire la valeur 20 et parametrer ca
+		for(int i = 0; i<=getheight(); i++){							
 			for(int j = 0; j<=getlength(); j++){
 				int x = j;
 				int y = i;
@@ -95,11 +94,44 @@ public class Board extends JPanel { // Attention, variables publiques
 	public int getlength() {//manque une majuscule
 		return view.getControlleur().getModel().getLength();//violation de la loi de Demeter
 	}
+	/*public void paintPlayerDirection(Graphics g){
+		Player player = view.getModel().getPlayer();
+		int direction=player.getDirection();
+		switch(direction){
+			case 1 :
+				int x=player.getPositionX()+1;
+				int y=player.getPositionY();
+				g.setColor(Color.WHITE);
+				g.fillOval(x*getsize()+15, y*getsize()+15, 10,10);
+				break;
+			case 2 :
+				int x1=player.getPositionX();
+				int y1=player.getPositionY()-1;
+				g.setColor(Color.WHITE);
+				g.fillOval(x1*getsize()+15, y1*getsize()+15, 10,10);
+				break;
+			case 3 :
+				int x2=player.getPositionX()-1;
+				int y2=player.getPositionY();
+				g.setColor(Color.WHITE);
+				g.fillOval(x2*getsize()+15, y2*getsize()+15, 10,10);
+				break;
+			case 4 :
+				int x3=player.getPositionX();
+				int y3=player.getPositionY()+1;
+				g.setColor(Color.WHITE);
+				g.fillOval(x3*getsize()+15, y3*getsize()+15, 10,10);
+				break;
+		}
+	}
+	public int getlength() {
+		return view.getModel().getLength();
+	}*/
 	public int getheight() {
-		return view.getControlleur().getModel().getHeight();
+		return view.getModel().getHeight();
 	}
 	public int getsize() {
-		return view.getControlleur().getModel().getSize();
+		return view.getModel().getSize();
 	}
 	public int getBoardHeight(){
 		return getheight()*getsize();

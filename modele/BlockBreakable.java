@@ -5,12 +5,18 @@ import java.util.ArrayList;
 
 public class BlockBreakable extends Case implements ExplodableObserver,Demisable {
 	private ArrayList<DemisableObserver> demisableobservers =new ArrayList<DemisableObserver>();
+	private int life;
 	//commentaire dans block, Donjonbis sur eclipse 
-	public BlockBreakable (int[] position, Color color){ // commentaire ds branche test
+	public BlockBreakable (int[] position, Color color,int life){ // commentaire ds branche test
 		super(position,color);
+		setLife(life);
 	}
-	@Override
-	public void utilize (Object object){}
+	public int getLife(){
+		return this.life;
+	}
+	public void setLife(int life){
+		this.life=life;
+	}
 	@Override
 	public boolean isObstacle(){
 		return true;
@@ -20,6 +26,8 @@ public class BlockBreakable extends Case implements ExplodableObserver,Demisable
 		demisableobservers.add(demi);
 		
 	}
+	@Override
+	public void demisableRemove(DemisableObserver po){};
 	@Override
 	public void demisableNotifyObserver(){
 		for(DemisableObserver po:demisableobservers){

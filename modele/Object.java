@@ -22,6 +22,10 @@ public abstract class Object extends Case implements Demisable {
 		demisableobservers.add(po);
 	}
 	@Override
+	public void demisableRemove(DemisableObserver po){
+		demisableobservers.remove(po);
+	};
+	@Override
 	public void demisableNotifyObserver(){
 		for(DemisableObserver po:demisableobservers){
 			po.demise(this, null);

@@ -6,18 +6,18 @@ import modele.Model;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+
 import controller.Controller;
 import modele.Observeur;
 
 public class View extends JFrame implements Observeur {
-	private Controller controlleur;
 	private Board board;
 	private Model model; //le principe du mvc et du observeur est que view n'a pas acces a model
 	private InventaireMap inventaire;
+	private Controller controller;
 
 
-	public View(Controller controller,Model model) {
-		this.controlleur=controller;
+	public View(Model model) {
 		this.model=model;
 		
 		//Paramètres Fenetre
@@ -36,8 +36,8 @@ public class View extends JFrame implements Observeur {
 		board.repaint();
 		inventaire.repaint();
 	}
-	public ArrayList<modele.Object> getObjectsInventaire(){
-		ArrayList<modele.Object> list=this.model.getObjectsInventaire();
+	public ArrayList<GameObject> getObjectsInventaire(){
+		ArrayList<GameObject> list=this.model.getObjectsInventaire();
 		return list;
 	}
 	@Override
@@ -46,11 +46,6 @@ public class View extends JFrame implements Observeur {
 		inventaire.repaint();
 		
 	}
-	
-	public Controller getControlleur() {
-	return this.controlleur;
-	}
-
 	public Board getBoard() {
 		return board;
 	}
@@ -58,10 +53,14 @@ public class View extends JFrame implements Observeur {
 		return model;
 	}
 	public ArrayList<GameObject> getGameObjects() {
-		ArrayList<GameObject> list= controlleur.listObjectsToDraw();
+		ArrayList<GameObject> list= model.getGameObjects();
 		return list;
 	}
 	public void setKeyListener(KeyListener keyboard){
 	    this.board.addKeyListener(keyboard); // Ajoute à l'objet map(fenetre) un ecouteur d'evenements claviers
+	}
+	public Controller getControlleur() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
