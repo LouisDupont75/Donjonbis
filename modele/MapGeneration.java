@@ -70,11 +70,11 @@ public class MapGeneration {
 			ArrayList<int[]> salle=frontiere.get(i);
 			nombreDePortes=aleatoire(this.nbreMinDePortes,this.nbreMaxDePortes);
 			while (nombreDePortes>0 && salle.size()>0) {
-				recupRectangle(salle);
+				int[] rectangle=recupRectangle(salle);
 				indexPorte=aleatoire(0,salle.size()-1);
 				if (creuserDansLesUns(salle,indexPorte)){
 					nombreDePortes--;
-					retireLesIndex(indexPorte,salle,recupRectangle(salle));
+					retireLesIndex(indexPorte,salle,rectangle);
 				}
 			}
 		}
@@ -105,19 +105,20 @@ public class MapGeneration {
 	}
 
 	private void retireLesIndex(int indexPorte,ArrayList<int[]> salle, int[] dimensionMajotanteSalle) {
+		ArrayList<int[]> toRemove = new ArrayList<>();
 		if (salle.get(indexPorte)[0]==dimensionMajotanteSalle[0]) {
 			for (int i=0;i<salle.size();i++){
 				int[]elmt=salle.get(i);
 				if (elmt[0] == dimensionMajotanteSalle[0]) {
-					salle.remove(elmt);
+					toRemove.add(elmt);
 				}
 			}
 		}
-		else if (salle.get(indexPorte)[0]==dimensionMajotanteSalle[1]) {
+		else if (salle.get(indexPorte)[1]==dimensionMajotanteSalle[1]) {
 			for (int i=0;i<salle.size();i++){
 				int[]elmt=salle.get(i);
-				if (elmt[0] == dimensionMajotanteSalle[1]) {
-					salle.remove(elmt);
+				if (elmt[1] == dimensionMajotanteSalle[1]) {
+					toRemove.add(elmt);
 				}
 			}
 		}
@@ -125,17 +126,20 @@ public class MapGeneration {
 			for (int i=0;i<salle.size();i++){
 				int[]elmt=salle.get(i);
 				if (elmt[0] == dimensionMajotanteSalle[2]) {
-					salle.remove(elmt);
+					toRemove.add(elmt);
 				}
 			}
 		}
-		else if (salle.get(indexPorte)[0]==dimensionMajotanteSalle[3]) {
+		else if (salle.get(indexPorte)[1]==dimensionMajotanteSalle[3]) {
 			for (int i=0;i<salle.size();i++){
 				int[]elmt=salle.get(i);
-				if (elmt[0] == dimensionMajotanteSalle[3]) {
-					salle.remove(elmt);
+				if (elmt[1] == dimensionMajotanteSalle[3]) {
+					toRemove.add(elmt);
 				}
 			}
+		}
+		for(int []element:toRemove){
+			salle.remove(element);
 		}
 	}
 

@@ -13,6 +13,8 @@ public class Model implements Observable,DemisableObserver {//Runnable
 	private ArrayList<Observeur> listObserveurs = new ArrayList<Observeur>();
 	private ArrayList<GameObject> gameobjects= new ArrayList<GameObject>();
 	private ArrayList<Object> objects = new ArrayList<Object>();
+	private Map map;
+	private int tailleMap;
 	
 	private int length=32; // Taille en carres
 	private int height=16;
@@ -21,6 +23,7 @@ public class Model implements Observable,DemisableObserver {//Runnable
 	//
  	public Model() {
         
+ 		tailleMap=150; //ICI changer la taille de la carte
  		Inventaire invent = new Inventaire();
  		setInventaire(invent);
 		Player player = new Player(4,1.0,new int[]{5,6},Color.GREEN,this);
@@ -43,7 +46,7 @@ public class Model implements Observable,DemisableObserver {//Runnable
 
 		//System.out.println("ennemi2 fini");
 		
-		Map map=new Map();
+		map=new Map(tailleMap);
 		ArrayList<Case> listeDeBlocksPourLaCarte = map.getBlocList();
 		for (Case bloc:listeDeBlocksPourLaCarte) {
 			gameobjects.add(bloc);
@@ -90,26 +93,26 @@ public class Model implements Observable,DemisableObserver {//Runnable
  	
  	//contenu devrait etre dans contolleur
  	public void movePlayer(int x, int y){//, int playerNumber){
-		GameObject player = gameobjects.get(0);//playerNumber));
-		boolean obstacle =false;
-		synchronized(gameobjects){
-		for(GameObject object : gameobjects){
-			obstacle=player.obstacleNextPosition(object, x, y);
-			if(obstacle==true){
-				if(object instanceof Moveable){
-					Moveable o = (Moveable)object;
-					o.moveableNotifyObserver(x,y);
-				}
-				break;
-			}
-		}
-		}
-		if(obstacle==false){
-			player.move(x,y);
-			notifyObserver();
-		}
-	}
-	
+ 		GameObject player = gameobjects.get(0);//playerNumber));
+ 		boolean obstacle =false;
+ 		synchronized(gameobjects){
+ 			for(GameObject object : gameobjects){
+ 				obstacle=player.obstacleNextPosition(object, x, y);
+ 				if(obstacle==true){
+ 					if(object instanceof Moveable){
+ 						Moveable o = (Moveable)object;
+ 						o.moveableNotifyObserver(x,y);
+ 					}
+ 					break;
+ 				}
+ 			}
+ 		}
+ 		if(obstacle==false){
+ 			player.move(x,y);
+ 			notifyObserver();
+ 		}
+ 	}
+
 	public void dropBomb(){ // au cas où plus tard des ennemis seraient capables d'en lancer aussi
 		GameObject perso = gameobjects.get(0);
 		Bomb bombdropped = perso.dropBomb();
@@ -183,5 +186,11 @@ public class Model implements Observable,DemisableObserver {//Runnable
 	}
 	public int getSize() {
 		return size;
+	}
+	public Map getMap(){
+		return map;
+	}
+	public int getTailleCarte(){
+		return tailleMap;
 	}
 }

@@ -3,26 +3,16 @@ package view;
 import modele.GameObject;
 import modele.Model;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
-
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
-
 import controller.Controller;
 import modele.Observeur;
 
 public class View extends JFrame implements Observeur {
 	private Controller controlleur;
 	private Board board;
-	private Model model;
+	private Model model; //le principe du mvc et du observeur est que view n'a pas acces a model
 	private InventaireMap inventaire;
 
 

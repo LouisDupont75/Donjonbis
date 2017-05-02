@@ -30,13 +30,13 @@ public class Controller {//sert a controller le joueur, pour eviter de violer la
 			break;
 			
 		case 2: //static majuscule
-			if (oldX<model.getLength()-1) {
+			if (oldX<model.getTailleCarte()-1) {
 				model.movePlayer(1, 0);}//, player1);}, player1);}
 			//System.out.println("personnage en " + String.valueOf(oldX+1) + " et " + oldY );
 			break;
 			
 		case 3:
-			if (oldY<model.getHeight()-1) {
+			if (oldY<model.getTailleCarte()-1) {
 				model.movePlayer(0, 1);}//, player1);}, player1);}
 			//System.out.println("personnage en " + oldX + " et " + String.valueOf(oldY+1) );
 			break;
