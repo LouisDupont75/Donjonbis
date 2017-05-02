@@ -12,20 +12,19 @@ import modele.Observeur;
 
 public class View extends JFrame implements Observeur {
 	private Board board;
-	private Model model; //le principe du mvc et du observeur est que view n'a pas acces a model
 	private InventaireMap inventaire;
 	private Controller controller;
 
 
-	public View(Model model) {
-		this.model=model;
+	public View(Controller controller) {
+		this.controller=controller;
 		
 		//Paramètres Fenetre
 		this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);//Maximise la fenetre (+simple)
 		this.setTitle("Donjon");
 
 		board = new Board(this);
-		inventaire=new InventaireMap(this,board);	
+		inventaire=new InventaireMap(this);	
 		/*JSplitPane contenu = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,board,inventaire);
 		contenu.setOneTouchExpandable(true);
 		contenu.setDividerLocation(0.5);*/
@@ -37,7 +36,7 @@ public class View extends JFrame implements Observeur {
 		inventaire.repaint();
 	}
 	public ArrayList<GameObject> getObjectsInventaire(){
-		ArrayList<GameObject> list=this.model.getObjectsInventaire();
+		ArrayList<GameObject> list=this.getControlleur().getModel().getObjectsInventaire();
 		return list;
 	}
 	@Override
@@ -49,18 +48,14 @@ public class View extends JFrame implements Observeur {
 	public Board getBoard() {
 		return board;
 	}
-	public Model getModel() {
-		return model;
-	}
 	public ArrayList<GameObject> getGameObjects() {
-		ArrayList<GameObject> list= model.getGameObjects();
+		ArrayList<GameObject> list= this.getControlleur().getModel().getGameObjects();
 		return list;
 	}
 	public void setKeyListener(KeyListener keyboard){
 	    this.board.addKeyListener(keyboard); // Ajoute à l'objet map(fenetre) un ecouteur d'evenements claviers
 	}
 	public Controller getControlleur() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.controller;
 	}
 }

@@ -18,14 +18,12 @@ public class InventaireMap extends JPanel implements MouseListener {
 	public static int HEIGTH=16;
 	public static int SIZE=42;
 	private View view;
-	private Board board;
 	
-	public InventaireMap(View view,Board board) {
+	public InventaireMap(View view) {
 		this.setFocusable(true);
 		this.requestFocusInWindow();
 		this.setBackground(Color.blue);
 		this.view=view;
-		this.board=board;
 		addMouseListener(this);
 	}
 	
@@ -73,7 +71,7 @@ public class InventaireMap extends JPanel implements MouseListener {
 		try{
 			int x=ev.getX();
 			int y=ev.getY();
-			Personnage player = this.view.getModel().getPlayer();
+			Personnage player = this.view.getControlleur().getModel().getPlayer();
 			if((ev.getModifiers()&InputEvent.BUTTON1_MASK)!=0){// si clic gauche enfonce
 				player.utilize(this.view.getObjectsInventaire().get(currentCase(x,y)));
 				// utilisation de l'objet par le joueur

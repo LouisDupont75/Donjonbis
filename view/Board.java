@@ -128,10 +128,10 @@ public class Board extends JPanel { // Attention, variables publiques
 		return view.getModel().getLength();
 	}*/
 	public int getheight() {
-		return view.getModel().getHeight();
+		return view.getControlleur().getModel().getHeight();
 	}
 	public int getsize() {
-		return view.getModel().getSize();
+		return view.getControlleur().getModel().getSize();
 	}
 	public int getBoardHeight(){
 		return getheight()*getsize();

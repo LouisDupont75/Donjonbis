@@ -30,21 +30,21 @@ public class Model implements Observable,DemisableObserver {
  		setInventaire(invent);
 		Player player = new Player(10,1.0,new int[]{5,6},Color.GREEN,this,1);
 		synchronized(gameobjects){
-		gameobjects.add(player);}
+		gameobjects.add(0,player);}
 
 		//System.out.println("player fini");
 		
 		Ennemy e1 = new Ennemy(1,1.0,new int[]{5,6},Color.CYAN,this,1,1);//direction arbitraire pour l'instant
 		e1.demisableAttach(this);
 		synchronized(gameobjects){
-		gameobjects.add(0, e1);}
+		gameobjects.add(e1);}
 
 		//System.out.println("ennemi fini");
 		
 		Ennemy e2 = new Ennemy(3,1.0,new int[]{15,12},Color.CYAN,this,2,1);
 		e2.demisableAttach(this);
 		synchronized(gameobjects){
-			gameobjects.add(0,e2);}
+			gameobjects.add(e2);}
 
 		//System.out.println("ennemi2 fini");
 		
@@ -56,7 +56,7 @@ public class Model implements Observable,DemisableObserver {
 		//TODO completer avec map[
 		BlockBreakable block1 =new BlockBreakable(new int[]{10,2},Color.DARK_GRAY,1);
 		block1.demisableAttach(this);
-		gameobjects.add(0,block1);
+		gameobjects.add(block1);
 
 		//System.out.println("bloc fini");
 		
@@ -69,14 +69,14 @@ public class Model implements Observable,DemisableObserver {
 		Object potion =new Potion(new int []{13,2},Color.PINK);
 		objects.add(potion); // A optimiser avec la méthode player.utilize
 		synchronized(gameobjects){
-			gameobjects.add(0,potion);} 
+			gameobjects.add(potion);} 
 		potion.demisableAttach(this);
 		potion.demisableAttach(this.inventaire);
 		
 		Object potion2 =new Potion(new int []{14,2},Color.ORANGE);
 		objects.add(potion2); 
 		synchronized(gameobjects){
-			gameobjects.add(0,potion2);} 
+			gameobjects.add(potion2);} 
 		potion2.demisableAttach(this);
 		potion2.demisableAttach(this.inventaire);
 
@@ -116,7 +116,7 @@ public class Model implements Observable,DemisableObserver {
 			}
 		}  
 		}
-		gameobjects.add(0,bombdropped); 
+		gameobjects.add(bombdropped); 
 		notifyObserver();
 	
 		}
@@ -155,7 +155,7 @@ public class Model implements Observable,DemisableObserver {
 		return inventaire;
 	}
 	public Player getPlayer() {
-		return (Player) gameobjects.get(gameobjects.size()-1);
+		return (Player) gameobjects.get(0);
 	}
 	public ArrayList<GameObject> getGameObjects(){
 		return gameobjects;

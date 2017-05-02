@@ -1,12 +1,14 @@
 
 import view.Keyboard;
+import controller.Controller;
 import modele.Model;
 import view.View;
 
 public class Main { 
 	public static void main(String[] args) {
 		Model model= new Model();
-		View view = new View(model);
+		Controller controller = new Controller(model);
+		View view = new View(controller);
 		Keyboard keyboardListener=new Keyboard(view);
 		model.addObserver(view);
 		view.setKeyListener(keyboardListener);
