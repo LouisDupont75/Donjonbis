@@ -9,7 +9,7 @@ import java.util.Iterator;
 public class Ennemy extends Personnage implements Demisable,ExplodableObserver {
 	private Model model;
 	private int numberEnnemy;
-	private Thread t;
+	private transient Thread t;
 	protected ArrayList<DemisableObserver> demisableobservers = new ArrayList<DemisableObserver>();
 	public Ennemy(int life,Double dmg,int[] position,Color color,Model model,int numberEnnemy,int direction) {
 		super(life,dmg,position,color,direction);

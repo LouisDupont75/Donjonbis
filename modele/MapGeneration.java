@@ -2,11 +2,12 @@ package modele;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-public class MapGeneration {
+public class MapGeneration{
 	int taille;
 	int[][] matriceCarte;
 	ArrayList<int[][]> visite=new ArrayList<int[][]>(); //pour les couloirs

@@ -1,4 +1,3 @@
-
 import view.Keyboard;
 import controller.Controller;
 import modele.Model;

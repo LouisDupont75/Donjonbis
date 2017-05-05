@@ -2,8 +2,6 @@ package view;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import modele.Model;
-import modele.Player;
 
 public class Keyboard implements KeyListener {
 	private View view;
@@ -15,9 +13,7 @@ public class Keyboard implements KeyListener {
 	//quelles clés keyEvent
 	@Override
 	public void keyPressed(KeyEvent event) {
-		int key = event.getKeyCode(); // L'evenement recu est stocke dans key
-		Model model=view.getControlleur().getModel();//doit disparaitre (le keyboard n'a pas acces au modèle) pas MVC (donc pas de points pour le MVC)
-		
+		int key = event.getKeyCode(); // L'evenement recu est stocke dans key		
 		
 		switch (key){   // Switch est ici un statement particulier. Il est ici prefere à la structure if-then-else 
 			case KeyEvent.VK_RIGHT: 
@@ -33,15 +29,17 @@ public class Keyboard implements KeyListener {
 				view.getControlleur().move(1);//1 haut
 				break;	
 			case KeyEvent.VK_B:
-				model.dropBomb();
-				//doit etre transformé en view.getConrolleur.bla bla
+				view.getControlleur().dropBomb();
 				break;		
 			case KeyEvent.VK_U:
-				((Player) model.getPlayer()).addItem(model.getObjects(),model.getInventaire()); 
-				// Downcast de Personnage vers Player
-// Comment faire pour "caster"  l'arraylist GameObject étant dans model en une ArrayList d'Object ? 				
-				//Il faut appeler une fonction dans le Controlleur, cette classe ne sert qu'a transmettre des info
-				break;	
+				view.getControlleur().addItem(); 
+				break;
+			case KeyEvent.VK_S:
+				view.getControlleur().sauvegarde();
+				break;
+			case KeyEvent.VK_L:
+				view.getControlleur().chargerLaPartie(view);
+				break;
 			default: 
 				System.out.println("Mauvaise touche");
 				break;
@@ -50,16 +48,10 @@ public class Keyboard implements KeyListener {
 			}
 	}
 	@Override
-	public void keyReleased(KeyEvent arg0) {
-
-		
-	}
+	public void keyReleased(KeyEvent arg0) {}
 
 	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void keyTyped(KeyEvent arg0) {}
 	
 
 }

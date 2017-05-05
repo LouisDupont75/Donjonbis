@@ -1,10 +1,11 @@
 package modele;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Map {
+public class Map implements Serializable{
 	private ArrayList<Case> blocList= new ArrayList<Case>(); //on appelle le constructeur du truc
-	private MapGeneration map1;
+	private transient MapGeneration map1;
 	public Map(int taille) {
 		this.map1=new MapGeneration(taille);
 		int[][] carte=map1.createMap();
@@ -24,6 +25,9 @@ public class Map {
 		this.blocList = blocList;
 	}
 	
+	public String toString(){
+		return "blocList size: "+blocList.size();
+	}
 	
 
 }

@@ -1,12 +1,13 @@
 package modele;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Inventaire implements DemisableObserver {
-	private ArrayList<GameObject> objectslist = new ArrayList<GameObject>();
-	private Model model;
-	public Inventaire(Model model){
-		this.model=model;
+public class Inventaire implements DemisableObserver,Serializable {//il ne doit pas implémenter DemisableObserver, c'est pas lui qui observe les objets qui se cassent .......
+	private ArrayList<GameObject> objectslist = new ArrayList<GameObject>();//on peut mettre des blocs des ennemis et des joueurs dans le sac?
+	//private Model model;
+	public Inventaire(){
+		//this.model=model;
 	}
 	
 	public void addObject(GameObject object){
@@ -15,7 +16,7 @@ public class Inventaire implements DemisableObserver {
 	public ArrayList<GameObject> getObjects(){
 		return this.objectslist;
 	}
-	public void setObjects(ArrayList<GameObject> objectslist){
+	public void setObjects(ArrayList<GameObject> objectslist){//a quoi ca sert? a quel moment tu donnes une liste complete a l'inventaire?
 		this.objectslist=objectslist;
 	}
 	@Override
@@ -24,6 +25,6 @@ public class Inventaire implements DemisableObserver {
     	if (loot!= null){
     		objectslist.addAll(loot);
     	}
-       	model.notifyObserver();
+       	//model.notifyObserver(); CLAIREMENT pas a l'inventaire de le faire...
 	}
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import modele.Model;
 import view.Board;
+import view.View;
 
 public class Controller {//sert a controller le joueur, pour eviter de violer la loi de Demeter, pour eviter les trop grosse cohésion entre les classes. et pace tu code pas tout seul (un code plus propre= un code plus lisible)! 
 	private Model model;
@@ -45,10 +46,26 @@ public class Controller {//sert a controller le joueur, pour eviter de violer la
 		}
 	}
 	
+	public void addItem() {
+		model.getItemOnPlayerFeet();//il n'y a qu'un inventaire donc pas besoin de le donner au joueur?
+	}
+	
+	public void dropBomb() {
+		model.dropBomb();
+	}
+	
 	public Model getModel(){
 		return this.model;
 	}
 	public ArrayList<GameObject> listObjectsToDraw() {
 		return  model.getGameObjects();
 	}
+	public void sauvegarde() {
+		model.save();	
+	}
+	public void chargerLaPartie(View view) {
+		model.load();
+		model.addObserver(view);
+	}
+	
 }

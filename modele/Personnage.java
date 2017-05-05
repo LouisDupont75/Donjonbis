@@ -3,10 +3,9 @@ package modele;
 import java.awt.Color;
 import java.util.ArrayList;
 
-public abstract class Personnage extends GameObject implements MoveableObserver { // 
+public abstract class Personnage extends GameObject implements MoveableObserver { // demisableObservable non?
 	private int life; //point de vie pv
 	private Double dmg;
-	private Model model; //utiliser les get et les set au lieu des protected
 	private int direction;
 	
 	/// Constructeur
@@ -42,10 +41,13 @@ public abstract class Personnage extends GameObject implements MoveableObserver 
 	public void moveThing(Moveable m,int x,int y){};
 	
 	///
+
+	public void addItem(ArrayList<GameObject> objects,Inventaire inventaire){
+		
+	}//TODO
 	
 	public abstract Bomb dropBomb();
 	public abstract void utilize(GameObject object);
-	public abstract void addItem(ArrayList<GameObject> objects,Inventaire inventaire);
 	public abstract void dropItem(GameObject object);
 	
 }

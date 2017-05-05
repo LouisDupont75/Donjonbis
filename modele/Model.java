@@ -4,17 +4,23 @@ import java.util.ArrayList;
 
 import modele.GameObject;
 import modele.Player;
-
 import java.awt.Color;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-public class Model implements Observable,DemisableObserver {
-	
-	private Inventaire inventaire;
-	private ArrayList<Observeur> listObserveurs = new ArrayList<Observeur>();
+
+public class Model implements Observable,DemisableObserver,Serializable {
+	private transient Inventaire inventaire;
+	private transient ArrayList<Observeur> listObserveurs = new ArrayList<Observeur>();
 	private ArrayList<GameObject> gameobjects= new ArrayList<GameObject>();
-	private Map map;
-	private int tailleMap;
-	private ArrayList<GameObject> objects = new ArrayList<GameObject>();// deuxieme arraylist Gameobjects mais seulement
+	private transient Map map;
+	private int tailleMap=150; //ICI changer la taille de la carte
+	private transient ArrayList<GameObject> objects = new ArrayList<GameObject>();// deuxieme arraylist Gameobjects mais seulement
 	//remplie d'objets destines à l'inventaire. But:utiliser le polymorphisme au maximum
 	
 	private int length=32; // Taille en carres
@@ -23,10 +29,12 @@ public class Model implements Observable,DemisableObserver {
 	
 	//
  	public Model() {
-
- 		tailleMap=150; //ICI changer la taille de la carte
+ 		startGame();
+	}
+ 	
+ 	private void startGame() {
  		//Inventaire invent = new Inventaire();
- 		Inventaire invent = new Inventaire(this);
+ 		Inventaire invent = new Inventaire();
  		setInventaire(invent);
 		Player player = new Player(10,1.0,new int[]{5,6},Color.GREEN,this,1);
 		synchronized(gameobjects){
@@ -54,9 +62,9 @@ public class Model implements Observable,DemisableObserver {
 			gameobjects.add(bloc);
 		}
 		//TODO completer avec map[
-		BlockBreakable block1 =new BlockBreakable(new int[]{10,2},Color.DARK_GRAY,1);
+		/*BlockBreakable block1 =new BlockBreakable(new int[]{10,2},Color.DARK_GRAY,1);
 		block1.demisableAttach(this);
-		gameobjects.add(block1);
+		gameobjects.add(block1);*/
 
 		//System.out.println("bloc fini");
 		
@@ -71,17 +79,49 @@ public class Model implements Observable,DemisableObserver {
 		synchronized(gameobjects){
 			gameobjects.add(potion);} 
 		potion.demisableAttach(this);
-		potion.demisableAttach(this.inventaire);
+		potion.demisableAttach(this.inventaire);//what? dupliquer les éléments... TRES bonne idée! (sarcastique)
 		
 		Object potion2 =new Potion(new int []{14,2},Color.ORANGE);
 		objects.add(potion2); 
 		synchronized(gameobjects){
 			gameobjects.add(potion2);} 
 		potion2.demisableAttach(this);
-		potion2.demisableAttach(this.inventaire);
-
-		
+		potion2.demisableAttach(this.inventaire);//idem
 	}
+ 	
+ 	private void startGame(Model model) {
+ 		//System.out.println("start game");
+ 		inventaire = model.getInventaire();
+ 		gameobjects = model.getGameObjects();
+ 		objects = model.getObjects();
+ 	}
+
+	public void save() {
+ 		try {
+			ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream("sauvegarde.txt"));
+			output.writeObject(this);
+			output.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("fichier non trové!");
+		} catch (IOException e) {
+			System.out.println("probleme avec le flux de données sortantes");
+		}
+		System.out.println("saved!");
+ 	}
+	
+ 	public void load() {
+ 		try {
+			ObjectInputStream input = new ObjectInputStream(new FileInputStream("sauvegarde.txt"));
+			startGame((Model) input.readObject());
+			input.close();
+		} catch (IOException e) {
+			System.out.println("probleme avec le flux de données entrantes");
+		} catch (ClassNotFoundException e) {
+			System.out.println("classe non trouvée, données probablement corrompues");
+		}
+		System.out.println("loaded!");
+ 	}
+ 	
  	//contenu devrait etre dans contolleur
  	public void movePlayer(int x, int y){//, int playerNumber){
  		GameObject player = gameobjects.get(0);//playerNumber));
@@ -120,10 +160,28 @@ public class Model implements Observable,DemisableObserver {
 		notifyObserver();
 	
 		}
+
+
+	public GameObject getItemOnPlayerFeet() {
+		GameObject item = null;
+		for (GameObject object: objects){
+			if (object.isAtPosition(new int[] {getPlayer().getPositionX(),getPlayer().getPositionY()})){
+				object.demisableNotifyObserver();
+				inventaire.addObject(object);
+				object=item;//inutile ici, mais le joueur ne devrais pas avoir son inventaire, plutot que le modèle?
+				object.demisableRemove(this);
+			}
+		}
+		return item;
+	}
+
+	public void addGiveItemToPlayer() {
+		
+	}
 	
 	@Override
-	public void addObserver(Observeur observeur) {
-	     listObserveurs.add(observeur);
+	public void addObserver(Observeur o) {
+	     listObserveurs.add(o);
 		
 	}
 
@@ -146,7 +204,7 @@ public class Model implements Observable,DemisableObserver {
     	gameobjects.remove(d);
 
     	if (loot!= null){
-    		gameobjects.addAll(0,loot);
+    		gameobjects.addAll(loot);
     	}
        	notifyObserver();
     }
@@ -183,5 +241,9 @@ public class Model implements Observable,DemisableObserver {
 	}
 	public int getTailleCarte(){
 		return tailleMap;
+	}
+
+	public ArrayList<Observeur> getListObserveurs() {
+		return listObserveurs;
 	}
 }

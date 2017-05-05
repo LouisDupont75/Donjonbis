@@ -1,11 +1,8 @@
 package modele;
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 
-import modele.DemisableObserver;
-
-public class Player extends Personnage implements DemisableObserver,MoveableObserver {
+public class Player extends Personnage implements MoveableObserver {
 	private Model model;
 	public Player(int life,Double dmg,int[] position,Color color,Model model,int direction) {
 		super(life,dmg,position,color,direction);
@@ -67,28 +64,14 @@ public void launchAttack(){
 		object.demisableNotifyObserver();
 	}
     @Override
-    public void addItem(ArrayList<GameObject> objects,Inventaire inventaire){
-    	for (GameObject object: objects){
-			if (object.isAtPosition(this.position)){
-				object.demisableNotifyObserver();// Doit etre fait AVANT l'ajout dans l'inventaire sinon l'inventaire
-//supprimera l'objet qu'il vient de rajouter
-				inventaire.addObject(object);
-				object.demisableRemove(this.model);
-				model.notifyObserver();
-			}
-		}
-    }
-    @Override
     public void dropItem(GameObject object){
     	object.setPositionX(this.getPositionX());
     	object.setPositionY(this.getPositionY());
     	object.demisableNotifyObserver();//disparait de l'inventaire
     	object.demisableAttach(this.model);
-    	model.getGameObjects().add(0,object);
+    	model.getGameObjects().add(object);
     	model.notifyObserver();
     }
-	@Override
-	public void demise(Demisable d,ArrayList<GameObject> go){}
 	
 	@Override
 	public Bomb dropBomb(){
@@ -119,24 +102,6 @@ public void launchAttack(){
 		}
 		
 	}
-	}
-
-	@Override
-	public void demisableNotifyObserver() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void demisableRemove(DemisableObserver po) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void demisableAttach(DemisableObserver po) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	

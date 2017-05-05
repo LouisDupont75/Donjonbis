@@ -1,9 +1,10 @@
 package modele;
 
 import java.awt.Color;
+import java.io.Serializable;
 
 
-public abstract class GameObject {
+public abstract class GameObject implements Serializable{
 	protected int[] position=new int[2];
 	protected Color color;
 	
