@@ -83,7 +83,7 @@ public class Model implements Observable,DemisableObserver,Serializable {
 			gameobjects.add(potion);} 
 		potion.demisableAttach(this);
 		
-		Object potion2 =new Potion(new int []{14,2},Color.ORANGE);
+		Object potion2 =new Potion(new int []{14,2},Color.PINK);
 		objects.add(potion2); 
 		synchronized(gameobjects){
 			gameobjects.add(potion2);} 

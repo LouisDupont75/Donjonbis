@@ -4,32 +4,35 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 public class Arrow extends GameObject implements Runnable, Demisable {
-	private Archer archer;
+	private Personnage perso;
+	private Model model; // je vois pas faire autrement pour pouvoir acceder a la liste des gameobjecs necessaires 
+//dans plusieurs des fonctions de cette classe
 	private ArrayList<DemisableObserver> demisableobservers = new ArrayList<DemisableObserver>();
 	private int nextX;
 	private int nextY;
-	public Arrow(int [] position,Color color,Archer archer){
+	public Arrow(int [] position,Color color,Personnage perso,Model model){
 		super(position,color);
-		setArcher(archer);
-		int [] coordinate = this.archer.coordinateDirection(this.archer.getDirection());
+		setPersonnage(perso);
+		this.model=model;
+		int [] coordinate = this.perso.coordinateDirection(this.perso.getDirection());
 		int x = coordinate[0];
 		int y = coordinate[1];
 		this.nextX=x;
 		this.nextY=y;
 		
 	}
-	public Archer getArcher(){
-		return this.archer;
+	public Personnage getPersonnage(){
+		return this.perso;
 	}
-	public void setArcher(Archer archer){
-		this.archer=archer;
+	public void setPersonnage(Personnage perso){
+		this.perso=perso;
 	}
 	public boolean isCollision(){
-		ArrayList<GameObject> gameobjects= this.archer.getModel().getGameObjects();
+		ArrayList<GameObject> gameobjects= model.getGameObjects();
 		boolean b=false;
 		synchronized(gameobjects){
 			for (GameObject go:gameobjects){
-				if(this.obstacleNextPosition(go,nextX,nextY)||(this.objectNextPosition(archer.getModel().getPlayer(),nextX,nextY))){
+				if(this.obstacleNextPosition(go,nextX,nextY)||(this.objectNextPosition(model.getPlayer(),nextX,nextY))){
 					b=true;
 					break;
 				}
@@ -38,7 +41,7 @@ public class Arrow extends GameObject implements Runnable, Demisable {
 		return b;
 	}
 	public GameObject getGoNextPos(int x, int y){
-		ArrayList<GameObject> gameobjects= this.archer.getModel().getGameObjects();
+		ArrayList<GameObject> gameobjects= model.getGameObjects();
 		GameObject val=null;
 		synchronized(gameobjects){
 			for (GameObject go:gameobjects){
@@ -53,7 +56,7 @@ public class Arrow extends GameObject implements Runnable, Demisable {
 		while(!this.isCollision()){
 			try{
 				this.move(this.nextX,this.nextY);
-				archer.getModel().notifyObserver();
+				model.notifyObserver();
 				Thread.sleep(500);
 			}catch(InterruptedException e){
 				e.printStackTrace();

@@ -5,8 +5,12 @@ import modele.Player;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class Board extends JPanel { // Attention, variables publiques
@@ -89,11 +93,17 @@ public class Board extends JPanel { // Attention, variables publiques
 			else if(getPlayerPositionY()>getTailleCarte()-getheight()/2){
 				y= player.getPositionY()-getTailleCarte()-getheight();
 			}
-			Color color = player.getColor();
+			BufferedImage img = null;
+			try {
+			    img = ImageIO.read(new File("C:/Users/Admin/Documents/Koala.jpg"));
+			    g.drawImage(img, x*getsize(), y*getsize(), getsize()-1, getsize()-1, null);
+			} catch (IOException e) {
+			}
+			/*Color color = player.getColor();
 			g.setColor(color);
 			g.fillRect(x*getsize(), y*getsize(), getsize()-1, getsize()-1);
 			g.setColor(Color.BLACK);
-			g.drawRect(x*getsize(), y*getsize(), getsize()-1, getsize()-1);
+			g.drawRect(x*getsize(), y*getsize(), getsize()-1, getsize()-1);*/
 			X=x;
 			Y=y;
 		}

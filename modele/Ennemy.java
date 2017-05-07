@@ -36,8 +36,11 @@ public class Ennemy extends Personnage implements Demisable,ExplodableObserver {
 				if(obstacle == true ){
 					break;
 				}
-				if(go==this.model.getPlayer()&& this.objectNextPosition(model.getPlayer(),X,Y)){
+				else if((go==this.model.getPlayer()&& this.objectNextPosition(go,X,Y))){
 					go.setLife(go.getLife()-1);
+				}
+				else if((go instanceof Arrow && this.objectNextPosition(go, X, Y))){
+					this.setLife(this.getLife()-1);
 				}
 		    }
 		}

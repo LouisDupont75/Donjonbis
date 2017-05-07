@@ -50,6 +50,9 @@ public class Controller {//sert a controller le joueur, pour eviter de violer la
 		
 		}
 	}
+	public void shootArrow(){
+		model.getPlayer().shootArrow();
+	}
 	public void launchAttack(){
 		model.getPlayer().launchAttack();
 	}

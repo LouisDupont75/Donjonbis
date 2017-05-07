@@ -5,9 +5,13 @@ import java.util.ArrayList;
 
 public class Archer extends Personnage implements Runnable {
 	private Model model;
+	private Bow bow;
 	public Archer(int life,Double dmg,int[] position,Color color,int direction,Model model){
 		super(life,dmg,position,color,direction);
 		this.model=model;
+		this.bow=new Bow(new int[]{this.getPositionX(),this.getPositionY()},Color.ORANGE);
+		model.getObjects().add(bow);//Ajout à la liste d'objets destinés à l'inventaire
+		bow.demisableAttach(model);
 		Thread t=new Thread(this);
 		t.start();
 	}
@@ -24,7 +28,7 @@ public class Archer extends Personnage implements Runnable {
 	}
 	public void shootArrow(){
 		ArrayList<GameObject> gameobjects=model.getGameObjects();
-		Arrow arrow=new Arrow(this.position,Color.WHITE,this);
+		Arrow arrow=new Arrow(this.position,Color.WHITE,this,this.model);
 		arrow.demisableAttach(model);
 		synchronized(gameobjects){
 		gameobjects.add(arrow);}
@@ -46,8 +50,10 @@ public class Archer extends Personnage implements Runnable {
 	public void dropItem(GameObject object) {}
 	@Override
 	public void demisableNotifyObserver(){ //TODO:faire tomber un arc lorsque l'archer meurt
+		ArrayList<GameObject> equipment=new ArrayList<GameObject>();
+		equipment.add(bow);
 		for(DemisableObserver po:demisableobservers){
-			po.demise(this, null);
+			po.demise(this,equipment );
 			this.setStateDemisable(true);
 		}
 	}
