@@ -14,6 +14,12 @@ public class Map implements Serializable{
 				if (carte[i][j]==1) {
 					blocList.add(new BlockUnbreakable(i,j));
 				}
+				else if (carte[i][j]==4) {
+					blocList.add(new BlockBreakable(i,j));
+				}
+				else if (carte[i][j]==5) {
+					blocList.add(new Coffre(i,j));
+				}				
 			}
 		}		
 	}

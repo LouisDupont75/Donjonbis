@@ -47,7 +47,7 @@ public class Controller {//sert a controller le joueur, pour eviter de violer la
 	}
 	
 	public void addItem() {
-		model.getItemOnPlayerFeet();//il n'y a qu'un inventaire donc pas besoin de le donner au joueur?
+		model.getItemOnPlayerFeet(false);//il n'y a qu'un inventaire donc pas besoin de le donner au joueur?
 	}
 	
 	public void dropBomb() {
@@ -66,6 +66,9 @@ public class Controller {//sert a controller le joueur, pour eviter de violer la
 	public void chargerLaPartie(View view) {
 		model.load();
 		model.addObserver(view);
+	}
+	public void ouvrirCoffre() {
+		model.getItemOnPlayerFeet(true);
 	}
 	
 }

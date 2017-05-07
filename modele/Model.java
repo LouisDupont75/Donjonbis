@@ -19,7 +19,7 @@ public class Model implements Observable,DemisableObserver,Serializable {
 	private transient ArrayList<Observeur> listObserveurs = new ArrayList<Observeur>();
 	private ArrayList<GameObject> gameobjects= new ArrayList<GameObject>();
 	private transient Map map;
-	private int tailleMap=150; //ICI changer la taille de la carte
+	private int tailleMap=30; //ICI changer la taille de la carte
 	private transient ArrayList<GameObject> objects = new ArrayList<GameObject>();// deuxieme arraylist Gameobjects mais seulement
 	//remplie d'objets destines à l'inventaire. But:utiliser le polymorphisme au maximum
 	
@@ -162,10 +162,13 @@ public class Model implements Observable,DemisableObserver,Serializable {
 		}
 
 
-	public GameObject getItemOnPlayerFeet() {
+	public GameObject getItemOnPlayerFeet(boolean front) {
 		GameObject item = null;
 		for (GameObject object: objects){
-			if (object.isAtPosition(new int[] {getPlayer().getPositionX(),getPlayer().getPositionY()})){
+			//TODO si front => prendre la direction et ajouter/retirer 1 a x/y
+			int x = getPlayer().getPositionX();
+			int y = getPlayer().getPositionY();
+			if (object.isAtPosition(new int[] {x,y})){
 				object.demisableNotifyObserver();
 				inventaire.addObject(object);
 				object=item;//inutile ici, mais le joueur ne devrais pas avoir son inventaire, plutot que le modèle?

@@ -4,12 +4,16 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 public class BlockBreakable extends Case implements ExplodableObserver,Demisable {
-	private ArrayList<DemisableObserver> demisableobservers =new ArrayList<DemisableObserver>();
+	protected ArrayList<DemisableObserver> demisableobservers =new ArrayList<DemisableObserver>();
 	private int life;
 	//commentaire dans block, Donjonbis sur eclipse 
 	public BlockBreakable (int[] position, Color color,int life){ // commentaire ds branche test
 		super(position,color);
 		setLife(life);
+	}
+	public BlockBreakable(int i, int j) {
+		super(new int[] {i,j}, Color.GRAY);
+		this.life=1;
 	}
 	public int getLife(){
 		return this.life;

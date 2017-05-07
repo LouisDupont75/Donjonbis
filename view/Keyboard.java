@@ -40,6 +40,8 @@ public class Keyboard implements KeyListener {
 			case KeyEvent.VK_L:
 				view.getControlleur().chargerLaPartie(view);
 				break;
+			case KeyEvent.VK_O:
+				view.getControlleur().ouvrirCoffre();
 			default: 
 				System.out.println("Mauvaise touche");
 				break;

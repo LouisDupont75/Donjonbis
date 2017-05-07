@@ -76,13 +76,13 @@ public class Board extends JPanel { // Attention, variables publiques
 			x = player.getPositionX();
 		}
 		else if(getPlayerPositionX()>getTailleCarte()-getlength()/2){
-			x = player.getPositionX()-getTailleCarte()-getlength();
+			x = player.getPositionX()-getTailleCarte()+getlength();
 		}
 		if(getPlayerPositionY()<getheight()/2){
 			y = player.getPositionY();
 		}
 		else if(getPlayerPositionY()>getTailleCarte()-getheight()/2){
-			y= player.getPositionY()-getTailleCarte()-getheight();
+			y= player.getPositionY()-getTailleCarte()+getheight();
 		}
 		Color color = player.getColor();
 		g.setColor(color);
