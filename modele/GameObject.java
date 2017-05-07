@@ -52,6 +52,16 @@ public abstract class GameObject implements Serializable{
 		}
 		return obstacle;
 	}
+	public boolean objectNextPosition(GameObject go,int x, int y){//précise si le GameObject en paramètre
+		// se situe à la position suivante		
+				int nextX = this.getPositionX()+x;
+				int nextY = this.getPositionY()+y;
+				boolean b = false;
+				if(go.isAtPosition(new int[]{nextX,nextY})){
+					b=true;
+			}
+			return b;
+		}
 	       
 	public boolean isAtPosition(int [] pos){
 		return this.position[0] == pos[0] && this.position[1] == pos[1];

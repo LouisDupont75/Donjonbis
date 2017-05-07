@@ -41,7 +41,10 @@ public class Model implements Observable,DemisableObserver,Serializable {
 		gameobjects.add(0,player);}
 
 		//System.out.println("player fini");
-		
+		Archer archer=new Archer(1,1.0,new int[]{14,7},Color.CYAN,2,this);
+		archer.demisableAttach(this);
+		synchronized(gameobjects){
+			gameobjects.add(archer);}
 		Ennemy e1 = new Ennemy(1,1.0,new int[]{5,25},Color.CYAN,this,1,1);//direction arbitraire pour l'instant
 		e1.demisableAttach(this);
 		synchronized(gameobjects){
@@ -56,11 +59,11 @@ public class Model implements Observable,DemisableObserver,Serializable {
 
 		//System.out.println("ennemi2 fini");
 		
-		map=new Map(tailleMap);
+		/*map=new Map(tailleMap);
 		ArrayList<Case> listeDeBlocksPourLaCarte = map.getBlocList();
 		for (Case bloc:listeDeBlocksPourLaCarte) {
 			gameobjects.add(bloc);
-		}
+		}*/
 		//TODO completer avec map[
 		/*BlockBreakable block1 =new BlockBreakable(new int[]{10,2},Color.DARK_GRAY,1);
 		block1.demisableAttach(this);
@@ -211,6 +214,7 @@ public class Model implements Observable,DemisableObserver,Serializable {
 	}
 	public Player getPlayer() {
 		return (Player) gameobjects.get(0);
+		//return this.player; //astuce pour ne pas avoir d'erreur de cast quand le joueur meurt
 	}
 	public ArrayList<GameObject> getGameObjects(){
 		return gameobjects;

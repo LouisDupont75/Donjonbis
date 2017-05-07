@@ -13,27 +13,6 @@ public class Player extends Personnage implements MoveableObserver {
 	public boolean isObstacle (){
 		return false;
 	}
-	public int[] coordinateDirection(int direction){// donne les coordonnees suivant lequel l'attaque sera exercee en
-		// fonction de la direction du joueur
-		int[] tab=new int[2];
-		if (direction==1){
-			tab[0]= 1;
-			tab[1]=0;
-		}
-		else if (direction==2){
-			tab[0]=0;
-			tab[1]=-1;
-		}
-		else if (direction==3){
-			tab[0]=-1;
-			tab[1]=0;
-		}
-		else if (direction==4){
-			tab[0]=0;
-			tab[1]=1;
-		}
-		return tab;
-	}
 public void launchAttack(){ 
 		int [] coordinate = this.coordinateDirection(this.getDirection());
 		int x = coordinate[0];

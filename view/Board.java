@@ -71,29 +71,33 @@ public class Board extends JPanel { // Attention, variables publiques
 		}
 	}
 	public int[] paintPlayer(Graphics g){
-		GameObject player = getPlayer();
-		int x=getlength()/2;
-		int y=getheight()/2;
-		if(getPlayerPositionX()<getlength()/2){
-			x = player.getPositionX();
+		Personnage player = getPlayer();
+		int X=1;// Valeur arbitraire
+		int Y=1;
+		if(!player.getStateDemisable()){
+			int x=getlength()/2;
+			int y=getheight()/2;
+			if(getPlayerPositionX()<getlength()/2){
+				x = player.getPositionX();
+			}
+			else if(getPlayerPositionX()>getTailleCarte()-getlength()/2){
+				x = player.getPositionX()-getTailleCarte()-getlength();
+			}
+			if(getPlayerPositionY()<getheight()/2){
+				y = player.getPositionY();
+			}
+			else if(getPlayerPositionY()>getTailleCarte()-getheight()/2){
+				y= player.getPositionY()-getTailleCarte()-getheight();
+			}
+			Color color = player.getColor();
+			g.setColor(color);
+			g.fillRect(x*getsize(), y*getsize(), getsize()-1, getsize()-1);
+			g.setColor(Color.BLACK);
+			g.drawRect(x*getsize(), y*getsize(), getsize()-1, getsize()-1);
+			X=x;
+			Y=y;
 		}
-		else if(getPlayerPositionX()>getTailleCarte()-getlength()/2){
-			x = player.getPositionX()-getTailleCarte()-getlength();
-		}
-		if(getPlayerPositionY()<getheight()/2){
-			y = player.getPositionY();
-		}
-		else if(getPlayerPositionY()>getTailleCarte()-getheight()/2){
-			y= player.getPositionY()-getTailleCarte()-getheight();
-		}
-		Color color = player.getColor();
-		g.setColor(color);
-		g.fillRect(x*getsize(), y*getsize(), getsize()-1, getsize()-1);
-		g.setColor(Color.BLACK);
-		g.drawRect(x*getsize(), y*getsize(), getsize()-1, getsize()-1);
-		
-		return new int[]{x,y};
-
+		return new int[]{X,Y};
 	}
 	public void paintPlayerDirection(Graphics g){
 		Player player = view.getControlleur().getModel().getPlayer();
