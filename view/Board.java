@@ -1,6 +1,8 @@
 package view;
 import modele.GameObject;
 import modele.Personnage;
+import modele.Player;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ public class Board extends JPanel { // Attention, variables publiques
 		paintGrille(g);
 		paintObjects(g);
 		paintPlayer(g);
-		//paintPlayerDirection(g);
+		paintPlayerDirection(g);
 	}
 	
 	public void paintGrille(Graphics g){
@@ -68,7 +70,7 @@ public class Board extends JPanel { // Attention, variables publiques
 			}
 		}
 	}
-	public void paintPlayer(Graphics g){
+	public int[] paintPlayer(Graphics g){
 		GameObject player = getPlayer();
 		int x=getlength()/2;
 		int y=getheight()/2;
@@ -89,44 +91,46 @@ public class Board extends JPanel { // Attention, variables publiques
 		g.fillRect(x*getsize(), y*getsize(), getsize()-1, getsize()-1);
 		g.setColor(Color.BLACK);
 		g.drawRect(x*getsize(), y*getsize(), getsize()-1, getsize()-1);
+		
+		return new int[]{x,y};
 
 	}
-	public int getlength() {//manque une majuscule
-		return view.getControlleur().getModel().getLength();//violation de la loi de Demeter
-	}
-	/*public void paintPlayerDirection(Graphics g){
-		Player player = view.getModel().getPlayer();
+	public void paintPlayerDirection(Graphics g){
+		Player player = view.getControlleur().getModel().getPlayer();
+		int[] coordinate=this.paintPlayer(g);
+	    int playerposX=coordinate[0];
+	    int playerposY=coordinate[1];
 		int direction=player.getDirection();
 		switch(direction){
 			case 1 :
-				int x=player.getPositionX()+1;
-				int y=player.getPositionY();
+				int x=playerposX+1;
+				int y=playerposY;
 				g.setColor(Color.WHITE);
 				g.fillOval(x*getsize()+15, y*getsize()+15, 10,10);
 				break;
 			case 2 :
-				int x1=player.getPositionX();
-				int y1=player.getPositionY()-1;
+				int x1=playerposX;
+				int y1=playerposY-1;
 				g.setColor(Color.WHITE);
 				g.fillOval(x1*getsize()+15, y1*getsize()+15, 10,10);
 				break;
 			case 3 :
-				int x2=player.getPositionX()-1;
-				int y2=player.getPositionY();
+				int x2=playerposX-1;
+				int y2=playerposY;
 				g.setColor(Color.WHITE);
 				g.fillOval(x2*getsize()+15, y2*getsize()+15, 10,10);
 				break;
 			case 4 :
-				int x3=player.getPositionX();
-				int y3=player.getPositionY()+1;
+				int x3=playerposX;
+				int y3=playerposY+1;
 				g.setColor(Color.WHITE);
 				g.fillOval(x3*getsize()+15, y3*getsize()+15, 10,10);
 				break;
 		}
 	}
-	public int getlength() {
-		return view.getModel().getLength();
-	}*/
+	public int getlength() {//manque une majuscule
+		return view.getControlleur().getModel().getLength();//violation de la loi de Demeter
+	}
 	public int getheight() {
 		return view.getControlleur().getModel().getHeight();
 	}

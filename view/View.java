@@ -6,6 +6,7 @@ import modele.Model;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JSplitPane;
 
 import controller.Controller;
 import modele.Observeur;
@@ -25,10 +26,10 @@ public class View extends JFrame implements Observeur {
 
 		board = new Board(this);
 		inventaire=new InventaireMap(this);	
-		/*JSplitPane contenu = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,board,inventaire);
+		JSplitPane contenu = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,board,inventaire);
 		contenu.setOneTouchExpandable(true);
-		contenu.setDividerLocation(0.5);*/
-		this.getContentPane().add(board);//contenu);	
+		contenu.setDividerLocation(0.5);
+		this.getContentPane().add(contenu);//contenu);	
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE); //pour donner l'effet "fermer la fenetre" au X rouge en haut a droite
 		

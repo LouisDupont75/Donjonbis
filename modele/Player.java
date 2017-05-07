@@ -1,5 +1,6 @@
 package modele;
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 
 public class Player extends Personnage implements MoveableObserver {
@@ -58,6 +59,19 @@ public void launchAttack(){
 		catch(ConcurrentModificationException e){}
 	}
 	///
+	public GameObject addItem(ArrayList<GameObject> objects,Inventaire inventaire){
+		GameObject item=null;
+		for (GameObject object: objects){
+			if (object.isAtPosition(this.position)){
+				object.demisableNotifyObserver();// Doit etre fait AVANT l'ajout dans l'inventaire sinon l'inventaire
+	//supprimera l'objet qu'il vient de rajouter
+				object.demisableAttach(inventaire);
+				inventaire.addObject(object);
+				item=object;
+			}
+		}
+		return item;
+	}
 	@Override
     public void utilize(GameObject object){ 
 		object.effect(this);
@@ -68,9 +82,6 @@ public void launchAttack(){
     	object.setPositionX(this.getPositionX());
     	object.setPositionY(this.getPositionY());
     	object.demisableNotifyObserver();//disparait de l'inventaire
-    	object.demisableAttach(this.model);
-    	model.getGameObjects().add(object);
-    	model.notifyObserver();
     }
 	
 	@Override

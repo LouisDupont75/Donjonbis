@@ -48,7 +48,9 @@ public class Ennemy extends Personnage implements Demisable,ExplodableObserver {
 	}	
 	///
 	@Override
-	public void addItem(ArrayList<GameObject> objects,Inventaire inventaire){};
+	public GameObject addItem(ArrayList<GameObject> objects,Inventaire inventaire){
+		return null;
+	};
 	@Override
 	public void utilize (GameObject object){}
 	@Override 

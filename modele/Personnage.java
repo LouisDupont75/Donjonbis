@@ -42,10 +42,7 @@ public abstract class Personnage extends GameObject implements MoveableObserver 
 	
 	///
 
-	public void addItem(ArrayList<GameObject> objects,Inventaire inventaire){
-		
-	}//TODO
-	
+	public abstract GameObject addItem(ArrayList<GameObject> objects,Inventaire inventaire);
 	public abstract Bomb dropBomb();
 	public abstract void utilize(GameObject object);
 	public abstract void dropItem(GameObject object);
