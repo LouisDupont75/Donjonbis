@@ -19,7 +19,6 @@ public class Ennemy extends Personnage implements Demisable,ExplodableObserver {
 		t.start();
 	}
 	
-	
 	public boolean isObstacle (){
 		return true;
 	}
@@ -27,16 +26,21 @@ public class Ennemy extends Personnage implements Demisable,ExplodableObserver {
 	public Bomb dropBomb (){
 		return null;//les ennemis ne lachent pas encore de bombes
 	}
-	
 	public void moveEnnemy(int X, int Y){//TODO : regler la sortie de map pour l'ennemi
 		try{
 		boolean obstacle = false;
-		ArrayList<GameObject> list =model.getGameObjects();
+		ArrayList<GameObject> list =this.model.getGameObjects();
 		synchronized (list) {
 		    for (GameObject go:list ) {   
 		        obstacle=this.obstacleNextPosition(go, X, Y);
 				if(obstacle == true ){
 					break;
+				}
+				else if((go==this.model.getPlayer()&& this.objectNextPosition(go,X,Y))){
+					go.setLife(go.getLife()-1);
+				}
+				else if((go instanceof Arrow && this.objectNextPosition(go, X, Y))){
+					this.setLife(this.getLife()-1);
 				}
 		    }
 		}
@@ -48,23 +52,13 @@ public class Ennemy extends Personnage implements Demisable,ExplodableObserver {
 	}	
 	///
 	@Override
-	public void addItem(ArrayList<GameObject> objects,Inventaire inventaire){};
+	public GameObject addItem(ArrayList<GameObject> objects,Inventaire inventaire){
+		return null;
+	};
 	@Override
 	public void utilize (GameObject object){}
 	@Override 
 	public void dropItem(GameObject object){};
-	@Override
-	public void demisableAttach(DemisableObserver po){
-		demisableobservers.add(po);
-	}
-	@Override
-	public void demisableRemove(DemisableObserver po){};
-	@Override
-	public void demisableNotifyObserver(){
-		for(DemisableObserver po:demisableobservers){
-			po.demise(this, null);
-		}
-	}
 	@Override
 	public void exploded(Explodable e){
 		Bomb bomb =(Bomb) e; // Downcast explodable--> Bomb

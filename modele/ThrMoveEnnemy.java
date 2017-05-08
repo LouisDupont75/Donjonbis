@@ -9,7 +9,7 @@ public  class ThrMoveEnnemy implements Runnable  {
 	@Override
 	public void run(){
 		try {
-			while(true){
+			while(!ennemy.getStateDemisable()){
     			ennemy.moveEnnemy(1,0);
     			Thread.sleep(200);
     			ennemy.moveEnnemy(0,-1);

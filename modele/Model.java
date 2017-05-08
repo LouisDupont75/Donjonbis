@@ -13,7 +13,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-
 public class Model implements Observable,DemisableObserver,Serializable {
 	private transient Inventaire inventaire;
 	private transient ArrayList<Observeur> listObserveurs = new ArrayList<Observeur>();
@@ -41,8 +40,11 @@ public class Model implements Observable,DemisableObserver,Serializable {
 		gameobjects.add(0,player);}
 
 		//System.out.println("player fini");
-		
-		Ennemy e1 = new Ennemy(1,1.0,new int[]{5,6},Color.CYAN,this,1,1);//direction arbitraire pour l'instant
+		Archer archer=new Archer(1,1.0,new int[]{14,7},Color.CYAN,2,this);
+		archer.demisableAttach(this);
+		synchronized(gameobjects){
+			gameobjects.add(archer);}
+		Ennemy e1 = new Ennemy(1,1.0,new int[]{5,25},Color.CYAN,this,1,1);//direction arbitraire pour l'instant
 		e1.demisableAttach(this);
 		synchronized(gameobjects){
 		gameobjects.add(e1);}
@@ -56,11 +58,11 @@ public class Model implements Observable,DemisableObserver,Serializable {
 
 		//System.out.println("ennemi2 fini");
 		
-		map=new Map(tailleMap);
+		/*map=new Map(tailleMap);
 		ArrayList<Case> listeDeBlocksPourLaCarte = map.getBlocList();
 		for (Case bloc:listeDeBlocksPourLaCarte) {
 			gameobjects.add(bloc);
-		}
+		}*/
 		//TODO completer avec map[
 		/*BlockBreakable block1 =new BlockBreakable(new int[]{10,2},Color.DARK_GRAY,1);
 		block1.demisableAttach(this);
@@ -74,19 +76,17 @@ public class Model implements Observable,DemisableObserver,Serializable {
 		gameobjects.add(0,block2);*/
 		
 		
-		Object potion =new Potion(new int []{13,2},Color.PINK);
+		Object potion =new Potion(new int []{12,2},Color.PINK);
 		objects.add(potion); // A optimiser avec la méthode player.utilize
 		synchronized(gameobjects){
 			gameobjects.add(potion);} 
 		potion.demisableAttach(this);
-		potion.demisableAttach(this.inventaire);//what? dupliquer les éléments... TRES bonne idée! (sarcastique)
 		
-		Object potion2 =new Potion(new int []{14,2},Color.ORANGE);
+		Object potion2 =new Potion(new int []{14,2},Color.PINK);
 		objects.add(potion2); 
 		synchronized(gameobjects){
 			gameobjects.add(potion2);} 
 		potion2.demisableAttach(this);
-		potion2.demisableAttach(this.inventaire);//idem
 	}
  	
  	private void startGame(Model model) {
@@ -122,7 +122,6 @@ public class Model implements Observable,DemisableObserver,Serializable {
 		System.out.println("loaded!");
  	}
  	
- 	//contenu devrait etre dans contolleur
  	public void movePlayer(int x, int y){//, int playerNumber){
  		GameObject player = gameobjects.get(0);//playerNumber));
  		boolean obstacle =false;
@@ -162,6 +161,7 @@ public class Model implements Observable,DemisableObserver,Serializable {
 		}
 
 
+
 	public GameObject getItemOnPlayerFeet(boolean front) {
 		GameObject item = null;
 		for (GameObject object: objects){
@@ -171,15 +171,11 @@ public class Model implements Observable,DemisableObserver,Serializable {
 			if (object.isAtPosition(new int[] {x,y})){
 				object.demisableNotifyObserver();
 				inventaire.addObject(object);
-				object=item;//inutile ici, mais le joueur ne devrais pas avoir son inventaire, plutot que le modèle?
+				//object=item;//inutile ici, mais le joueur ne devrais pas avoir son inventaire, plutot que le modèle?
 				object.demisableRemove(this);
 			}
 		}
 		return item;
-	}
-
-	public void addGiveItemToPlayer() {
-		
 	}
 	
 	@Override
@@ -217,6 +213,7 @@ public class Model implements Observable,DemisableObserver,Serializable {
 	}
 	public Player getPlayer() {
 		return (Player) gameobjects.get(0);
+		//return this.player; //astuce pour ne pas avoir d'erreur de cast quand le joueur meurt
 	}
 	public ArrayList<GameObject> getGameObjects(){
 		return gameobjects;

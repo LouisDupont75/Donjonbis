@@ -77,7 +77,8 @@ public class InventaireMap extends JPanel implements MouseListener {
 				// utilisation de l'objet par le joueur
 			}
 			else if((ev.getModifiers()&InputEvent.BUTTON3_MASK)!=0){
-				player.dropItem(this.view.getObjectsInventaire().get(currentCase(x,y)));
+				view.getControlleur().dropItem(this.view.getObjectsInventaire().get(currentCase(x,y)));
+				//player.dropItem(this.view.getObjectsInventaire().get(currentCase(x,y)));
 			}
 		}catch(IndexOutOfBoundsException e){
 		}

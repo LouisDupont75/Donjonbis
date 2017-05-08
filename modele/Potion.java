@@ -17,6 +17,6 @@ public class Potion extends Object {
 	public void effect (Player player){
 		player.setLife(player.getLife() +1);
 		System.out.println("j'ai " + player.getLife() + "vies");
+		this.demisableNotifyObserver();
 	}
-	public void utilize(Object object){}
 }
