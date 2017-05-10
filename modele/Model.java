@@ -15,12 +15,12 @@ import java.io.Serializable;
 
 
 public class Model implements Observable,DemisableObserver,Serializable,Observeur,CreationObserver {
-	private transient Inventaire inventaire;
+	private Inventaire inventaire;
 	private transient ArrayList<Observeur> listObserveurs = new ArrayList<Observeur>();
 	private ArrayList<GameObject> gameobjects= new ArrayList<GameObject>();
 	private transient Map map;
 	private int tailleMap=150; //ICI changer la taille de la carte
-	private transient ArrayList<GameObject> objects = new ArrayList<GameObject>();// deuxieme arraylist Gameobjects mais seulement
+	private ArrayList<GameObject> objects = new ArrayList<GameObject>();// deuxieme arraylist Gameobjects mais seulement
 	//remplie d'objets destines à l'inventaire. But:utiliser le polymorphisme au maximum
 	
 	private int length=32; // Taille en carres
@@ -36,47 +36,39 @@ public class Model implements Observable,DemisableObserver,Serializable,Observeu
  		//Inventaire invent = new Inventaire();
  		Inventaire invent = new Inventaire();
  		setInventaire(invent);
-		Player player = new Player(10,1.0,new int[]{5,6},Color.GREEN,this,1);
+		Player player = new Player(10,1.0,new int[]{5,6},Color.GREEN,1);
 		player.creationAttach(this);
-		player.addObserver(this);
+		player.demisableAttach(this);
+    	player.addObserver(this);
+    	//this.attachInterface(player);
 		synchronized(gameobjects){
 		gameobjects.add(0,player);}
 
 		//System.out.println("player fini");
 		Archer archer=new Archer(1,1.0,new int[]{14,7},Color.CYAN,2);
-		Ennemy e1 = new Ennemy(1,1.0,new int[]{5,9},Color.CYAN,1);//direction arbitraire pour l'instant
-		Ennemy e2 = new Ennemy(3,1.0,new int[]{15,12},Color.CYAN,1);
-		Object potion =new Potion(new int []{12,2},Color.PINK);
-		Object potion2 =new Potion(new int []{14,2},Color.PINK);
-		BlockMoveable block1 =new BlockMoveable(new int[]{19,7},Color.DARK_GRAY,1);
-		objects.add(potion);
-		objects.add(potion2);
-		archer.demisableAttach(this);
 		archer.creationAttach(this);
-		e1.demisableAttach(this);
-		e1.addObserver(this);
-		e2.demisableAttach(this);
-		e2.addObserver(this);
-		potion.demisableAttach(this);
-		potion2.demisableAttach(this);
-		block1.demisableAttach(this);
-		block1.moveableAttach(this.getPlayer());
+		this.initialize(archer);
+		Ennemy e1 = new Ennemy(1,1.0,new int[]{5,9},Color.CYAN,1);//direction arbitraire pour l'instant
+		this.initialize(e1);
+		Ennemy e2 = new Ennemy(3,1.0,new int[]{15,12},Color.CYAN,1);
+		this.initialize(e2);
+		Object potion =new Potion(new int []{12,2},Color.PINK);
+		objects.add(potion);
+		this.initialize(potion);
+		Object potion2 =new Potion(new int []{14,2},Color.PINK);
+		objects.add(potion2);
+		this.initialize(potion2);
+		BlockMoveable block1 =new BlockMoveable(new int[]{19,6},Color.DARK_GRAY,1);
+		this.initialize(block1);
+		for(GameObject go:gameobjects){
+			this.attachInterface(go);
+		}
+		
 		/*map=new Map(tailleMap);
 		ArrayList<Case> listeDeBlocksPourLaCarte = map.getBlocList();***/
-		synchronized(gameobjects){
 			/*for (Case bloc:listeDeBlocksPourLaCarte) {
 				gameobjects.add(bloc);
 			}*/
-			gameobjects.add(archer);
-			gameobjects.add(e1);
-			gameobjects.add(e2);
-			gameobjects.add(potion);
-			gameobjects.add(potion2);
-			gameobjects.add(block1);
-		}
-	    this.attachInterface(e1);
-	    this.attachInterface(e2);
-	    this.attachInterface(block1);
 	}
 		//TODO completer avec map[
 		
@@ -89,11 +81,13 @@ public class Model implements Observable,DemisableObserver,Serializable,Observeu
 		gameobjects.add(0,block2);*/
 		
 	
- 	private void startGame(Model model) {
+ 	public void startGame(Model model) {
  		//System.out.println("start game");
  		inventaire = model.getInventaire();
  		gameobjects = model.getGameObjects();
  		objects = model.getObjects();
+		/*ArrayList<Observeur> listObserveurs=new ArrayList<Observeur>();
+		this.listObserveurs=listObserveurs;*/
  	}
 
 	public void save() {
@@ -121,6 +115,12 @@ public class Model implements Observable,DemisableObserver,Serializable,Observeu
 		}
 		System.out.println("loaded!");
  	}
+ 	public void initialize(GameObject go){
+ 		synchronized(gameobjects){
+ 	    	gameobjects.add(go);}
+ 	    	go.demisableAttach(this);
+ 	    	go.addObserver(this);
+ 	}
  	public void attachInterface(GameObject gameobject){// Rattache les observeurs necessaires au gameobject en parametre
  		synchronized(gameobjects){
  		for (GameObject go:gameobjects){
@@ -130,30 +130,15 @@ public class Model implements Observable,DemisableObserver,Serializable,Observeu
 			if(go instanceof ObstacleObserver){
 				gameobject.obstacleAttach((ObstacleObserver) go);
 			}
+			if(go instanceof PlayerAttackObserver){
+				gameobject.playerAttackAttach((PlayerAttackObserver) go);
+			}
+			if(go instanceof MoveableObserver){
+				gameobject.moveableAttach((MoveableObserver)go);
+			}
 		}
  	}
  }		
- 	public void movePlayer(int x, int y){//TODO:le player ne doit pas pouvoir rentrer au travers des fleches
- 		GameObject player = gameobjects.get(0);//playerNumber));
- 		boolean obstacle =false;
- 		synchronized(gameobjects){
- 			for(GameObject object : gameobjects){
- 				obstacle=player.obstacleNextPosition(object, x, y);
- 				if(obstacle==true){
- 					if(object instanceof Moveable){
- 						Moveable o = (Moveable)object;
- 						o.moveableNotifyObserver(x,y);
- 					}
- 					break;
- 				}
- 			}
- 		}
- 		if(obstacle==false){
- 			player.move(x,y);
- 			notifyObserver();
- 		}
- 	}
-
 	public void dropBomb(){ // au cas où plus tard des ennemis seraient capables d'en lancer aussi
 		GameObject perso = this.getPlayer();
 		Bomb bombdropped = perso.dropBomb();
@@ -198,7 +183,12 @@ public class Model implements Observable,DemisableObserver,Serializable,Observeu
 		listObserveurs.clear();
 	}
 	@Override
-	public void notifyObserver() {
+	public void clearObserver(){
+		listObserveurs.clear();
+	}
+	@Override
+	public void notifyObserver() { //TODO:cette methode pose probleme apres avoir fait un chargement. 
+//Amene un NullPointerException car la vue n'est pas serializee et est reinitialisee comme null. 
 		for (Observeur observeur:listObserveurs){
 			observeur.update();
 		}
@@ -210,7 +200,6 @@ public class Model implements Observable,DemisableObserver,Serializable,Observeu
     @Override
     public void demise(Demisable d ,ArrayList<GameObject> loot){
     	gameobjects.remove(d);
-
     	if (loot!= null){
     		gameobjects.addAll(loot);
     		for(GameObject go:loot){
@@ -222,7 +211,7 @@ public class Model implements Observable,DemisableObserver,Serializable,Observeu
        	notifyObserver();
     }
     @Override
-    public void initialize(GameObject go){
+    public void initializeCreation(GameObject go){
     	synchronized(gameobjects){
     	gameobjects.add(go);}
     	go.demisableAttach(this);

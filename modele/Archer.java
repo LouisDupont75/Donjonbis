@@ -3,13 +3,14 @@ package modele;
 import java.awt.Color;
 import java.util.ArrayList;
 
-public class Archer extends Personnage implements Runnable,ObstacleObserver,Creation {
+public class Archer extends Personnage implements Runnable,ObstacleObserver,Creation,PlayerAttackObserver {
 	private Bow bow;
+	private transient Thread t;
 	private ArrayList<CreationObserver> creationobservers = new ArrayList<CreationObserver>();
 	public Archer(int life,Double dmg,int[] position,Color color,int direction){
 		super(life,dmg,position,color,direction);
 		this.bow=new Bow(new int[]{this.getPositionX(),this.getPositionY()},Color.ORANGE);
-		Thread t=new Thread(this);
+		t=new Thread(this);
 		t.start();
 	}
 	public void changeDirection(){
@@ -45,8 +46,8 @@ public class Archer extends Personnage implements Runnable,ObstacleObserver,Crea
 		for(DemisableObserver po:demisableobservers){
 			bow.demisableAttach(po);
 			po.demise(this,equipment );
-			this.setStateDemisable(true);
 		}
+		this.setStateDemisable(true);
 	}
 	@Override
 	public boolean isObstacle(){
@@ -68,13 +69,15 @@ public class Archer extends Personnage implements Runnable,ObstacleObserver,Crea
 	}
 	@Override
 	public void collision(Obstacle o,int x,int y){
-		GameObject go=(GameObject) o;
-		int distX=this.getPositionX()-(go.getPositionX()+x);
-		int distY=this.getPositionY()-(go.getPositionY()+y);
-		//System.out.println(distX + "et" + distY);
-		if(distX==0 && distY==0){
-			go.setStateObstacle(true);
-		}
+		if((!this.getStateDemisable())){
+			GameObject go=(GameObject) o;
+			int distX=this.getPositionX()-(go.getPositionX()+x);
+			int distY=this.getPositionY()-(go.getPositionY()+y);
+			//System.out.println(distX + "et" + distY);
+			if(distX==0 && distY==0){
+				go.setStateObstacle(true);
+			}
+		}	
 	}
 	@Override
 	public void creationAttach(CreationObserver co){
@@ -83,7 +86,17 @@ public class Archer extends Personnage implements Runnable,ObstacleObserver,Crea
 	@Override
 	public void creationNotifyObserver(GameObject go){
 		for(CreationObserver co:creationobservers){
-			co.initialize(go);
+			co.initializeCreation(go);
+		}
+	}
+	@Override
+	public void attackedByPlayer(PlayerAttack pa,int x,int y){
+		GameObject attacker=(GameObject)pa;
+		int distX=this.getPositionX()-(attacker.getPositionX()+x);
+		int distY=this.getPositionY()-(attacker.getPositionY()+y);
+		if(distX==0 && distY==0){
+			this.setLife(this.getLife()-1);
+			attacker.setStateAttack(true);
 		}
 	}
 }

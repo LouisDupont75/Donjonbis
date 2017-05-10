@@ -7,6 +7,7 @@ public class Main {
 	public static void main(String[] args) {
 		Model model= new Model();
 		Controller controller = new Controller(model);
+		
 		View view = new View(controller);
 		Keyboard keyboardListener=new Keyboard(view);
 		model.addObserver(view);

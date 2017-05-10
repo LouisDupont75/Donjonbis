@@ -3,12 +3,11 @@ package modele;
 import java.awt.Color;
 import java.util.ArrayList;
 
-public abstract class Personnage extends GameObject implements MoveableObserver,Demisable { // demisableObservable non? 
+public abstract class Personnage extends GameObject implements Demisable { // demisableObservable non? 
 	//--> Tous les personnages peuvent mourir
 	private int life; 
 	private Double dmg;
 	private int direction;
-	private boolean demiseState=false;
 	protected ArrayList<DemisableObserver> demisableobservers = new ArrayList<DemisableObserver>();
 
 	/// Constructeur
@@ -21,12 +20,6 @@ public abstract class Personnage extends GameObject implements MoveableObserver,
 	}
 	
 	////
-	public boolean getStateDemisable(){
-		return this.demiseState;
-	}
-	public void setStateDemisable(boolean demiseState){
-		this.demiseState=demiseState;
-	}
 	public int getLife() {
 		return this.life;
 	}
@@ -84,11 +77,9 @@ public abstract class Personnage extends GameObject implements MoveableObserver,
 	public void demisableNotifyObserver(){
 		for(DemisableObserver po:demisableobservers){
 			po.demise(this, null);
-			this.setStateDemisable(true);
 		}
+		this.setStateDemisable(true);
 	}
-	@Override
-	public void moveThing(Moveable m,int x,int y){};
 	
 	///
 

@@ -2,6 +2,5 @@ package modele;
 
 
 public interface MoveableObserver {
-	public void moveThing(Moveable m,int x,int y);
-
+	public void moved(Moveable m,int x,int y);
 }

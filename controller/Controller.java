@@ -1,10 +1,12 @@
 package controller;
 
-import modele.GameObject;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
+import modele.GameObject;
 import modele.Model;
-import view.Board;
 import view.View;
 
 public class Controller {//sert a controller le joueur, pour eviter de violer la loi de Demeter, pour eviter les trop grosse cohésion entre les classes. et pace tu code pas tout seul (un code plus propre= un code plus lisible)! 
@@ -20,21 +22,21 @@ public class Controller {//sert a controller le joueur, pour eviter de violer la
 		switch (direction) {
 		case 1:
 			if (oldY>0) {
-				model.movePlayer(0, -1);}//, player1);}
+				model.getPlayer().movePlayer(0, -1);}//, player1);}
 				model.getPlayer().setDirection(2);
 			//System.out.println("personnage en " + oldX + " et " + String.valueOf(oldY-1) );
 			break;
 			
 		case 0:
 			if (oldX>0) {
-				model.movePlayer(-1, 0);}//, player1);}, player1);}
+				model.getPlayer().movePlayer(-1, 0);}//, player1);}, player1);}
 				model.getPlayer().setDirection(3);		
 			//System.out.println("personnage en " + String.valueOf(oldX-1) + " et " + oldY );
 			break;
 			
 		case 2: //static majuscule
 			if (oldX<model.getTailleCarte()-1) {
-				model.movePlayer(1, 0);}//, player1);}, player1);}
+				model.getPlayer().movePlayer(1, 0);}//, player1);}, player1);}
 				model.getPlayer().setDirection(1);
 
 			//System.out.println("personnage en " + String.valueOf(oldX+1) + " et " + oldY );
@@ -42,7 +44,7 @@ public class Controller {//sert a controller le joueur, pour eviter de violer la
 			
 		case 3:
 			if (oldY<model.getTailleCarte()-1) {
-				model.movePlayer(0, 1);}//, player1);}, player1);}
+				model.getPlayer().movePlayer(0, 1);}//, player1);}, player1);}
 				model.getPlayer().setDirection(4);
 			//System.out.println("personnage en " + oldX + " et " + String.valueOf(oldY+1) );
 			break;

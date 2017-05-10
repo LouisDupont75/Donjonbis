@@ -3,7 +3,8 @@ package modele;
 import java.awt.Color;
 import java.util.ArrayList;
 
-public class BlockBreakable extends Case implements ExplodableObserver,Demisable,ObstacleObserver {
+public class BlockBreakable extends Case implements ExplodableObserver,Demisable,ObstacleObserver,PlayerAttackObserver,
+AttackObserver{
 	private ArrayList<DemisableObserver> demisableobservers =new ArrayList<DemisableObserver>();
 	private int life;
 	//commentaire dans block, Donjonbis sur eclipse 
@@ -14,8 +15,13 @@ public class BlockBreakable extends Case implements ExplodableObserver,Demisable
 	public int getLife(){
 		return this.life;
 	}
-	public void setLife(int life){
+	public void setLife(int life) {
 		this.life=life;
+		System.out.println("le bloc a" +this.getLife()+"vies");
+		if(this.getLife()<=0){
+			this.demisableNotifyObserver();
+			setStateDemisable(true);
+			}
 	}
 	@Override
 	public boolean isObstacle(){
@@ -33,6 +39,7 @@ public class BlockBreakable extends Case implements ExplodableObserver,Demisable
 		for(DemisableObserver po:demisableobservers){
 			po.demise(this, null);
 		}
+		this.setStateDemisable(true);
 	}
 	@Override 
 	public void exploded(Explodable e){
@@ -46,12 +53,34 @@ public class BlockBreakable extends Case implements ExplodableObserver,Demisable
 	}
 	@Override
 	public void collision(Obstacle o,int x,int y){
-		GameObject go=(GameObject) o;
+		if((!this.getStateDemisable())){
+			GameObject go=(GameObject) o;
+			int distX=this.getPositionX()-(go.getPositionX()+x);
+			int distY=this.getPositionY()-(go.getPositionY()+y);
+			//System.out.println(distX + "et" + distY);
+			if(distX==0 && distY==0){
+				go.setStateObstacle(true);
+			}
+		}	
+	}
+	@Override
+	public void attackedByPlayer(PlayerAttack pa,int x,int y){
+		GameObject attacker=(GameObject)pa;
+		int distX=this.getPositionX()-(attacker.getPositionX()+x);
+		int distY=this.getPositionY()-(attacker.getPositionY()+y);
+		if(distX==0 && distY==0){
+			this.setLife(this.getLife()-1);
+			attacker.setStateAttack(true);
+		}
+	}
+	@Override
+	public void attacked(Attack a,int x,int y){
+		GameObject go=(GameObject) a;
 		int distX=this.getPositionX()-(go.getPositionX()+x);
 		int distY=this.getPositionY()-(go.getPositionY()+y);
-		//System.out.println(distX + "et" + distY);
-		if(distX==0 && distY==0){
-			go.setStateObstacle(true);
+		if(distX==0&&distY==0){
+			this.setLife(this.getLife()-1);
+			go.setStateAttack(true);
 		}
 	}
 }

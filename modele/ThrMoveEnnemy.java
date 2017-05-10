@@ -11,13 +11,13 @@ public  class ThrMoveEnnemy implements Runnable  {
 		try {
 			while(!ennemy.getStateDemisable()){
     			ennemy.moveEnnemy(1,0);
-    			Thread.sleep(200);
+    			Thread.sleep(400);
     			ennemy.moveEnnemy(0,-1);
-    			Thread.sleep(200);
+    			Thread.sleep(400);
     			ennemy.moveEnnemy(-1,0);
-    			Thread.sleep(200);
+    			Thread.sleep(400);
     			ennemy.moveEnnemy(0,1);
-    			Thread.sleep(200);
+    			Thread.sleep(400);
 			}
 		}
 	 catch(InterruptedException e){

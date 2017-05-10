@@ -3,9 +3,12 @@ package modele;
 import java.awt.Color;
 import java.util.ArrayList;
 
-public class Arrow extends GameObject implements Runnable, Demisable,Obstacle,Attack,Observable {
+public class Arrow extends GameObject implements Runnable, Demisable,Obstacle,Attack,Observable,ObstacleObserver
+,PlayerAttack {
 	private Personnage perso;
+	private boolean equipedByPlayer=false;
 	private ArrayList<DemisableObserver> demisableobservers = new ArrayList<DemisableObserver>();
+	private ArrayList<PlayerAttackObserver> playerattackobservers = new ArrayList<PlayerAttackObserver>();
 	private ArrayList<AttackObserver> attackobservers = new ArrayList<AttackObserver>();
 	private ArrayList<ObstacleObserver> obstacleobservers = new ArrayList<ObstacleObserver>();
 	private ArrayList<Observeur> listObserveurs = new ArrayList<Observeur>();
@@ -21,6 +24,12 @@ public class Arrow extends GameObject implements Runnable, Demisable,Obstacle,At
 		this.nextY=y;
 		
 	}
+	public boolean getEquipedByPlayer(){
+		return this.equipedByPlayer;
+	}
+	public void setEquipedByPlayer(boolean b){
+		this.equipedByPlayer=b;
+	}
 	public Personnage getPersonnage(){
 		return this.perso;
 	}
@@ -34,13 +43,16 @@ public class Arrow extends GameObject implements Runnable, Demisable,Obstacle,At
 			this.move(X, Y);
 			this.notifyObserver();
 		}
-		this.AttackNotifyObserver();
+		this.AttackNotifyObserver(X,Y);
+		if(this.equipedByPlayer){
+			this.playerAttackNotify(X, Y);
+		}
 	}
 	public void run(){
 		while(!(this.getStateObstacle()) && !(this.getStateAttack()) ){
 			try{
 				this.moveArrow(this.nextX,this.nextY);
-				Thread.sleep(500);
+				Thread.sleep(200);
 			}catch(InterruptedException e){
 				e.printStackTrace();
 				e.getMessage();
@@ -48,11 +60,10 @@ public class Arrow extends GameObject implements Runnable, Demisable,Obstacle,At
 			
 		}
 		this.demisableNotifyObserver();	
-		System.out.println("demisable declenche");
 	}
 	@Override
 	public boolean isObstacle(){
-		return false;
+		return true;
 	}
 	@Override
 	public void demisableAttach(DemisableObserver po){
@@ -68,15 +79,16 @@ public class Arrow extends GameObject implements Runnable, Demisable,Obstacle,At
 		for(DemisableObserver po:demisableobservers){
 			po.demise(this, null);
 		}
+		this.setStateDemisable(true);
 	}
 	@Override
 	public void AttackAttach(AttackObserver ao){
 		attackobservers.add(ao);
 	}
 	@Override 
-	public void AttackNotifyObserver(){
+	public void AttackNotifyObserver(int x,int y){
 		for(AttackObserver ao:attackobservers){
-			ao.attacked(this);
+			ao.attacked(this,x,y);
 		}
 	}
 	@Override
@@ -98,12 +110,37 @@ public class Arrow extends GameObject implements Runnable, Demisable,Obstacle,At
 	public void deleteObserver(Observeur o) {
 		listObserveurs.remove(o);
 	}
-
+	@Override
+	public void clearObserver(){
+		listObserveurs.clear();
+	}
 	@Override
 	public void notifyObserver() {
 		for (Observeur observeur:listObserveurs){
 			observeur.update();
 		}
 		
+	}
+	@Override
+	public void playerAttackAttach(PlayerAttackObserver pao){
+		playerattackobservers.add(pao);
+	}
+	@Override
+	public void playerAttackNotify(int x,int y){
+		for(PlayerAttackObserver pao:playerattackobservers){
+			pao.attackedByPlayer(this,x,y);
+		}
+	}
+	@Override
+    public void collision(Obstacle o,int x,int y){
+		if(!this.getStateDemisable()){
+    		GameObject go=(GameObject) o;
+			int distX=this.getPositionX()-(go.getPositionX()+x);
+			int distY=this.getPositionY()-(go.getPositionY()+y);
+			//System.out.println(distX + "et" + distY);
+			if(distX==0 && distY==0){
+				go.setStateObstacle(true);
+			}
+		}	
 	}
 }

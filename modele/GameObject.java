@@ -7,12 +7,19 @@ import java.io.Serializable;
 public abstract class GameObject implements Serializable{
 	protected int[] position=new int[2];
 	protected Color color;
+	private boolean demiseState=false;
 	private boolean stateObstacle=false;
 	private boolean stateAttack=false;
 	public GameObject(int [] position, Color color){
 		setPositionX(position[0]);
 		setPositionY(position[1]);
 		setColor(color);
+	}
+	public boolean getStateDemisable(){
+		return this.demiseState;
+	}
+	public void setStateDemisable(boolean demiseState){
+		this.demiseState=demiseState;
 	}
 	public boolean getStateAttack(){
 		return this.stateAttack;
@@ -93,9 +100,12 @@ public abstract class GameObject implements Serializable{
 	public void demisableNotifyObserver(){};
 	public  void demisableRemove(DemisableObserver po){};
 	public  void demisableAttach(DemisableObserver po){};
-	public void addObserver(Observeur o) {}
-	public void AttackAttach(AttackObserver ao){}
-	public void obstacleAttach(ObstacleObserver ao){}
+	public void addObserver(Observeur o) {};
+	public void AttackAttach(AttackObserver ao){};
+	public void obstacleAttach(ObstacleObserver ao){};
+	public void playerAttackAttach(PlayerAttackObserver pao){};
+	public void moveableAttach(MoveableObserver mo){};
+	
 	///Abstracts methods
 	public abstract boolean isObstacle();
 }
