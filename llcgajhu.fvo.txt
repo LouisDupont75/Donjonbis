@@ -1,0 +1,25 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	modified:   carte/carte.txt
+#	modified:   modele/Archer.java
+#	modified:   modele/Arrow.java
+#	new file:   modele/Attack.java
+#	new file:   modele/AttackObserver.java
+#	modified:   modele/BlockBreakable.java
+#	modified:   modele/BlockUnbreakable.java
+#	new file:   modele/Creation.java
+#	new file:   modele/CreationObserver.java
+#	modified:   modele/Ennemy.java
+#	modified:   modele/GameObject.java
+#	modified:   modele/Model.java
+#	new file:   modele/Obstacle.java
+#	new file:   modele/ObstacleObserver.java
+#	modified:   modele/Personnage.java
+#	modified:   modele/Player.java
+#
+
