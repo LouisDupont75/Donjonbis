@@ -14,7 +14,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 
-public class Model implements Observable,DemisableObserver,Serializable {
+public class Model implements Observable,DemisableObserver,Serializable,Observeur,CreationObserver {
 	private transient Inventaire inventaire;
 	private transient ArrayList<Observeur> listObserveurs = new ArrayList<Observeur>();
 	private ArrayList<GameObject> gameobjects= new ArrayList<GameObject>();
@@ -37,37 +37,49 @@ public class Model implements Observable,DemisableObserver,Serializable {
  		Inventaire invent = new Inventaire();
  		setInventaire(invent);
 		Player player = new Player(10,1.0,new int[]{5,6},Color.GREEN,this,1);
+		player.creationAttach(this);
+		player.addObserver(this);
 		synchronized(gameobjects){
 		gameobjects.add(0,player);}
 
 		//System.out.println("player fini");
-		Archer archer=new Archer(1,1.0,new int[]{14,7},Color.CYAN,2,this);
+		Archer archer=new Archer(1,1.0,new int[]{14,7},Color.CYAN,2);
+		Ennemy e1 = new Ennemy(1,1.0,new int[]{5,9},Color.CYAN,1);//direction arbitraire pour l'instant
+		Ennemy e2 = new Ennemy(3,1.0,new int[]{15,12},Color.CYAN,1);
+		Object potion =new Potion(new int []{12,2},Color.PINK);
+		Object potion2 =new Potion(new int []{14,2},Color.PINK);
+		BlockMoveable block1 =new BlockMoveable(new int[]{19,7},Color.DARK_GRAY,1);
+		objects.add(potion);
+		objects.add(potion2);
 		archer.demisableAttach(this);
-		synchronized(gameobjects){
-			gameobjects.add(archer);}
-		Ennemy e1 = new Ennemy(1,1.0,new int[]{5,25},Color.CYAN,this,1,1);//direction arbitraire pour l'instant
+		archer.creationAttach(this);
 		e1.demisableAttach(this);
-		synchronized(gameobjects){
-		gameobjects.add(e1);}
-
-		//System.out.println("ennemi fini");
-		
-		Ennemy e2 = new Ennemy(3,1.0,new int[]{15,12},Color.CYAN,this,2,1);
+		e1.addObserver(this);
 		e2.demisableAttach(this);
-		synchronized(gameobjects){
-			gameobjects.add(e2);}
-
-		//System.out.println("ennemi2 fini");
-		
-		/*map=new Map(tailleMap);
-		ArrayList<Case> listeDeBlocksPourLaCarte = map.getBlocList();
-		for (Case bloc:listeDeBlocksPourLaCarte) {
-			gameobjects.add(bloc);
-		}*/
-		//TODO completer avec map[
-		/*BlockBreakable block1 =new BlockBreakable(new int[]{10,2},Color.DARK_GRAY,1);
+		e2.addObserver(this);
+		potion.demisableAttach(this);
+		potion2.demisableAttach(this);
 		block1.demisableAttach(this);
-		gameobjects.add(block1);*/
+		block1.moveableAttach(this.getPlayer());
+		/*map=new Map(tailleMap);
+		ArrayList<Case> listeDeBlocksPourLaCarte = map.getBlocList();***/
+		synchronized(gameobjects){
+			/*for (Case bloc:listeDeBlocksPourLaCarte) {
+				gameobjects.add(bloc);
+			}*/
+			gameobjects.add(archer);
+			gameobjects.add(e1);
+			gameobjects.add(e2);
+			gameobjects.add(potion);
+			gameobjects.add(potion2);
+			gameobjects.add(block1);
+		}
+	    this.attachInterface(e1);
+	    this.attachInterface(e2);
+	    this.attachInterface(block1);
+	}
+		//TODO completer avec map[
+		
 
 		//System.out.println("bloc fini");
 		
@@ -76,20 +88,7 @@ public class Model implements Observable,DemisableObserver,Serializable {
 		block2.moveableAttach(this.getPlayer());
 		gameobjects.add(0,block2);*/
 		
-		
-		Object potion =new Potion(new int []{12,2},Color.PINK);
-		objects.add(potion); // A optimiser avec la méthode player.utilize
-		synchronized(gameobjects){
-			gameobjects.add(potion);} 
-		potion.demisableAttach(this);
-		
-		Object potion2 =new Potion(new int []{14,2},Color.PINK);
-		objects.add(potion2); 
-		synchronized(gameobjects){
-			gameobjects.add(potion2);} 
-		potion2.demisableAttach(this);
-	}
- 	
+	
  	private void startGame(Model model) {
  		//System.out.println("start game");
  		inventaire = model.getInventaire();
@@ -122,8 +121,19 @@ public class Model implements Observable,DemisableObserver,Serializable {
 		}
 		System.out.println("loaded!");
  	}
- 	
- 	public void movePlayer(int x, int y){//, int playerNumber){
+ 	public void attachInterface(GameObject gameobject){// Rattache les observeurs necessaires au gameobject en parametre
+ 		synchronized(gameobjects){
+ 		for (GameObject go:gameobjects){
+			if(go instanceof AttackObserver){
+				gameobject.AttackAttach((AttackObserver) go);
+			}
+			if(go instanceof ObstacleObserver){
+				gameobject.obstacleAttach((ObstacleObserver) go);
+			}
+		}
+ 	}
+ }		
+ 	public void movePlayer(int x, int y){//TODO:le player ne doit pas pouvoir rentrer au travers des fleches
  		GameObject player = gameobjects.get(0);//playerNumber));
  		boolean obstacle =false;
  		synchronized(gameobjects){
@@ -155,8 +165,8 @@ public class Model implements Observable,DemisableObserver,Serializable {
 
 			}
 		}  
-		}
 		gameobjects.add(bombdropped); 
+		}
 		notifyObserver();
 	
 		}
@@ -181,34 +191,45 @@ public class Model implements Observable,DemisableObserver,Serializable {
 	
 	@Override
 	public void addObserver(Observeur o) {
-	     listObserveurs.add(o);
-		
+	     listObserveurs.add(o);	
 	}
-
 	@Override
 	public void deleteObserver(Observeur o) {
 		listObserveurs.clear();
-		
 	}
-
 	@Override
 	public void notifyObserver() {
 		for (Observeur observeur:listObserveurs){
 			observeur.update();
 		}
-		
 	}
-	
+	@Override
+	public void update(){
+		this.notifyObserver();
+	}
     @Override
     public void demise(Demisable d ,ArrayList<GameObject> loot){
     	gameobjects.remove(d);
 
     	if (loot!= null){
     		gameobjects.addAll(loot);
+    		for(GameObject go:loot){
+    			if(go instanceof Object){
+    				objects.add(go);
+    			}
+    		}
     	}
        	notifyObserver();
     }
-    
+    @Override
+    public void initialize(GameObject go){
+    	synchronized(gameobjects){
+    	gameobjects.add(go);}
+    	go.demisableAttach(this);
+    	go.addObserver(this);
+    	this.attachInterface(go);
+    	this.notifyObserver();
+    }
 	public Inventaire getInventaire(){
 		return inventaire;
 	}

@@ -3,8 +3,9 @@ package modele;
 import java.awt.Color;
 import java.util.ArrayList;
 
-public abstract class Personnage extends GameObject implements MoveableObserver,Demisable { // demisableObservable non?
-	private int life; //point de vie pv
+public abstract class Personnage extends GameObject implements MoveableObserver,Demisable { // demisableObservable non? 
+	//--> Tous les personnages peuvent mourir
+	private int life; 
 	private Double dmg;
 	private int direction;
 	private boolean demiseState=false;

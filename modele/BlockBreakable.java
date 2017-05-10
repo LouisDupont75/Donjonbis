@@ -3,7 +3,7 @@ package modele;
 import java.awt.Color;
 import java.util.ArrayList;
 
-public class BlockBreakable extends Case implements ExplodableObserver,Demisable {
+public class BlockBreakable extends Case implements ExplodableObserver,Demisable,ObstacleObserver {
 	private ArrayList<DemisableObserver> demisableobservers =new ArrayList<DemisableObserver>();
 	private int life;
 	//commentaire dans block, Donjonbis sur eclipse 
@@ -42,6 +42,16 @@ public class BlockBreakable extends Case implements ExplodableObserver,Demisable
 		boolean dist = this.distance(bomb) <=bomb.getRange();//TODO Changer la vue pour afficher un cercle
 		if(dist){
 			this.demisableNotifyObserver();
+		}
+	}
+	@Override
+	public void collision(Obstacle o,int x,int y){
+		GameObject go=(GameObject) o;
+		int distX=this.getPositionX()-(go.getPositionX()+x);
+		int distY=this.getPositionY()-(go.getPositionY()+y);
+		//System.out.println(distX + "et" + distY);
+		if(distX==0 && distY==0){
+			go.setStateObstacle(true);
 		}
 	}
 }

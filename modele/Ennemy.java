@@ -6,15 +6,13 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
 //import java.util.Iterator;
-public class Ennemy extends Personnage implements Demisable,ExplodableObserver {
-	private Model model;
-	private int numberEnnemy;
+public class Ennemy extends Personnage implements Demisable,ExplodableObserver,Attack,Obstacle,ObstacleObserver,Observable {
 	private transient Thread t;
-	protected ArrayList<DemisableObserver> demisableobservers = new ArrayList<DemisableObserver>();
-	public Ennemy(int life,Double dmg,int[] position,Color color,Model model,int numberEnnemy,int direction) {
+	private ArrayList<Observeur> listObserveurs = new ArrayList<Observeur>();
+	private ArrayList<AttackObserver> attackobservers = new ArrayList<AttackObserver>();
+	private ArrayList<ObstacleObserver> obstacleobservers = new ArrayList<ObstacleObserver>();
+	public Ennemy(int life,Double dmg,int[] position,Color color,int direction) {
 		super(life,dmg,position,color,direction);
-		this.numberEnnemy=numberEnnemy;
-		this.model=model;
 		t=new Thread(new ThrMoveEnnemy(this));
 		t.start();
 	}
@@ -26,8 +24,16 @@ public class Ennemy extends Personnage implements Demisable,ExplodableObserver {
 	public Bomb dropBomb (){
 		return null;//les ennemis ne lachent pas encore de bombes
 	}
-	public void moveEnnemy(int X, int Y){//TODO : regler la sortie de map pour l'ennemi
-		try{
+	public void moveEnnemy(int X, int Y){//TODO : ajouter l'attackObserver
+		this.setStateObstacle(false);
+		this.obstacleNotifyObserver(X, Y);
+		if(!this.getStateObstacle()){
+			this.move(X, Y);
+			this.notifyObserver();
+		}
+		this.AttackNotifyObserver();
+		//System.out.println(obstacleobservers.size());
+		/*try{
 		boolean obstacle = false;
 		ArrayList<GameObject> list =this.model.getGameObjects();
 		synchronized (list) {
@@ -48,7 +54,7 @@ public class Ennemy extends Personnage implements Demisable,ExplodableObserver {
 			this.move(X, Y);
 			model.notifyObserver();
 		}
-	}catch(ConcurrentModificationException e){}	
+	}catch(ConcurrentModificationException e){}	*/
 	}	
 	///
 	@Override
@@ -68,5 +74,51 @@ public class Ennemy extends Personnage implements Demisable,ExplodableObserver {
 			
 		}
 	}
+	@Override
+	public void AttackAttach(AttackObserver ao){
+		attackobservers.add(ao);
+	}
+	@Override 
+	public void AttackNotifyObserver(){
+		for(AttackObserver ao:attackobservers){
+			ao.attacked(this);
+		}
+	}
+	@Override
+    public void obstacleAttach(ObstacleObserver oo){
+   	 obstacleobservers.add(oo);
+    }
+    @Override
+    public void obstacleNotifyObserver(int x,int y){
+   	 for(ObstacleObserver oo:obstacleobservers){
+   		 oo.collision(this,x,y);
+   	 }
+    }
+    @Override
+    public void collision(Obstacle o,int x,int y){
+		GameObject go=(GameObject) o;
+		int distX=this.getPositionX()-(go.getPositionX()+x);
+		int distY=this.getPositionY()-(go.getPositionY()+y);
+		//System.out.println(distX + "et" + distY);
+		if(distX==0 && distY==0){
+			go.setStateObstacle(true);
+		}
+	}
+    @Override
+	public void addObserver(Observeur o) {
+	     listObserveurs.add(o);
+	}
 
+	@Override
+	public void deleteObserver(Observeur o) {
+		listObserveurs.remove(o);
+	}
+
+	@Override
+	public void notifyObserver() {
+		for (Observeur observeur:listObserveurs){
+			observeur.update();
+		}
+		
+	}
 }

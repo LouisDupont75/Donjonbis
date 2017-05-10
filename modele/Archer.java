@@ -3,20 +3,14 @@ package modele;
 import java.awt.Color;
 import java.util.ArrayList;
 
-public class Archer extends Personnage implements Runnable {
-	private Model model;
+public class Archer extends Personnage implements Runnable,ObstacleObserver,Creation {
 	private Bow bow;
-	public Archer(int life,Double dmg,int[] position,Color color,int direction,Model model){
+	private ArrayList<CreationObserver> creationobservers = new ArrayList<CreationObserver>();
+	public Archer(int life,Double dmg,int[] position,Color color,int direction){
 		super(life,dmg,position,color,direction);
-		this.model=model;
 		this.bow=new Bow(new int[]{this.getPositionX(),this.getPositionY()},Color.ORANGE);
-		model.getObjects().add(bow);//Ajout à la liste d'objets destinés à l'inventaire
-		bow.demisableAttach(model);
 		Thread t=new Thread(this);
 		t.start();
-	}
-	public Model getModel(){
-		return this.model;
 	}
 	public void changeDirection(){
 		if(this.getDirection()<4){
@@ -27,12 +21,8 @@ public class Archer extends Personnage implements Runnable {
 		}
 	}
 	public void shootArrow(){
-		ArrayList<GameObject> gameobjects=model.getGameObjects();
-		Arrow arrow=new Arrow(this.position,Color.WHITE,this,this.model);
-		arrow.demisableAttach(model);
-		synchronized(gameobjects){
-		gameobjects.add(arrow);}
-		model.notifyObserver();
+		Arrow arrow=new Arrow(this.position,Color.WHITE,this);
+		creationNotifyObserver(arrow);
 		Thread t=new Thread(arrow);
 		t.start();
 	}
@@ -53,6 +43,7 @@ public class Archer extends Personnage implements Runnable {
 		ArrayList<GameObject> equipment=new ArrayList<GameObject>();
 		equipment.add(bow);
 		for(DemisableObserver po:demisableobservers){
+			bow.demisableAttach(po);
 			po.demise(this,equipment );
 			this.setStateDemisable(true);
 		}
@@ -74,5 +65,25 @@ public class Archer extends Personnage implements Runnable {
 			}
 		}
 		
+	}
+	@Override
+	public void collision(Obstacle o,int x,int y){
+		GameObject go=(GameObject) o;
+		int distX=this.getPositionX()-(go.getPositionX()+x);
+		int distY=this.getPositionY()-(go.getPositionY()+y);
+		//System.out.println(distX + "et" + distY);
+		if(distX==0 && distY==0){
+			go.setStateObstacle(true);
+		}
+	}
+	@Override
+	public void creationAttach(CreationObserver co){
+		creationobservers.add(co);
+	}
+	@Override
+	public void creationNotifyObserver(GameObject go){
+		for(CreationObserver co:creationobservers){
+			co.initialize(go);
+		}
 	}
 }

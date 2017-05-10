@@ -3,9 +3,11 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 
-public class Player extends Personnage implements MoveableObserver {
+public class Player extends Personnage implements MoveableObserver,AttackObserver,Creation,Observable {
 	private Model model;
 	private boolean bowEquiped=false;
+	private ArrayList<CreationObserver> creationobservers = new ArrayList<CreationObserver>();
+	private ArrayList<Observeur> listObserveurs = new ArrayList<Observeur>();
 	public Player(int life,Double dmg,int[] position,Color color,Model model,int direction) {
 		super(life,dmg,position,color,direction);
 		this.model =model;
@@ -21,12 +23,8 @@ public class Player extends Personnage implements MoveableObserver {
 	}
 	public void shootArrow(){
 		if(this.getBowEquiped()){
-			ArrayList<GameObject> gameobjects=model.getGameObjects();
-			Arrow arrow=new Arrow(this.position,Color.WHITE,this,this.model);
-			arrow.demisableAttach(model);
-			synchronized(gameobjects){
-			gameobjects.add(arrow);}
-			model.notifyObserver();
+			Arrow arrow=new Arrow(this.position,Color.WHITE,this);
+			creationNotifyObserver(arrow);
 			Thread t=new Thread(arrow);
 			t.start();
 		}	
@@ -112,7 +110,42 @@ public class Player extends Personnage implements MoveableObserver {
 		}
 		
 	}
+}
+	@Override
+	public void attacked(Attack a){
+		GameObject go=(GameObject) a;
+		int distX=this.getPositionX()-go.getPositionX();
+		int distY=this.getPositionY()-go.getPositionY();
+		if(distX==0&&distY==0){
+			this.setLife(this.getLife()-1);
+			go.setStateAttack(true);
+		}
+	}
+	@Override
+	public void creationAttach(CreationObserver co){
+		creationobservers.add(co);
+	}
+	@Override
+	public void creationNotifyObserver(GameObject go){
+		for(CreationObserver co:creationobservers){
+			co.initialize(go);
+		}
+	}
+	@Override
+	public void addObserver(Observeur o) {
+	     listObserveurs.add(o);
 	}
 
-	
+	@Override
+	public void deleteObserver(Observeur o) {
+		listObserveurs.remove(o);
+	}
+
+	@Override
+	public void notifyObserver() {
+		for (Observeur observeur:listObserveurs){
+			observeur.update();
+		}
+		
+	}
 }

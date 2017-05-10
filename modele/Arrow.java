@@ -3,17 +3,17 @@ package modele;
 import java.awt.Color;
 import java.util.ArrayList;
 
-public class Arrow extends GameObject implements Runnable, Demisable {
+public class Arrow extends GameObject implements Runnable, Demisable,Obstacle,Attack,Observable {
 	private Personnage perso;
-	private Model model; // je vois pas faire autrement pour pouvoir acceder a la liste des gameobjecs necessaires 
-//dans plusieurs des fonctions de cette classe
 	private ArrayList<DemisableObserver> demisableobservers = new ArrayList<DemisableObserver>();
+	private ArrayList<AttackObserver> attackobservers = new ArrayList<AttackObserver>();
+	private ArrayList<ObstacleObserver> obstacleobservers = new ArrayList<ObstacleObserver>();
+	private ArrayList<Observeur> listObserveurs = new ArrayList<Observeur>();
 	private int nextX;
 	private int nextY;
-	public Arrow(int [] position,Color color,Personnage perso,Model model){
+	public Arrow(int [] position,Color color,Personnage perso){
 		super(position,color);
 		setPersonnage(perso);
-		this.model=model;
 		int [] coordinate = this.perso.coordinateDirection(this.perso.getDirection());
 		int x = coordinate[0];
 		int y = coordinate[1];
@@ -27,36 +27,19 @@ public class Arrow extends GameObject implements Runnable, Demisable {
 	public void setPersonnage(Personnage perso){
 		this.perso=perso;
 	}
-	public boolean isCollision(){
-		ArrayList<GameObject> gameobjects= model.getGameObjects();
-		boolean b=false;
-		synchronized(gameobjects){
-			for (GameObject go:gameobjects){
-				if(this.obstacleNextPosition(go,nextX,nextY)||(this.objectNextPosition(model.getPlayer(),nextX,nextY))){
-					b=true;
-					break;
-				}
-			}
-		}	
-		return b;
-	}
-	public GameObject getGoNextPos(int x, int y){
-		ArrayList<GameObject> gameobjects= model.getGameObjects();
-		GameObject val=null;
-		synchronized(gameobjects){
-			for (GameObject go:gameobjects){
-				if (this.objectNextPosition(go, x, y)){
-					val=go;
-				}
-			}
+	public void moveArrow(int X,int Y){
+		this.setStateObstacle(false);
+		this.obstacleNotifyObserver(X, Y);
+		if(!this.getStateObstacle()){
+			this.move(X, Y);
+			this.notifyObserver();
 		}
-		return val;
+		this.AttackNotifyObserver();
 	}
 	public void run(){
-		while(!this.isCollision()){
+		while(!(this.getStateObstacle()) && !(this.getStateAttack()) ){
 			try{
-				this.move(this.nextX,this.nextY);
-				model.notifyObserver();
+				this.moveArrow(this.nextX,this.nextY);
 				Thread.sleep(500);
 			}catch(InterruptedException e){
 				e.printStackTrace();
@@ -64,9 +47,8 @@ public class Arrow extends GameObject implements Runnable, Demisable {
 			}
 			
 		}
-		GameObject go=this.getGoNextPos(this.nextX,this.nextY);
-		go.setLife(go.getLife()-1);
-		this.demisableNotifyObserver();		
+		this.demisableNotifyObserver();	
+		System.out.println("demisable declenche");
 	}
 	@Override
 	public boolean isObstacle(){
@@ -86,4 +68,42 @@ public class Arrow extends GameObject implements Runnable, Demisable {
 		for(DemisableObserver po:demisableobservers){
 			po.demise(this, null);
 		}
-	}}
+	}
+	@Override
+	public void AttackAttach(AttackObserver ao){
+		attackobservers.add(ao);
+	}
+	@Override 
+	public void AttackNotifyObserver(){
+		for(AttackObserver ao:attackobservers){
+			ao.attacked(this);
+		}
+	}
+	@Override
+    public void obstacleNotifyObserver(int x,int y){
+   	 for(ObstacleObserver oo:obstacleobservers){
+   		 oo.collision(this,x,y);
+   	 	}
+    }
+	@Override
+    public void obstacleAttach(ObstacleObserver oo){
+   	 obstacleobservers.add(oo);
+    }
+	@Override
+	public void addObserver(Observeur o) {
+	     listObserveurs.add(o);
+	}
+
+	@Override
+	public void deleteObserver(Observeur o) {
+		listObserveurs.remove(o);
+	}
+
+	@Override
+	public void notifyObserver() {
+		for (Observeur observeur:listObserveurs){
+			observeur.update();
+		}
+		
+	}
+}

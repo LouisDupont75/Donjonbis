@@ -7,13 +7,25 @@ import java.io.Serializable;
 public abstract class GameObject implements Serializable{
 	protected int[] position=new int[2];
 	protected Color color;
-	
+	private boolean stateObstacle=false;
+	private boolean stateAttack=false;
 	public GameObject(int [] position, Color color){
 		setPositionX(position[0]);
 		setPositionY(position[1]);
 		setColor(color);
 	}
-	
+	public boolean getStateAttack(){
+		return this.stateAttack;
+	}
+	public void setStateAttack(boolean b){
+		this.stateAttack=b;
+	}
+	public boolean getStateObstacle(){
+		return this.stateObstacle;
+	}
+	public void setStateObstacle(boolean b){
+		this.stateObstacle=b;
+	}
 	public int getPositionX() {
 		return this.position[0]; 
 	}
@@ -77,12 +89,13 @@ public abstract class GameObject implements Serializable{
 	public int getLife(){//choix arbitraire
 		return 1;
 	};
-	public void demisableNotifyObserver(){}; // Pour pouvoir utiliser cette méthode avec un object de type Object sans 
-		//faire de downcast ----> Bonne pratique ??
-		
 	
+	public void demisableNotifyObserver(){};
 	public  void demisableRemove(DemisableObserver po){};
 	public  void demisableAttach(DemisableObserver po){};
+	public void addObserver(Observeur o) {}
+	public void AttackAttach(AttackObserver ao){}
+	public void obstacleAttach(ObstacleObserver ao){}
 	///Abstracts methods
 	public abstract boolean isObstacle();
 }
