@@ -42,11 +42,13 @@ public class Keyboard implements KeyListener {
 				break;
 			case KeyEvent.VK_O:
 				view.getControlleur().ouvrirCoffre();
+				break;
 			case KeyEvent.VK_A:
 				view.getControlleur().launchAttack();
 				break;	
 			case KeyEvent.VK_SPACE:
 				view.getControlleur().shootArrow();
+				break;
 			default: 
 				System.out.println("Mauvaise touche");
 				break;

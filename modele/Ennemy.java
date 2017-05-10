@@ -6,11 +6,9 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
 //import java.util.Iterator;
-public class Ennemy extends Personnage implements Demisable,ExplodableObserver {
+public class Ennemy extends AbstractEnnemy{
 	private Model model;
 	private int numberEnnemy;
-	private transient Thread t;
-	protected ArrayList<DemisableObserver> demisableobservers = new ArrayList<DemisableObserver>();
 	public Ennemy(int life,Double dmg,int[] position,Color color,Model model,int numberEnnemy,int direction) {
 		super(life,dmg,position,color,direction);
 		this.numberEnnemy=numberEnnemy;
@@ -19,13 +17,13 @@ public class Ennemy extends Personnage implements Demisable,ExplodableObserver {
 		t.start();
 	}
 	
-	public boolean isObstacle (){
-		return true;
+	public Ennemy(int[] position) {
+		super(1,1.0,position,Color.BLUE,0);
+		numberEnnemy=1;//TODO changer, on ne sait pas quoi mettre
+		t=new Thread(new ThrMoveEnnemy(this));
+		t.start();
 	}
-	
-	public Bomb dropBomb (){
-		return null;//les ennemis ne lachent pas encore de bombes
-	}
+
 	public void moveEnnemy(int X, int Y){//TODO : regler la sortie de map pour l'ennemi
 		try{
 		boolean obstacle = false;
@@ -49,24 +47,6 @@ public class Ennemy extends Personnage implements Demisable,ExplodableObserver {
 			model.notifyObserver();
 		}
 	}catch(ConcurrentModificationException e){}	
-	}	
-	///
-	@Override
-	public GameObject addItem(ArrayList<GameObject> objects,Inventaire inventaire){
-		return null;
-	};
-	@Override
-	public void utilize (GameObject object){}
-	@Override 
-	public void dropItem(GameObject object){};
-	@Override
-	public void exploded(Explodable e){
-		Bomb bomb =(Bomb) e; // Downcast explodable--> Bomb
-		boolean dist = this.distance(bomb) <=bomb.getRange();
-		if(dist){
-			this.demisableNotifyObserver();
-			
-		}
 	}
 
 }

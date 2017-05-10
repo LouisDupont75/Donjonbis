@@ -3,7 +3,7 @@ package modele;
 import java.awt.Color;
 import java.util.ArrayList;
 
-public abstract class Personnage extends GameObject implements MoveableObserver,Demisable { // demisableObservable non?
+public abstract class Personnage extends GameObject implements MoveableObserver,Demisable { 
 	private int life; //point de vie pv
 	private Double dmg;
 	private int direction;
@@ -92,7 +92,6 @@ public abstract class Personnage extends GameObject implements MoveableObserver,
 	///
 
 	public abstract GameObject addItem(ArrayList<GameObject> objects,Inventaire inventaire);
-	public abstract Bomb dropBomb();
 	public abstract void utilize(GameObject object);
 	public abstract void dropItem(GameObject object);
 	

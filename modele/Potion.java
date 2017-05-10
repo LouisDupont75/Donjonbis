@@ -9,9 +9,6 @@ public class Potion extends Object {
 	
 	public Potion(int[] position) {
 		super(position, Color.PINK);
-		if(Math.random()>=0.5){
-			color=Color.ORANGE;
-		}
 	}
 
 	public void effect (Player player){

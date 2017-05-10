@@ -28,7 +28,6 @@ public class BlockBreakable extends Case implements ExplodableObserver,Demisable
 	@Override
 	public void demisableAttach(DemisableObserver demi){ // le mot-cle "do" ne marche pas car c'est un mot cle special
 		demisableobservers.add(demi);
-		
 	}
 	@Override
 	public void demisableRemove(DemisableObserver po){};

@@ -27,9 +27,9 @@ public class Board extends JPanel { // Attention, variables publiques
 		paintGrille(g);
 		paintObjects(g);
 		if(!getPlayer().getStateDemisable()){
-			paintPlayer(g);
 			paintPlayerDirection(g);
 		}
+		//paintFieldOfVision(g);
 	}
 	
 	public void paintGrille(Graphics g){
@@ -105,6 +105,7 @@ public class Board extends JPanel { // Attention, variables publiques
 		g.drawRect(x*getsize(), y*getsize(), getsize()-1, getsize()-1);
 		return new int[]{x,y};
 	}
+	
 	public void paintPlayerDirection(Graphics g){
 		Player player = view.getControlleur().getModel().getPlayer();
 		int[] coordinate=this.paintPlayer(g);
@@ -112,25 +113,25 @@ public class Board extends JPanel { // Attention, variables publiques
 	    int playerposY=coordinate[1];
 		int direction=player.getDirection();
 		switch(direction){
-			case 1 :
-				int x=playerposX+1;
+			case 0 :
+				int x=playerposX-1;
 				int y=playerposY;
 				g.setColor(Color.WHITE);
 				g.fillOval(x*getsize()+15, y*getsize()+15, 10,10);
 				break;
-			case 2 :
+			case 1 :
 				int x1=playerposX;
 				int y1=playerposY-1;
 				g.setColor(Color.WHITE);
 				g.fillOval(x1*getsize()+15, y1*getsize()+15, 10,10);
 				break;
-			case 3 :
-				int x2=playerposX-1;
+			case 2 :
+				int x2=playerposX+1;
 				int y2=playerposY;
 				g.setColor(Color.WHITE);
 				g.fillOval(x2*getsize()+15, y2*getsize()+15, 10,10);
 				break;
-			case 4 :
+			case 3 :
 				int x3=playerposX;
 				int y3=playerposY+1;
 				g.setColor(Color.WHITE);

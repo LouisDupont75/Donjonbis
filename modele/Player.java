@@ -32,30 +32,28 @@ public class Player extends Personnage implements MoveableObserver {
 		}	
 	}
 	public void launchAttack(){ 
-			int [] coordinate = this.coordinateDirection(this.getDirection());
-			int x = coordinate[0];
-			int y = coordinate[1];
-			try{
-				synchronized(model.getGameObjects()){
-					for(GameObject go:model.getGameObjects()){
-							int distanceX=go.getPositionX()-this.getPositionX();
-							int distanceY=go.getPositionY()-this.getPositionY();
-		
-							if(distanceX==x & distanceY==y){
-								go.setLife(go.getLife()-1);
-		
-								if (go.getLife()<=0){
-									go.demisableNotifyObserver();
-								}
-							}			
-	
-						
-					}
+		int [] coordinate = this.coordinateDirection(this.getDirection());
+		int x = coordinate[0];
+		int y = coordinate[1];
+		try{
+			synchronized(model.getGameObjects()){
+				for(GameObject go:model.getGameObjects()){
+					int distanceX=go.getPositionX()-this.getPositionX();
+					int distanceY=go.getPositionY()-this.getPositionY();
+
+					if(distanceX==x & distanceY==y){
+						go.setLife(go.getLife()-1);
+
+						if (go.getLife()<=0){
+							go.demisableNotifyObserver();
+						}
+					}		
 				}
 			}
-			catch(ConcurrentModificationException e){}
 		}
-	///
+		catch(ConcurrentModificationException e){}
+	}
+	///fonction pas utilisée v 
 	public GameObject addItem(ArrayList<GameObject> objects,Inventaire inventaire){// comment lever l'exception du
 //NullPointer ici ? 
 //TODO: corriger le fait qu'il faille deux demisablenotify pour faire disparaitre l'objet.. Duplication qlq part?
@@ -99,20 +97,20 @@ public class Player extends Personnage implements MoveableObserver {
 		GameObject block=(GameObject) m; // Cast Evitable ?
 		boolean obstacle =false;
 		synchronized(model.getGameObjects()){
-		for(GameObject object : model.getGameObjects()){
-			obstacle=block.obstacleNextPosition(object, x, y);
-			if(obstacle==true){
-				break;
+			for(GameObject object : model.getGameObjects()){
+				obstacle=block.obstacleNextPosition(object, x, y);
+				if(obstacle==true){
+					break;
+				}
 			}
+			if(obstacle== false){
+				block.move(x, y);
+				this.move(x, y);
+				model.notifyObserver();
+			}
+
 		}
-		if(obstacle== false){
-			block.move(x, y);
-			this.move(x, y);
-			model.notifyObserver();
-		}
-		
-	}
 	}
 
-	
+
 }
