@@ -15,7 +15,7 @@ public class MapGeneration{
 	ArrayList<ArrayList<int[]>> frontiere= new ArrayList<>();
 	Random rand;
 	int nbreMaxDePortes=4;
-	int nbreMinDePortes=1;
+	int nbreMinDePortes=2;
 	private ArrayList<int[]> listeNonVisite = new ArrayList<>();
 	public MapGeneration(int taille) {
 		rand=new Random();
@@ -33,6 +33,8 @@ public class MapGeneration{
 		createRooms(0);
 		faireDesCouloirs();
 		faireDesPortes();
+		transformerDesBlocks();
+		
 
 		FileWriter filewriter=null;
 		try {
@@ -51,6 +53,19 @@ public class MapGeneration{
 		return matriceCarte;
 	}
 
+	private void transformerDesBlocks() {
+		for (int i=1;i<matriceCarte.length-2;i++){
+			for(int j=1;j<matriceCarte[0].length;j++){
+				if(matriceCarte[i][j] == 1) {
+					int x=aleatoire(1,6);
+					if (x==1) {
+						matriceCarte[i][j] = 4;
+					}
+				}
+			}
+		}
+	}
+
 	private boolean creuserDansLesUns(ArrayList<int[]> elmt, int indexPorte) {
 		int[] point=elmt.get(indexPorte);
 		boolean succes=false;
@@ -61,7 +76,7 @@ public class MapGeneration{
 		else if (matriceCarte[point[0]-1][point[1]]==2 && matriceCarte[point[0]+1][point[1]]==2) {
 			matriceCarte[point[0]][point[1]]=2;
 			succes=true;
-		}		
+		}
 		return succes;
 	}
 
@@ -75,8 +90,42 @@ public class MapGeneration{
 				indexPorte=aleatoire(0,salle.size()-1);
 				if (creuserDansLesUns(salle,indexPorte)){
 					nombreDePortes--;
-					retireLesIndex(indexPorte,salle,rectangle);
+					retireLesIndex(indexPorte,salle,rectangle);//ici
 				}
+				else{
+					if(salle.size()<=nombreDePortes){
+						faireUnePorteDOffice(salle, rectangle);
+					}
+				}
+			}
+		}
+	}
+	
+	private void faireUnePorteDOffice(ArrayList<int[]> salle, int[] rectangle){
+		for (int[] elmt: salle){
+			if(elmt[0]==rectangle[0]) {
+				 do{
+					 matriceCarte[elmt[0]][elmt[1]]=2;
+					 elmt[0]--;
+				 }while(matriceCarte[elmt[0]][elmt[1]]!=2);
+			}
+			else if(elmt[0]==rectangle[1]) {
+				 do{
+					 matriceCarte[elmt[0]][elmt[1]]=2;
+					 elmt[0]++;
+				 }while(matriceCarte[elmt[0]][elmt[1]]!=2);
+			}
+			else if(elmt[1]==rectangle[2]) {
+				 do{
+					 matriceCarte[elmt[0]][elmt[1]]=2;
+					 elmt[1]--;
+				 }while(matriceCarte[elmt[0]][elmt[1]]!=2);
+			}
+			else if(elmt[1]==rectangle[3]) {
+				 do{
+					 matriceCarte[elmt[0]][elmt[1]]=2;
+					 elmt[1]++;
+				 }while(matriceCarte[elmt[0]][elmt[1]]!=2);
 			}
 		}
 	}
@@ -87,7 +136,7 @@ public class MapGeneration{
 		xMax=salle.get(0)[0];
 		yMin=salle.get(0)[1];
 		yMax=salle.get(0)[1];
-		for (int i = 0;i<salle.size();i++) {
+		for (int i = 1;i<salle.size();i++) {
 			if (salle.get(i)[0] <= xMin){
 				xMin=salle.get(i)[0];
 			}
@@ -102,7 +151,6 @@ public class MapGeneration{
 			}
 		} // ordre donné xMin, xMax, yMin puis yMax 
 		return new int[] {xMin,xMax,yMin,yMax};
-		
 	}
 
 	private void retireLesIndex(int indexPorte,ArrayList<int[]> salle, int[] dimensionMajotanteSalle) {
@@ -115,18 +163,18 @@ public class MapGeneration{
 				}
 			}
 		}
-		else if (salle.get(indexPorte)[1]==dimensionMajotanteSalle[1]) {
+		else if (salle.get(indexPorte)[0]==dimensionMajotanteSalle[1]) {
 			for (int i=0;i<salle.size();i++){
 				int[]elmt=salle.get(i);
-				if (elmt[1] == dimensionMajotanteSalle[1]) {
+				if (elmt[0] == dimensionMajotanteSalle[1]) {
 					toRemove.add(elmt);
 				}
 			}
 		}
-		else if (salle.get(indexPorte)[0]==dimensionMajotanteSalle[2]) {
+		else if (salle.get(indexPorte)[1]==dimensionMajotanteSalle[2]) {
 			for (int i=0;i<salle.size();i++){
 				int[]elmt=salle.get(i);
-				if (elmt[0] == dimensionMajotanteSalle[2]) {
+				if (elmt[1] == dimensionMajotanteSalle[2]) {
 					toRemove.add(elmt);
 				}
 			}
@@ -141,6 +189,7 @@ public class MapGeneration{
 		}
 		for(int []element:toRemove){
 			salle.remove(element);
+			//System.out.println("taille de la salle: " + salle.size());
 		}
 	}
 
@@ -150,8 +199,8 @@ public class MapGeneration{
 		}
 		int width= aleatoire(10,15);
 		int height=aleatoire(10,15);
-		int x=aleatoire(1,taille-width-1);
-		int y=aleatoire(1,taille-height-1);
+		int x=aleatoire(2,taille-width-2);
+		int y=aleatoire(2,taille-height-2);
 		int[] rectangle={x,y,width,height};
 		if (chevauchement(rectangle)) {
 			createRooms(count+1);
@@ -324,6 +373,10 @@ public class MapGeneration{
 				}
 				else {
 					matriceCarte[i][j]=2;
+					int x= aleatoire(1,84);
+					if (x==1) {
+						matriceCarte[i][j]=5;
+					}
 				}
 				enleverElementANonVisite(new int[] {i,j});
 			}

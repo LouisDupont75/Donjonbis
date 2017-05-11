@@ -5,12 +5,16 @@ import java.util.ArrayList;
 
 public class BlockBreakable extends Case implements ExplodableObserver,Demisable,ObstacleObserver,PlayerAttackObserver,
 AttackObserver{
-	private ArrayList<DemisableObserver> demisableobservers =new ArrayList<DemisableObserver>();
+	protected ArrayList<DemisableObserver> demisableobservers =new ArrayList<DemisableObserver>();
 	private int life;
 	//commentaire dans block, Donjonbis sur eclipse 
 	public BlockBreakable (int[] position, Color color,int life){ // commentaire ds branche test
 		super(position,color);
 		setLife(life);
+	}
+	public BlockBreakable(int i, int j) {
+		super(new int[] {i,j}, Color.GRAY);
+		this.life=1;
 	}
 	public int getLife(){
 		return this.life;
@@ -30,7 +34,6 @@ AttackObserver{
 	@Override
 	public void demisableAttach(DemisableObserver demi){ // le mot-cle "do" ne marche pas car c'est un mot cle special
 		demisableobservers.add(demi);
-		
 	}
 	@Override
 	public void demisableRemove(DemisableObserver po){};

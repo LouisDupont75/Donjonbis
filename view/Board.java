@@ -26,8 +26,10 @@ public class Board extends JPanel { // Attention, variables publiques
 	public void paint(Graphics g) { // A chaque fois qu'on appelle repaint qui appelle paint, on appelle ces 2 methodes
 		paintGrille(g);
 		paintObjects(g);
-		paintPlayer(g);
-		paintPlayerDirection(g);
+		if(!getPlayer().getStateDemisable()){
+			paintPlayerDirection(g);
+		}
+		//paintFieldOfVision(g);
 	}
 	
 	public void paintGrille(Graphics g){
@@ -76,39 +78,34 @@ public class Board extends JPanel { // Attention, variables publiques
 	}
 	public int[] paintPlayer(Graphics g){
 		Personnage player = getPlayer();
-		int X=1;// Valeur arbitraire
-		int Y=1;
-		if(!player.getStateDemisable()){
-			int x=getlength()/2;
-			int y=getheight()/2;
-			if(getPlayerPositionX()<getlength()/2){
-				x = player.getPositionX();
-			}
-			else if(getPlayerPositionX()>getTailleCarte()-getlength()/2){
-				x = player.getPositionX()-getTailleCarte()-getlength();
-			}
-			if(getPlayerPositionY()<getheight()/2){
-				y = player.getPositionY();
-			}
-			else if(getPlayerPositionY()>getTailleCarte()-getheight()/2){
-				y= player.getPositionY()-getTailleCarte()-getheight();
-			}
-			BufferedImage img = null;
+		int x=getlength()/2;
+		int y=getheight()/2;
+		if(getPlayerPositionX()<getlength()/2){
+			x = player.getPositionX();
+		}
+		else if(getPlayerPositionX()>getTailleCarte()-getlength()/2){
+			x = player.getPositionX()-getTailleCarte()+getlength();
+		}
+		if(getPlayerPositionY()<getheight()/2){
+			y = player.getPositionY();
+		}
+		else if(getPlayerPositionY()>getTailleCarte()-getheight()/2){
+			y= player.getPositionY()-getTailleCarte()+getheight();
+		}
+		/*BufferedImage img = null;
 			try {
 			    img = ImageIO.read(new File("C:/Users/Admin/Documents/Koala.jpg"));
 			    g.drawImage(img, x*getsize(), y*getsize(), getsize()-1, getsize()-1, null);
 			} catch (IOException e) {
-			}
-			/*Color color = player.getColor();
-			g.setColor(color);
-			g.fillRect(x*getsize(), y*getsize(), getsize()-1, getsize()-1);
-			g.setColor(Color.BLACK);
-			g.drawRect(x*getsize(), y*getsize(), getsize()-1, getsize()-1);*/
-			X=x;
-			Y=y;
-		}
-		return new int[]{X,Y};
+			}*/
+		Color color = player.getColor();
+		g.setColor(color);
+		g.fillRect(x*getsize(), y*getsize(), getsize()-1, getsize()-1);
+		g.setColor(Color.BLACK);
+		g.drawRect(x*getsize(), y*getsize(), getsize()-1, getsize()-1);
+		return new int[]{x,y};
 	}
+	
 	public void paintPlayerDirection(Graphics g){
 		Player player = view.getControlleur().getModel().getPlayer();
 		int[] coordinate=this.paintPlayer(g);
@@ -116,25 +113,25 @@ public class Board extends JPanel { // Attention, variables publiques
 	    int playerposY=coordinate[1];
 		int direction=player.getDirection();
 		switch(direction){
-			case 1 :
-				int x=playerposX+1;
+			case 0 :
+				int x=playerposX-1;
 				int y=playerposY;
 				g.setColor(Color.WHITE);
 				g.fillOval(x*getsize()+15, y*getsize()+15, 10,10);
 				break;
-			case 2 :
+			case 1 :
 				int x1=playerposX;
 				int y1=playerposY-1;
 				g.setColor(Color.WHITE);
 				g.fillOval(x1*getsize()+15, y1*getsize()+15, 10,10);
 				break;
-			case 3 :
-				int x2=playerposX-1;
+			case 2 :
+				int x2=playerposX+1;
 				int y2=playerposY;
 				g.setColor(Color.WHITE);
 				g.fillOval(x2*getsize()+15, y2*getsize()+15, 10,10);
 				break;
-			case 4 :
+			case 3 :
 				int x3=playerposX;
 				int y3=playerposY+1;
 				g.setColor(Color.WHITE);

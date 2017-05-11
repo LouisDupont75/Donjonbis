@@ -3,7 +3,7 @@ package modele;
 import java.awt.Color;
 import java.util.ArrayList;
 
-public class Archer extends Personnage implements Runnable,ObstacleObserver,Creation,PlayerAttackObserver {
+public class Archer extends AbstractEnnemy implements Runnable,ObstacleObserver,Creation,PlayerAttackObserver  {
 	private Bow bow;
 	private transient Thread t;
 	private ArrayList<CreationObserver> creationobservers = new ArrayList<CreationObserver>();
@@ -11,6 +11,13 @@ public class Archer extends Personnage implements Runnable,ObstacleObserver,Crea
 		super(life,dmg,position,color,direction);
 		this.bow=new Bow(new int[]{this.getPositionX(),this.getPositionY()},Color.ORANGE);
 		t=new Thread(this);
+	}
+	public Archer(int[] position) {
+		super(3,1.0,position,Color.BLUE,0);
+		//this.bow=new Bow(new int[]{this.getPositionX(),this.getPositionY()},Color.ORANGE);
+		//model.getObjects().add(bow);//Ajout à la liste d'objets destinés à l'inventaire
+		//bow.demisableAttach(model);
+		Thread t=new Thread(this);
 		t.start();
 	}
 	public void changeDirection(){
@@ -27,18 +34,6 @@ public class Archer extends Personnage implements Runnable,ObstacleObserver,Crea
 		Thread t=new Thread(arrow);
 		t.start();
 	}
-	@Override
-	public Bomb dropBomb (){
-		return null;
-	}
-	@Override
-	public void utilize (GameObject object){}
-	@Override
-	public GameObject addItem(ArrayList<GameObject> objects, Inventaire inventaire) {
-		return null;
-	}
-	@Override
-	public void dropItem(GameObject object) {}
 	@Override
 	public void demisableNotifyObserver(){ //TODO:faire tomber un arc lorsque l'archer meurt
 		ArrayList<GameObject> equipment=new ArrayList<GameObject>();

@@ -7,6 +7,10 @@ public class Potion extends Object {
 		super(position,color);
 	}
 	
+	public Potion(int[] position) {
+		super(position, Color.PINK);
+	}
+
 	public void effect (Player player){
 		player.setLife(player.getLife() +1);
 		System.out.println("j'ai " + player.getLife() + "vies");

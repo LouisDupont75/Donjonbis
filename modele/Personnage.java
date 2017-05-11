@@ -3,7 +3,8 @@ package modele;
 import java.awt.Color;
 import java.util.ArrayList;
 
-public abstract class Personnage extends GameObject implements Demisable { // demisableObservable non? 
+
+public abstract class Personnage extends GameObject implements Demisable { // demisableObservable non? MoveableObserver,
 	//--> Tous les personnages peuvent mourir
 	private int life; 
 	private Double dmg;
@@ -46,19 +47,19 @@ public abstract class Personnage extends GameObject implements Demisable { // de
 	public int[] coordinateDirection(int direction){// donne les coordonnees suivant lequel l'attaque sera exercee en
 		// fonction de la direction du joueur
 		int[] tab=new int[2];
-		if (direction==1){
+		if (direction==2){
 			tab[0]= 1;
 			tab[1]=0;
 		}
-		else if (direction==2){
+		else if (direction==1){
 			tab[0]=0;
 			tab[1]=-1;
 		}
-		else if (direction==3){
+		else if (direction==0){
 			tab[0]=-1;
 			tab[1]=0;
 		}
-		else if (direction==4){
+		else if (direction==3){
 			tab[0]=0;
 			tab[1]=1;
 		}
@@ -84,7 +85,6 @@ public abstract class Personnage extends GameObject implements Demisable { // de
 	///
 
 	public abstract GameObject addItem(ArrayList<GameObject> objects,Inventaire inventaire);
-	public abstract Bomb dropBomb();
 	public abstract void utilize(GameObject object);
 	public abstract void dropItem(GameObject object);
 	

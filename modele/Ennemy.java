@@ -6,24 +6,23 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
 //import java.util.Iterator;
-public class Ennemy extends Personnage implements ExplodableObserver,Attack,Obstacle,ObstacleObserver,Observable
+public class Ennemy extends AbstractEnnemy implements ExplodableObserver,Attack,Obstacle,ObstacleObserver,Observable
 ,PlayerAttackObserver{
 	private transient Thread t;
 	private ArrayList<Observeur> listObserveurs = new ArrayList<Observeur>();
 	private ArrayList<AttackObserver> attackobservers = new ArrayList<AttackObserver>();
 	private ArrayList<ObstacleObserver> obstacleobservers = new ArrayList<ObstacleObserver>();
 	public Ennemy(int life,Double dmg,int[] position,Color color,int direction) {
+
 		super(life,dmg,position,color,direction);
 		t=new Thread(new ThrMoveEnnemy(this));
 		t.start();
 	}
 	
-	public boolean isObstacle (){
-		return true;
-	}
-	
-	public Bomb dropBomb (){
-		return null;//les ennemis ne lachent pas encore de bombes
+	public Ennemy(int[] position) {
+		super(1,1.0,position,Color.BLUE,0);
+		t=new Thread(new ThrMoveEnnemy(this));
+		t.start();
 	}
 	public void moveEnnemy(int X, int Y){//TODO : ajouter l'attackObserver
 		this.setStateObstacle(false);

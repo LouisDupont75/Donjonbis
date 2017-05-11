@@ -22,22 +22,22 @@ public class Controller {//sert a controller le joueur, pour eviter de violer la
 		switch (direction) {
 		case 1:
 			if (oldY>0) {
-				model.getPlayer().movePlayer(0, -1);}//, player1);}
-				model.getPlayer().setDirection(2);
+				model.getPlayer().movePlayer(0, -1);} // .movePlayer(0, -1);}//, player1);}
+				model.getPlayer().setDirection(2); // .getPlayer().setDirection(1);
 			//System.out.println("personnage en " + oldX + " et " + String.valueOf(oldY-1) );
 			break;
 			
 		case 0:
 			if (oldX>0) {
 				model.getPlayer().movePlayer(-1, 0);}//, player1);}, player1);}
-				model.getPlayer().setDirection(3);		
+				model.getPlayer().setDirection(0);
 			//System.out.println("personnage en " + String.valueOf(oldX-1) + " et " + oldY );
 			break;
 			
 		case 2: //static majuscule
 			if (oldX<model.getTailleCarte()-1) {
 				model.getPlayer().movePlayer(1, 0);}//, player1);}, player1);}
-				model.getPlayer().setDirection(1);
+				model.getPlayer().setDirection(2);
 
 			//System.out.println("personnage en " + String.valueOf(oldX+1) + " et " + oldY );
 			break;
@@ -45,13 +45,14 @@ public class Controller {//sert a controller le joueur, pour eviter de violer la
 		case 3:
 			if (oldY<model.getTailleCarte()-1) {
 				model.getPlayer().movePlayer(0, 1);}//, player1);}, player1);}
-				model.getPlayer().setDirection(4);
+				model.getPlayer().setDirection(3);
 			//System.out.println("personnage en " + oldX + " et " + String.valueOf(oldY+1) );
 			break;
 			
 		
 		}
 	}
+	
 	public void shootArrow(){
 		model.getPlayer().shootArrow();
 	}
@@ -59,10 +60,8 @@ public class Controller {//sert a controller le joueur, pour eviter de violer la
 		model.getPlayer().launchAttack();
 	}
 	public void addItem() {
-		//model.getItemOnPlayerFeet();//il n'y a qu'un inventaire donc pas besoin de le donner au joueur?
-		GameObject object=model.getPlayer().addItem(model.getObjects(), model.getInventaire());
-		object.demisableRemove(this.getModel());
-		getModel().notifyObserver();
+		model.getItemOnPlayerFeet(false);//il n'y a qu'un inventaire donc pas besoin de le donner au joueur?
+		//GameObject object=model.getPlayer().addItem(model.getObjects(), model.getInventaire());
 	}
 	public void dropItem(GameObject object){
 		model.getPlayer().dropItem(object);
@@ -86,6 +85,10 @@ public class Controller {//sert a controller le joueur, pour eviter de violer la
 	public void chargerLaPartie(View view) {
 		model.load();
 		model.addObserver(view);
+	}
+	public void ouvrirCoffre() {
+		model.ouvrirCoffre();
+		model.getItemOnPlayerFeet(true);
 	}
 	
 }

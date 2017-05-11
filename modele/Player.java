@@ -64,7 +64,7 @@ public class Player extends Personnage implements Moveable,AttackObserver,Creati
 			this.notifyObserver();
 		}
 	}
-	public void launchAttack(){ 
+	public void launchAttack(){
 			int [] coordinate = this.coordinateDirection(this.getDirection());
 			int x = coordinate[0];
 			int y = coordinate[1];

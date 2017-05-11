@@ -1,8 +1,8 @@
 package modele;
 
 public  class ThrMoveEnnemy implements Runnable  {
-	private Ennemy ennemy;
-	public ThrMoveEnnemy(Ennemy ennemy){
+	private AbstractEnnemy ennemy;
+	public ThrMoveEnnemy(AbstractEnnemy ennemy){
 		this.ennemy=ennemy;
 	}
 	
