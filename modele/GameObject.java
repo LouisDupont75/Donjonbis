@@ -105,6 +105,7 @@ public abstract class GameObject implements Serializable{
 	public void obstacleAttach(ObstacleObserver ao){};
 	public void playerAttackAttach(PlayerAttackObserver pao){};
 	public void moveableAttach(MoveableObserver mo){};
+	public void setSucceededAttack(boolean b,Player player){};
 	
 	///Abstracts methods
 	public abstract boolean isObstacle();

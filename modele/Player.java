@@ -5,6 +5,7 @@ import java.util.ConcurrentModificationException;
 
 public class Player extends Personnage implements Moveable,AttackObserver,Creation,Observable,PlayerAttack,Obstacle {
 	private boolean bowEquiped=false;
+	private boolean keyboardInversion=false;
 	private int life;
 	private ArrayList<MoveableObserver> moveableobservers =new ArrayList<MoveableObserver>();
 	private ArrayList<CreationObserver> creationobservers = new ArrayList<CreationObserver>();
@@ -14,6 +15,12 @@ public class Player extends Personnage implements Moveable,AttackObserver,Creati
 	public Player(int life,Double dmg,int[] position,Color color,int direction) {
 		super(life,dmg,position,color,direction);
 		//setLife(life);
+	}
+	public boolean getKeyboardInversion(){
+		return this.keyboardInversion;
+	}
+	public void setKeyboardInversion(boolean b){
+		this.keyboardInversion=b;
 	}
 	public boolean getBowEquiped(){
 		return this.bowEquiped;
@@ -48,7 +55,12 @@ public class Player extends Personnage implements Moveable,AttackObserver,Creati
 		this.setStateObstacle(false);
 		this.obstacleNotifyObserver(X, Y);
 		if(!this.getStateObstacle()){
-			this.move(X, Y);
+			if(this.getKeyboardInversion()){
+				this.move(-X,-Y);
+			}
+			else{
+				this.move(X, Y);
+			}
 			this.notifyObserver();
 		}
 	}
@@ -99,6 +111,7 @@ public class Player extends Personnage implements Moveable,AttackObserver,Creati
 		if(distX==0&&distY==0){
 			this.setLife(this.getLife()-1);
 			go.setStateAttack(true);
+			go.setSucceededAttack(true, this);
 		}
 	}
 	@Override

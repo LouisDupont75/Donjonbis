@@ -64,11 +64,11 @@ public class Model implements Observable,DemisableObserver,Serializable,Observeu
 			this.attachInterface(go);
 		}
 		
-		/*map=new Map(tailleMap);
-		ArrayList<Case> listeDeBlocksPourLaCarte = map.getBlocList();***/
-			/*for (Case bloc:listeDeBlocksPourLaCarte) {
-				gameobjects.add(bloc);
-			}*/
+		map=new Map(tailleMap);
+		ArrayList<Case> listeDeBlocksPourLaCarte = map.getBlocList();
+			for (Case bloc:listeDeBlocksPourLaCarte) {
+				this.initialize(bloc);				
+			}
 	}
  	public void startGame(Model model) {
  		//System.out.println("start game");

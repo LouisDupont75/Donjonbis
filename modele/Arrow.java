@@ -7,6 +7,7 @@ public class Arrow extends GameObject implements Runnable, Demisable,Obstacle,At
 ,PlayerAttack {
 	private Personnage perso;
 	private boolean equipedByPlayer=false;
+	private boolean succeededAttack=false;
 	private ArrayList<DemisableObserver> demisableobservers = new ArrayList<DemisableObserver>();
 	private ArrayList<PlayerAttackObserver> playerattackobservers = new ArrayList<PlayerAttackObserver>();
 	private ArrayList<AttackObserver> attackobservers = new ArrayList<AttackObserver>();
@@ -23,6 +24,16 @@ public class Arrow extends GameObject implements Runnable, Demisable,Obstacle,At
 		this.nextX=x;
 		this.nextY=y;
 		
+	}
+	//Redefinition de cette methode par rapport à celle dans GameObject
+	public boolean getSucceededAttack(){
+		return this.succeededAttack;
+	}
+	public void setSucceededAttack(boolean b,Player player){
+		this.succeededAttack=b;
+		if(this.getStateAttack()){
+			InversionKeyboard inversion=new InversionKeyboard(player,5000);//duration in millisec
+		}
 	}
 	public boolean getEquipedByPlayer(){
 		return this.equipedByPlayer;
