@@ -65,7 +65,6 @@ public class Archer extends Personnage implements Runnable,ObstacleObserver,Crea
 				e.getMessage();
 			}
 		}
-		
 	}
 	@Override
 	public void collision(Obstacle o,int x,int y){

@@ -70,17 +70,6 @@ public class Model implements Observable,DemisableObserver,Serializable,Observeu
 				gameobjects.add(bloc);
 			}*/
 	}
-		//TODO completer avec map[
-		
-
-		//System.out.println("bloc fini");
-		
-		/*BlockMoveable block2 =new BlockMoveable(new int[]{13,2},Color.GRAY);
-		block2.demisableAttach(this);
-		block2.moveableAttach(this.getPlayer());
-		gameobjects.add(0,block2);*/
-		
-	
  	public void startGame(Model model) {
  		//System.out.println("start game");
  		inventaire = model.getInventaire();
@@ -155,8 +144,6 @@ public class Model implements Observable,DemisableObserver,Serializable,Observeu
 		notifyObserver();
 	
 		}
-
-
 	/*public void getItemOnPlayerFeet() {
 		//GameObject item = null;
 		for (GameObject object: objects){
@@ -168,12 +155,7 @@ public class Model implements Observable,DemisableObserver,Serializable,Observeu
 			}
 		}
 		//return item;
-	}*/
-
-	/*public void addGiveItemToPlayer() {
-		
-	}*/
-	
+	}*/	
 	@Override
 	public void addObserver(Observeur o) {
 	     listObserveurs.add(o);	

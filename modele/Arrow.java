@@ -137,7 +137,6 @@ public class Arrow extends GameObject implements Runnable, Demisable,Obstacle,At
     		GameObject go=(GameObject) o;
 			int distX=this.getPositionX()-(go.getPositionX()+x);
 			int distY=this.getPositionY()-(go.getPositionY()+y);
-			//System.out.println(distX + "et" + distY);
 			if(distX==0 && distY==0){
 				go.setStateObstacle(true);
 			}

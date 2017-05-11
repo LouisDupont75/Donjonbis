@@ -82,7 +82,7 @@ public class Bomb extends Case implements Demisable,Runnable,Explodable {
 			Thread thread = new Thread(explosion);
 			thread.start();
 		}
-		/*for(int i = y-range; i <= y+range; i++){
+		for(int i = y-range; i <= y+range; i++){
 			Explosion explosion = new Explosion(new int[]{x,i},Color.BLUE,500);
 			Thread thread = new Thread(explosion);
 			thread.start();
@@ -91,7 +91,6 @@ public class Bomb extends Case implements Demisable,Runnable,Explodable {
 			}
 			loot.add(explosion);
 		}
-		*/
 		for (DemisableObserver o : this.demisableObservers) { 
 			o.demise(this, loot); // On supprime la bombe de la liste des objets et on rajoute les explosions
 		}	
