@@ -95,7 +95,11 @@ public class Pathfinding {
 	private ArrayList<Node> getAdjacent(Node node) {
 		ArrayList<Node>adjacent = new ArrayList<Node>();
 		for(Node potential:this.map){
-			if(((potential.getPosition()[0]==node.getPosition()[0]+1 && potential.getPosition()[1]==node.getPosition()[1])  || (potential.getPosition()[0]==node.getPosition()[0]-1 && potential.getPosition()[1]==node.getPosition()[1]) || (potential.getPosition()[1]==node.getPosition()[1]+1 && potential.getPosition()[0]==node.getPosition()[0]) || (potential.getPosition()[1]==node.getPosition()[1]-1 && potential.getPosition()[0]==node.getPosition()[0]))&&(!isExplored(potential))){
+			if(((potential.getPosition()[0]==node.getPosition()[0]+1 && potential.getPosition()[1]==node.getPosition()
+[1])||(potential.getPosition()[0]==node.getPosition()[0]-1 && potential.getPosition()[1]==node.getPosition()[1]) || 
+(potential.getPosition()[1]==node.getPosition()[1]+1 && potential.getPosition()[0]==node.getPosition()[0]) || 
+(potential.getPosition()[1]==node.getPosition()[1]-1 && potential.getPosition()[0]==node.getPosition()[0]))&&
+(!isExplored(potential))){
 				adjacent.add(potential);
 			}
 		}

@@ -16,9 +16,6 @@ public class Inventaire implements DemisableObserver,Serializable {//il ne doit 
 	public ArrayList<GameObject> getObjects(){
 		return this.objectslist;
 	}
-	public void setObjects(ArrayList<GameObject> objectslist){//a quoi ca sert? a quel moment tu donnes une liste complete a l'inventaire?
-		this.objectslist=objectslist;
-	}
 	@Override
 	public void demise(Demisable d,ArrayList<GameObject> loot){
 		objectslist.remove(d);

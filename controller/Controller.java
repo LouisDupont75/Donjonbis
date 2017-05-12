@@ -23,7 +23,7 @@ public class Controller {//sert a controller le joueur, pour eviter de violer la
 		case 1:
 			if (oldY>0) {
 				model.getPlayer().movePlayer(0, -1);} // .movePlayer(0, -1);}//, player1);}
-				model.getPlayer().setDirection(2); // .getPlayer().setDirection(1);
+				model.getPlayer().setDirection(1); // .getPlayer().setDirection(1);
 			//System.out.println("personnage en " + oldX + " et " + String.valueOf(oldY-1) );
 			break;
 			
@@ -60,7 +60,8 @@ public class Controller {//sert a controller le joueur, pour eviter de violer la
 		model.getPlayer().launchAttack();
 	}
 	public void addItem() {
-		model.getItemOnPlayerFeet(false);//il n'y a qu'un inventaire donc pas besoin de le donner au joueur?
+		model.getPlayer().addItem();
+		//model.getItemOnPlayerFeet(false);//il n'y a qu'un inventaire donc pas besoin de le donner au joueur?
 		//GameObject object=model.getPlayer().addItem(model.getObjects(), model.getInventaire());
 	}
 	public void dropItem(GameObject object){
@@ -86,9 +87,9 @@ public class Controller {//sert a controller le joueur, pour eviter de violer la
 		model.load();
 		model.addObserver(view);
 	}
-	public void ouvrirCoffre() {
+	/*public void ouvrirCoffre() {
 		model.ouvrirCoffre();
 		model.getItemOnPlayerFeet(true);
-	}
+	}*/
 	
 }

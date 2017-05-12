@@ -92,12 +92,12 @@ public class Board extends JPanel { // Attention, variables publiques
 		else if(getPlayerPositionY()>getTailleCarte()-getheight()/2){
 			y= player.getPositionY()-getTailleCarte()+getheight();
 		}
-		/*BufferedImage img = null;
+		BufferedImage img = null;
 			try {
 			    img = ImageIO.read(new File("C:/Users/Admin/Documents/Koala.jpg"));
 			    g.drawImage(img, x*getsize(), y*getsize(), getsize()-1, getsize()-1, null);
 			} catch (IOException e) {
-			}*/
+			}
 		Color color = player.getColor();
 		g.setColor(color);
 		g.fillRect(x*getsize(), y*getsize(), getsize()-1, getsize()-1);

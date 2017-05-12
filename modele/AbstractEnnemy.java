@@ -20,9 +20,7 @@ public abstract class AbstractEnnemy extends Personnage  implements ExplodableOb
 	}
 
 	@Override
-	public GameObject addItem(ArrayList<GameObject> objects, Inventaire inventaire) {
-		return null;
-	}
+	public void addItem() {}
 
 	@Override
 	public void utilize(GameObject object) {}

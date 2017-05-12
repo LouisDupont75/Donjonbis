@@ -3,7 +3,7 @@ package modele;
 import java.awt.Color;
 import java.util.ArrayList;
 
-public abstract class Object extends Case implements Demisable {
+public abstract class Object extends Case implements Demisable,AddInventaireObserver {
 	private ArrayList<DemisableObserver> demisableobservers =new ArrayList<DemisableObserver>();
 
 	public Object (int [] position,Color color){
@@ -27,9 +27,19 @@ public abstract class Object extends Case implements Demisable {
 	};
 	@Override
 	public void demisableNotifyObserver(){
-		for(DemisableObserver po:demisableobservers){
+		for(DemisableObserver po:this.demisableobservers){
 			po.demise(this, null);
 		}
 	}
-
+	@Override
+	public void added(AddInventaire ai){
+		Player player=(Player)ai;
+		int distX=this.getPositionX()-player.getPositionX();
+		int distY=this.getPositionY()-player.getPositionY();
+		if(distX==0&&distY==0){
+			this.demisableNotifyObserver();
+			player.addToInventaire(this);
+			
+		}
+	}
 }

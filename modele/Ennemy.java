@@ -17,14 +17,15 @@ public class Ennemy extends AbstractEnnemy implements ExplodableObserver,Attack,
 		super(life,dmg,position,color,direction);
 		t=new Thread(new ThrMoveEnnemy(this));
 		t.start();
+		System.out.println("thread ennemi initie");
 	}
 	
 	public Ennemy(int[] position) {
-		super(1,1.0,position,Color.BLUE,0);
+		super(1,1.0,position,Color.CYAN,0);
 		t=new Thread(new ThrMoveEnnemy(this));
 		t.start();
 	}
-	public void moveEnnemy(int X, int Y){//TODO : ajouter l'attackObserver
+	public void moveEnnemy(int X, int Y){
 		this.setStateObstacle(false);
 		this.obstacleNotifyObserver(X, Y);
 		if(!this.getStateObstacle()){
@@ -34,14 +35,6 @@ public class Ennemy extends AbstractEnnemy implements ExplodableObserver,Attack,
 		this.AttackNotifyObserver(X,Y);
 	}	
 	///
-	@Override
-	public GameObject addItem(ArrayList<GameObject> objects,Inventaire inventaire){
-		return null;
-	};
-	@Override
-	public void utilize (GameObject object){}
-	@Override 
-	public void dropItem(GameObject object){};
 	@Override
 	public void exploded(Explodable e){
 		Bomb bomb =(Bomb) e; // Downcast explodable--> Bomb

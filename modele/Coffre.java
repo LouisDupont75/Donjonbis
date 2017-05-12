@@ -15,7 +15,7 @@ public class Coffre extends BlockBreakable{
 	@Override
 	public void demisableNotifyObserver(){
 		ArrayList<GameObject> loot= new ArrayList<>();
-		if(Math.random() <0.75) {
+		if(Math.random() <0.01) {
 			loot.add(new Potion(position));
 		}
 		else{
@@ -28,10 +28,12 @@ public class Coffre extends BlockBreakable{
 
 	private void addEnnemy(ArrayList<GameObject> loot) {
 		if (Math.random()<0.5) {
-			loot.add(new Archer(position));
+			Archer archer= new Archer(1,1.0,position,Color.CYAN,2);
+			loot.add(archer);
 		}
 		else {
-			loot.add(new Ennemy(position));
+			Ennemy ennemy=new Ennemy(position);
+			loot.add(ennemy);
 		}
 	}
 }

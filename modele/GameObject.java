@@ -98,13 +98,14 @@ public abstract class GameObject implements Serializable{
 	};
 	
 	public void demisableNotifyObserver(){};
-	public  void demisableRemove(DemisableObserver po){};
-	public  void demisableAttach(DemisableObserver po){};
+	public void demisableRemove(DemisableObserver po){};
+	public void demisableAttach(DemisableObserver po){};
 	public void addObserver(Observeur o) {};
 	public void AttackAttach(AttackObserver ao){};
 	public void obstacleAttach(ObstacleObserver ao){};
 	public void playerAttackAttach(PlayerAttackObserver pao){};
 	public void moveableAttach(MoveableObserver mo){};
+	public void addInventaireAttach(AddInventaireObserver aio){};
 	public void setSucceededAttack(boolean b,Player player){};
 	
 	///Abstracts methods

@@ -23,9 +23,9 @@ public class Poursuiveur extends AbstractEnnemy implements CarteObserver {
 		Node enemyNode=new Node(this.getPositionX(),this.getPositionY());
 		this.node=node;
 		poursuite=new ThreadPoursuit(enemyNode, new Node(node.get(0).getPosition()[0],node.get(0).getPosition()[1]), node,this);
-		if(thread.isAlive()){
-			thread.interrupt();
-		}
 		thread=new Thread(poursuite);
+		/*if(thread.isAlive()){
+			thread.interrupt();
+		}*/
 	}
 }

@@ -40,9 +40,9 @@ public class Keyboard implements KeyListener {
 			case KeyEvent.VK_L:
 				view.getControlleur().chargerLaPartie(view);
 				break;
-			case KeyEvent.VK_O:
+			/*case KeyEvent.VK_O:
 				view.getControlleur().ouvrirCoffre();
-				break;
+				break;*/
 			case KeyEvent.VK_A:
 				view.getControlleur().launchAttack();
 				break;	
