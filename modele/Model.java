@@ -1,6 +1,7 @@
 package modele;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import modele.GameObject;
 import modele.Player;
@@ -32,6 +33,17 @@ public class Model implements Observable,DemisableObserver, CarteObservable,Seri
 	}
  	
  	private void startGame() {
+ 		
+ 		Scanner sc = new Scanner(System.in);
+		System.out.println("Entrez une valeur pour la taille de la carte: ");
+		tailleMap=sc.nextInt();
+		sc.close();
+		map=new Map(tailleMap);
+		ArrayList<Case> listeDeBlocksPourLaCarte = map.getBlocList();
+			for (Case bloc:listeDeBlocksPourLaCarte) {
+				this.initialize(bloc);				
+			}
+ 		
 		Player player = new Player(10,1.0,new int[]{5,6},Color.GREEN,1);
 		player.creationAttach(this);
 		player.demisableAttach(this);
@@ -66,11 +78,6 @@ public class Model implements Observable,DemisableObserver, CarteObservable,Seri
 		this.initialize(block1);
 		Coffre coffre=new Coffre(10,6);
 		this.initialize(coffre);*/
-		map=new Map(tailleMap);
-		ArrayList<Case> listeDeBlocksPourLaCarte = map.getBlocList();
-			for (Case bloc:listeDeBlocksPourLaCarte) {
-				this.initialize(bloc);				
-			}
 		for(GameObject go:gameobjects){
 			this.attachInterface(go);
 		}

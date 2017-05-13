@@ -114,7 +114,7 @@ public class Pathfinding {
 	 * @return noeud le moins couteux en déplaement
 	 */
 	private Node chooseNode() {
-		int minCost = 1000000;
+		int minCost = 100000000;
 		Node bestNode = null;
 		for(Node node:this.reachable){
 			int costStartToNode=node.getCost();

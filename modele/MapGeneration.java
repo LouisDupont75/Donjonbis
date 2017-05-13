@@ -82,10 +82,13 @@ public class MapGeneration{
 
 	private void faireDesPortes() {
 		int nombreDePortes, indexPorte;
+		int count;
 		for (int i=0; i<frontiere.size();i++){
 			ArrayList<int[]> salle=frontiere.get(i);
 			nombreDePortes=aleatoire(this.nbreMinDePortes,this.nbreMaxDePortes);
-			while (nombreDePortes>0 && salle.size()>0) {
+			count=100;
+			while (nombreDePortes>0 && salle.size()>0 &&count<100) {
+				//System.out.println("salles: "+salle.size());
 				int[] rectangle=recupRectangle(salle);
 				indexPorte=aleatoire(0,salle.size()-1);
 				if (creuserDansLesUns(salle,indexPorte)){
@@ -97,6 +100,7 @@ public class MapGeneration{
 						faireUnePorteDOffice(salle, rectangle);
 					}
 				}
+				count--;
 			}
 		}
 	}
