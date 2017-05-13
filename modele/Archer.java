@@ -13,14 +13,14 @@ public class Archer extends AbstractEnnemy implements Runnable,Creation  {
 		t=new Thread(this);
 		t.start();
 	}
-	public Archer(int[] position) {
+	/*public Archer(int[] position) {
 		super(3,1.0,position,Color.BLUE,0);
-		//this.bow=new Bow(new int[]{this.getPositionX(),this.getPositionY()},Color.ORANGE);
+		this.bow=new Bow(new int[]{this.getPositionX(),this.getPositionY()},Color.ORANGE);
 		//model.getObjects().add(bow);//Ajout à la liste d'objets destinés à l'inventaire
 		//bow.demisableAttach(model);
 		t=new Thread(this);
 		t.start();
-	}
+	}*/
 	public void changeDirection(){
 		if(this.getDirection()<3){
 			this.setDirection(this.getDirection()+1);
@@ -40,7 +40,6 @@ public class Archer extends AbstractEnnemy implements Runnable,Creation  {
 		ArrayList<GameObject> equipment=new ArrayList<GameObject>();
 		equipment.add(bow);
 		for(DemisableObserver po:demisableobservers){
-			bow.demisableAttach(po);
 			po.demise(this,equipment );
 		}
 		this.setStateDemisable(true);

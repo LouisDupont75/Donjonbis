@@ -1,7 +1,7 @@
 package modele;
 
 public class Node {
-	private int cost=1000000000; //un grand nombre peu importe infini
+	private int cost=100000; //un grand nombre peu importe infini
 	private Node previous;
 	private boolean discovered;
 	private int [] position;

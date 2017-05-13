@@ -45,7 +45,7 @@ public class Pathfinding {
 			//System.out.println("size of reachable = " + reachable.size());
 			if(node==this.getFinishNode()){
 				path = buildThePath(node);
-				System.out.println("found it! :3");
+				//System.out.println("found it! :3");
 				break;
 			}
 			reachable.remove(node);
@@ -65,7 +65,7 @@ public class Pathfinding {
 				}
 			}
 		}
-		System.out.println("path size: "+path.size());
+		//System.out.println("path size: "+path.size());
 		Collections.reverse(path);
 		return path;
 	}
@@ -136,7 +136,7 @@ public class Pathfinding {
 		return dist;
 	}
 	private int euclideanDistance(int[] position, int[] position2) {
-		return (position[1]-position2[1])^2 + (position[0]-position2[0])^2;
+		return (int) (Math.sqrt(Math.pow(position2[1]-position[1],2) + Math.pow(position[0]-position2[0],2)));
 	}
 	public Node getFinishNode() {
 		return finishNode;

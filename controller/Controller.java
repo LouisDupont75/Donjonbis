@@ -60,7 +60,8 @@ public class Controller {//sert a controller le joueur, pour eviter de violer la
 		model.getPlayer().launchAttack();
 	}
 	public void addItem() {
-		model.getItemOnPlayerFeet(false);//il n'y a qu'un inventaire donc pas besoin de le donner au joueur?
+		model.getPlayer().addItem();
+		//model.getItemOnPlayerFeet(false);//il n'y a qu'un inventaire donc pas besoin de le donner au joueur?
 		//GameObject object=model.getPlayer().addItem(model.getObjects(), model.getInventaire());
 	}
 	public void dropItem(GameObject object){

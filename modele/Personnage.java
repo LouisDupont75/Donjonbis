@@ -97,8 +97,8 @@ public abstract class Personnage extends GameObject implements ObstacleObserver,
 	
 	///
 
-	public abstract GameObject addItem(ArrayList<GameObject> objects,Inventaire inventaire);
-	public abstract void utilize(GameObject object);
-	public abstract void dropItem(GameObject object);
+	public  void addItem(){}
+	public  void utilize(GameObject object){}
+	public  void dropItem(GameObject object){}
 	
 }

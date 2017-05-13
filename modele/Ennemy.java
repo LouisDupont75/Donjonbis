@@ -16,31 +16,27 @@ public class Ennemy extends AbstractEnnemy implements Attack,Obstacle,Observable
 		super(life,dmg,position,color,direction);
 		t=new Thread(new ThrMoveEnnemy(this));
 		t.start();
+		System.out.println("thread ennemi initie");
 	}
 	
 	public Ennemy(int[] position) {
-		super(1,1.0,position,Color.BLUE,0);
+		super(1,1.0,position,Color.CYAN,0);
 		t=new Thread(new ThrMoveEnnemy(this));
 		t.start();
 	}
-	public void moveEnnemy(int X, int Y){//TODO : ajouter l'attackObserver
+	public boolean moveEnnemy(int X, int Y){
+		boolean succes=false;
 		this.setStateObstacle(false);
 		this.obstacleNotifyObserver(X, Y);
 		if(!this.getStateObstacle()){
 			this.move(X, Y);
 			this.notifyObserver();
+			succes=true;
 		}
 		this.AttackNotifyObserver(X,Y);
+		return succes;
 	}	
 	///
-	@Override
-	public GameObject addItem(ArrayList<GameObject> objects,Inventaire inventaire){
-		return null;
-	};
-	@Override
-	public void utilize (GameObject object){}
-	@Override 
-	public void dropItem(GameObject object){};
 	@Override
 	public void exploded(Explodable e){
 		Bomb bomb =(Bomb) e; // Downcast explodable--> Bomb

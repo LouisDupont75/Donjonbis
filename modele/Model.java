@@ -14,7 +14,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class Model implements Observable,DemisableObserver, CarteObservable,Serializable,Observeur,CreationObserver,PlayerMovementObserver {
-	private transient Inventaire inventaire;
 	private ArrayList<Observeur> listObserveurs = new ArrayList<Observeur>();
 	private ArrayList<GameObject> gameobjects= new ArrayList<GameObject>();
 	private transient Map map;
@@ -24,7 +23,7 @@ public class Model implements Observable,DemisableObserver, CarteObservable,Seri
 	//remplie d'objets destines à l'inventaire. But:utiliser le polymorphisme au maximum
 	
 	private int length=32; // Taille en carres
-	private int height=16;
+	private int height=20;
 	private int size=42;// Taille en pixels d'un carre
 	
 	//
@@ -33,16 +32,12 @@ public class Model implements Observable,DemisableObserver, CarteObservable,Seri
 	}
  	
  	private void startGame() {
- 		//Inventaire invent = new Inventaire();
- 		Inventaire invent = new Inventaire();
- 		setInventaire(invent);
 		Player player = new Player(10,1.0,new int[]{5,6},Color.GREEN,1);
 		player.creationAttach(this);
 		player.demisableAttach(this);
     	player.addPlayerMovementObserver(this);
-    	//this.attachInterface(player);
-		synchronized(gameobjects){
-		gameobjects.add(0,player);}
+    	synchronized(gameobjects){
+    		gameobjects.add(0,player);}
 
 		//System.out.println("player fini");
 		Archer archer=new Archer(1,1.0,new int[]{14,7},Color.CYAN,2);
@@ -61,7 +56,7 @@ public class Model implements Observable,DemisableObserver, CarteObservable,Seri
 		block2.demisableAttach(this);
 		block2.moveableAttach(this.getPlayer());
 		gameobjects.add(0,block2);*/
-		Object potion =new Potion(new int []{12,2},Color.PINK);
+	/*	Object potion =new Potion(new int []{12,2},Color.PINK);
 		objects.add(potion);
 		this.initialize(potion);
 		Object potion2 =new Potion(new int []{14,2},Color.PINK);
@@ -69,19 +64,19 @@ public class Model implements Observable,DemisableObserver, CarteObservable,Seri
 		this.initialize(potion2);
 		BlockMoveable block1 =new BlockMoveable(new int[]{19,6},Color.DARK_GRAY,1);
 		this.initialize(block1);
-		for(GameObject go:gameobjects){
-			this.attachInterface(go);
-		}
-		
+		Coffre coffre=new Coffre(10,6);
+		this.initialize(coffre);*/
 		map=new Map(tailleMap);
 		ArrayList<Case> listeDeBlocksPourLaCarte = map.getBlocList();
 			for (Case bloc:listeDeBlocksPourLaCarte) {
 				this.initialize(bloc);				
 			}
+		for(GameObject go:gameobjects){
+			this.attachInterface(go);
+		}
 	}
  	public void startGame(Model model) {
- 		//System.out.println("start game");
- 		inventaire = model.getInventaire();
+ 		//inventaire = model.getInventaire();
  		gameobjects = model.getGameObjects();
  		objects = model.getObjects();
 		/*ArrayList<Observeur> listObserveurs=new ArrayList<Observeur>();
@@ -119,7 +114,8 @@ public class Model implements Observable,DemisableObserver, CarteObservable,Seri
  	    	go.demisableAttach(this);
  	    	go.addObserver(this);
  	}
- 	public void attachInterface(GameObject gameobject){// Rattache les observeurs necessaires au gameobject en parametre
+ 	public void attachInterface(GameObject gameobject){//Rattache les observeurs necessaires au gameobject en parametre
+ 		//TODO:rattacher des synchronized partout devant toutes les listes des interfaces
  		synchronized(gameobjects){
  		for (GameObject go:gameobjects){
 			if(go instanceof AttackObserver){
@@ -133,6 +129,9 @@ public class Model implements Observable,DemisableObserver, CarteObservable,Seri
 			}
 			if(go instanceof MoveableObserver){
 				gameobject.moveableAttach((MoveableObserver)go);
+			}
+			if(go instanceof AddInventaireObserver){
+				gameobject.addInventaireAttach((AddInventaireObserver)go);
 			}
 		}
  	}
@@ -215,6 +214,31 @@ public class Model implements Observable,DemisableObserver, CarteObservable,Seri
 			}
 		}
 	}
+
+	private ArrayList<Node> makeCarte() {
+		boolean found=false;
+		ArrayList<Node> carteDeNode = new ArrayList<>();
+		for(int i=0;i<tailleMap;i++){
+			for(int j=0;j<tailleMap;j++){
+				found=false;
+				for(GameObject tuile:gameobjects){
+					if(tuile.getPositionX()==i && tuile.getPositionY()==j && tuile instanceof Case){//TODO il faudrait remplacer par un " isObstacle" ?
+						//System.out.println("obstacle trouvé");//il ne vois que quelques obstables
+						found=true;
+						break;
+					}
+				}
+				if(found){
+					carteDeNode.add(new Node(i,j,10000000));
+				}
+				else{
+					carteDeNode.add(new Node(i,j));
+				}
+			}
+		}
+		return carteDeNode;
+	}
+	
 	@Override
 	public void addObserver(Observeur o) {
 	     listObserveurs.add(o);	
@@ -248,14 +272,10 @@ public class Model implements Observable,DemisableObserver, CarteObservable,Seri
     	gameobjects.remove(d);
     	if (loot!= null){
     		for(GameObject element: loot){
-    			if(element instanceof Demisable){
-    				element.demisableAttach(this);
-    			}
-    		}
-    		gameobjects.addAll(loot);
-    		for(GameObject go:loot){
-    			if(go instanceof Object){
-    				objects.add(go);
+    			this.initialize(element);
+    			//this.attachInterface(element);
+    			if(element instanceof AddInventaireObserver){
+    				this.getPlayer().addInventaireAttach((AddInventaireObserver) element);
     			}
     		}
     	}
@@ -270,8 +290,24 @@ public class Model implements Observable,DemisableObserver, CarteObservable,Seri
     	this.attachInterface(go);
     	this.notifyObserver();
     }
+    @Override
+	public void addCarteObserver(CarteObserver obs) {
+		carteObserveurs.add(obs);
+	}
+
+	@Override
+	public void deleteCarteObserver(CarteObserver obs) {
+		carteObserveurs.remove(obs);
+	}
+
+	@Override
+	public void sentCarte() {
+		for(CarteObserver co:carteObserveurs){
+			co.update(makeCarte(),new int[]{getPlayer().getPositionX(),getPlayer().getPositionY()});
+		}
+	}
 	public Inventaire getInventaire(){
-		return inventaire;
+		return getPlayer().getInventaire();
 	}
 	public Player getPlayer() {
 		return (Player) gameobjects.get(0);
@@ -284,10 +320,7 @@ public class Model implements Observable,DemisableObserver, CarteObservable,Seri
 		return objects;
 	}
 	public ArrayList <GameObject> getObjectsInventaire(){
-		return this.inventaire.getObjects();
-	}
-	public void setInventaire(Inventaire inventaire){
-		this.inventaire=inventaire;
+		return this.getInventaire().getObjects();
 	}
 	public int getLength() {
 		return length;
@@ -304,48 +337,7 @@ public class Model implements Observable,DemisableObserver, CarteObservable,Seri
 	public int getTailleCarte(){
 		return tailleMap;
 	}
-
 	public ArrayList<Observeur> getListObserveurs() {
 		return listObserveurs;
-	}
-
-	@Override
-	public void addCarteObserver(CarteObserver obs) {
-		carteObserveurs.add(obs);
-	}
-
-	@Override
-	public void deleteCarteObserver(CarteObserver obs) {
-		carteObserveurs.remove(obs);
-	}
-
-	@Override
-	public void sentCarte() {
-		for(CarteObserver co:carteObserveurs){
-			co.update(makeCarte(),new int[]{getPlayer().getPositionX(),getPlayer().getPositionY()});
-		}
-	}
-
-	private ArrayList<Node> makeCarte() {
-		ArrayList<Node> carteDeNode = new ArrayList<>();
-		carteDeNode.add(new Node(getPlayer().getPositionX(),getPlayer().getPositionY()));
-		for(int i=0;i<tailleMap;i++){
-			for(int j=0;j<tailleMap;j++){
-				boolean found=false;
-				for(GameObject tuile:gameobjects){
-					if(tuile.getPositionX()==i && tuile.getPositionY()==j && tuile.isObstacle()){
-						found=true;
-						break;
-					}
-				}
-				if(found){
-					carteDeNode.add(new Node(i,j,100000));
-				}
-				else{
-					carteDeNode.add(new Node(i,j));
-				}
-			}
-		}
-		return carteDeNode;
 	}
 }

@@ -29,11 +29,14 @@ public class Poursuiveur extends AbstractEnnemy implements CarteObserver,Attack,
 	public void update(ArrayList<Node> node, int[]finishPos) {
 		//System.out.println("coucou");
 		Node playerNode=null;
-		Node enemyNode=new Node(this.getPositionX(),this.getPositionY());
+		Node enemyNode=null;
 		this.node=node;
 		for(Node test:node){
 			if(test.getPosition()[0]==finishPos[0] && test.getPosition()[1]==finishPos[1]){
 				playerNode = test;
+			}
+			if(test.getPosition()[0]==this.getPositionX() && test.getPosition()[1]==this.getPositionY()){
+				enemyNode=test;
 			}
 		}
 		if(!poursuite.isInterrupted()){
@@ -44,14 +47,17 @@ public class Poursuiveur extends AbstractEnnemy implements CarteObserver,Attack,
 		thread.start();
 	}
 
-	public void moveEnnemy(int X, int Y){//TODO : ajouter l'attackObserver
+	public boolean moveEnnemy(int X, int Y){//TODO : ajouter l'attackObserver
+		boolean succes = false;
 		this.setStateObstacle(false);
 		this.obstacleNotifyObserver(X, Y);
 		if(!this.getStateObstacle()){
 			this.move(X, Y);
 			this.notifyObserver();
+			succes=true;
 		}
 		this.AttackNotifyObserver(X,Y);
+		return succes;
 	}	
 	@Override
 	public void AttackAttach(AttackObserver ao){

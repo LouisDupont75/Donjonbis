@@ -1,20 +1,32 @@
 package modele;
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 
-public class Player extends Personnage implements Moveable,AttackObserver,Creation,PlayerAttack,Obstacle,PlayerMovement{
+public class Player extends Personnage implements Moveable,AttackObserver,Creation,PlayerAttack,Obstacle,AddInventaire, PlayerMovement{
 	private boolean bowEquiped=false;
+	private Inventaire inventaire;
 	private boolean keyboardInversion=false;
+	private int direction;
 	private int life;
 	private ArrayList<PlayerMovementObserver> playerMovementObserverList = new ArrayList<>();
 	private ArrayList<MoveableObserver> moveableobservers =new ArrayList<MoveableObserver>();
+	private ArrayList<AddInventaireObserver> inventaireobservers =new ArrayList<AddInventaireObserver>();
 	private ArrayList<CreationObserver> creationobservers = new ArrayList<CreationObserver>();
 	private ArrayList<PlayerAttackObserver> playerattackobservers = new ArrayList<PlayerAttackObserver>();
 	private ArrayList<ObstacleObserver> obstacleobservers = new ArrayList<ObstacleObserver>();
 	public Player(int life,Double dmg,int[] position,Color color,int direction) {
 		super(life,dmg,position,color,direction);
-		//setLife(life);
+		Inventaire invent = new Inventaire();
+ 		setInventaire(invent);
+	}
+	public int getDirection(){
+		return this.direction;
+	}
+	public void setDirection(int direction){
+		this.direction=direction;
+		if (getKeyboardInversion()){
+			this.direction=switchDirection(direction);
+		}
 	}
 	public boolean getKeyboardInversion(){
 		return this.keyboardInversion;
@@ -40,6 +52,22 @@ public class Player extends Personnage implements Moveable,AttackObserver,Creati
 		if(this.getLife()<=0){
 			System.out.println("GAME OVER");
 			}
+	}
+	public int switchDirection(int direction){
+		int val=0;
+		if(direction==1){
+			val=3;
+		}
+		else if(direction==3){
+			val=1;
+		}
+		else if(direction==0){
+			val=2;
+		}
+		else if(direction==2){
+			val=0;
+		}
+		return val;
 	}
 	public void shootArrow(){
 		if(this.getBowEquiped()){
@@ -70,19 +98,19 @@ public class Player extends Personnage implements Moveable,AttackObserver,Creati
 			int y = coordinate[1];
 			this.playerAttackNotify(x,y);
 		}
+	public void addToInventaire(Object object){
+		object.demisableAttach(inventaire);
+		this.inventaire.addObject(object);
+	}
 	///
-	public GameObject addItem(ArrayList<GameObject> objects,Inventaire inventaire){
-	GameObject item=null;
-		for (GameObject object: objects){
-			if (object.isAtPosition(this.position)){
-				object.demisableNotifyObserver();// Doit etre fait AVANT l'ajout dans l'inventaire sinon l'inventaire
-	//supprimera l'objet qu'il vient de rajouter
-				object.demisableAttach(inventaire);
-				inventaire.addObject(object);
-				item=object;
-			}
-		}
-	return item;
+	public void addItem(){
+		this.addInventaireNotify();
+	}
+	public Inventaire getInventaire(){
+		return inventaire;
+	}
+	public void setInventaire(Inventaire inventaire){
+		this.inventaire=inventaire;
 	}
 	@Override
     public void utilize(GameObject object){ 
@@ -151,9 +179,9 @@ public class Player extends Personnage implements Moveable,AttackObserver,Creati
     }
     @Override
     public void moveableNotifyObserver(int x,int y){
-   	 for(MoveableObserver mo:moveableobservers){
-   		 mo.moved(this,x,y);
-   	 }
+    	for(MoveableObserver mo:moveableobservers){
+    		mo.moved(this,x,y);
+    	}
     }
 	@Override
 	public void addPlayerMovementObserver(Model model) {
@@ -163,4 +191,14 @@ public class Player extends Personnage implements Moveable,AttackObserver,Creati
 	public void notifyPlayerMovementObserver() {
 		playerMovementObserverList.get(0).updatePlayerMovement();
 	}
+    @Override
+    public void addInventaireAttach(AddInventaireObserver aio){
+    	inventaireobservers.add(aio);
+    }
+    @Override
+    public void addInventaireNotify(){
+    	for(AddInventaireObserver aio:inventaireobservers){
+    		aio.added(this);
+    	}
+    }
 }
