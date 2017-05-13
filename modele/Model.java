@@ -13,7 +13,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public class Model implements Observable,DemisableObserver, CarteObservable,Serializable,Observeur,CreationObserver {
+public class Model implements Observable,DemisableObserver, CarteObservable,Serializable,Observeur,CreationObserver,PlayerMovementObserver {
 	private transient Inventaire inventaire;
 	private ArrayList<Observeur> listObserveurs = new ArrayList<Observeur>();
 	private ArrayList<GameObject> gameobjects= new ArrayList<GameObject>();
@@ -39,7 +39,7 @@ public class Model implements Observable,DemisableObserver, CarteObservable,Seri
 		Player player = new Player(10,1.0,new int[]{5,6},Color.GREEN,1);
 		player.creationAttach(this);
 		player.demisableAttach(this);
-    	player.addObserver(this);
+    	player.addPlayerMovementObserver(this);
     	//this.attachInterface(player);
 		synchronized(gameobjects){
 		gameobjects.add(0,player);}
@@ -52,12 +52,9 @@ public class Model implements Observable,DemisableObserver, CarteObservable,Seri
 		this.initialize(e1);
 		Ennemy e2 = new Ennemy(3,1.0,new int[]{15,12},Color.CYAN,1);
 		this.initialize(e2);
-		//System.out.println("ennemi2 fini");
-
 		Poursuiveur poursuiveur = new Poursuiveur(new int[]{10,10});
-		poursuiveur.demisableAttach(this);
+		this.initialize(poursuiveur);
 		synchronized(gameobjects){
-			gameobjects.add(poursuiveur);
 			addCarteObserver(poursuiveur);
 		}
 		/*BlockMoveable block2 =new BlockMoveable(new int[]{13,2},Color.GRAY);
@@ -241,6 +238,11 @@ public class Model implements Observable,DemisableObserver, CarteObservable,Seri
 	public void update(){
 		this.notifyObserver();
 	}
+	@Override
+	public void updatePlayerMovement(){
+		sentCarte();
+		notifyObserver();
+	}
     @Override
     public void demise(Demisable d ,ArrayList<GameObject> loot){
     	gameobjects.remove(d);
@@ -320,7 +322,7 @@ public class Model implements Observable,DemisableObserver, CarteObservable,Seri
 	@Override
 	public void sentCarte() {
 		for(CarteObserver co:carteObserveurs){
-			co.update(makeCarte());
+			co.update(makeCarte(),new int[]{getPlayer().getPositionX(),getPlayer().getPositionY()});
 		}
 	}
 
@@ -333,15 +335,14 @@ public class Model implements Observable,DemisableObserver, CarteObservable,Seri
 				for(GameObject tuile:gameobjects){
 					if(tuile.getPositionX()==i && tuile.getPositionY()==j && tuile.isObstacle()){
 						found=true;
+						break;
 					}
 				}
 				if(found){
 					carteDeNode.add(new Node(i,j,100000));
 				}
 				else{
-					if(i!=getPlayer().getPositionX()&&j!=getPlayer().getPositionY()){
-						carteDeNode.add(new Node(i,j));
-					}
+					carteDeNode.add(new Node(i,j));
 				}
 			}
 		}

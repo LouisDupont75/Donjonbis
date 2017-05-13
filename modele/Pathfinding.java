@@ -12,7 +12,9 @@ public class Pathfinding {
 	
 	//CONSTRUCTOR
 	public Pathfinding(Node startNode, Node finishNode,ArrayList<Node>map){
+		//System.out.println("map size: "+map.size());
 		reachable.add(startNode);
+		startNode.setCost(0);
 		this.setFinishNode(finishNode);
 		this.map = map;
 	}
@@ -38,11 +40,12 @@ public class Pathfinding {
 		ArrayList<Node> path = null;
 		while(reachable.size()!=0){
 			Node node=chooseNode();
+			//System.out.println("node position: "+node.getPosition()[0]+ " "+node.getPosition()[1]);
 			//System.out.println("current node = " + node.getPosition()[0]+ " " + node.getPosition()[1]);
 			//System.out.println("size of reachable = " + reachable.size());
 			if(node==this.getFinishNode()){
 				path = buildThePath(node);
-				//System.out.println("found it! :3");
+				System.out.println("found it! :3");
 				break;
 			}
 			reachable.remove(node);
@@ -62,7 +65,7 @@ public class Pathfinding {
 				}
 			}
 		}
-		//System.out.println("path size: "+path.size());
+		System.out.println("path size: "+path.size());
 		Collections.reverse(path);
 		return path;
 	}
@@ -93,9 +96,14 @@ public class Pathfinding {
 	 * @return liste de noeuds adjacent a node
 	 */
 	private ArrayList<Node> getAdjacent(Node node) {
+		//System.out.println("node position: "+node.getPosition()[0]+ " "+node.getPosition()[1]);
 		ArrayList<Node>adjacent = new ArrayList<Node>();
 		for(Node potential:this.map){
-			if(((potential.getPosition()[0]==node.getPosition()[0]+1 && potential.getPosition()[1]==node.getPosition()[1])  || (potential.getPosition()[0]==node.getPosition()[0]-1 && potential.getPosition()[1]==node.getPosition()[1]) || (potential.getPosition()[1]==node.getPosition()[1]+1 && potential.getPosition()[0]==node.getPosition()[0]) || (potential.getPosition()[1]==node.getPosition()[1]-1 && potential.getPosition()[0]==node.getPosition()[0]))&&(!isExplored(potential))){
+			if(((potential.getPosition()[0]==node.getPosition()[0]+1 && potential.getPosition()[1]==node.getPosition()[1])  ||
+					(potential.getPosition()[0]==node.getPosition()[0]-1 && potential.getPosition()[1]==node.getPosition()[1]) ||
+					(potential.getPosition()[1]==node.getPosition()[1]+1 && potential.getPosition()[0]==node.getPosition()[0]) ||
+					(potential.getPosition()[1]==node.getPosition()[1]-1 && potential.getPosition()[0]==node.getPosition()[0]))&&
+					(!isExplored(potential))){
 				adjacent.add(potential);
 			}
 		}
@@ -114,6 +122,7 @@ public class Pathfinding {
 			int costNodeToGoal=calculateDistance(node,this.getFinishNode());
 			int totalCost = costStartToNode + costNodeToGoal;
 			if(minCost>totalCost){
+				//System.out.println("reachable found!");
 				minCost = totalCost;
 				bestNode = node;
 			}

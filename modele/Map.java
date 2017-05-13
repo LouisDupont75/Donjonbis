@@ -20,6 +20,9 @@ public class Map implements Serializable{
 				else if (carte[i][j]==5) {
 					blocList.add(new Coffre(i,j));
 				}				
+				/*else if(carte[i][j]==6){
+					blocList.add(new Ennemy(new int[]{i,j}));
+				}*/
 			}
 		}		
 	}

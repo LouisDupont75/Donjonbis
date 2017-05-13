@@ -23,7 +23,7 @@ public class Controller {//sert a controller le joueur, pour eviter de violer la
 		case 1:
 			if (oldY>0) {
 				model.getPlayer().movePlayer(0, -1);} // .movePlayer(0, -1);}//, player1);}
-				model.getPlayer().setDirection(2); // .getPlayer().setDirection(1);
+				model.getPlayer().setDirection(1); // .getPlayer().setDirection(1);
 			//System.out.println("personnage en " + oldX + " et " + String.valueOf(oldY-1) );
 			break;
 			

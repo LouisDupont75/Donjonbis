@@ -6,8 +6,7 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
 //import java.util.Iterator;
-public class Ennemy extends AbstractEnnemy implements ExplodableObserver,Attack,Obstacle,ObstacleObserver,Observable
-,PlayerAttackObserver{
+public class Ennemy extends AbstractEnnemy implements Attack,Obstacle,Observable{
 	private transient Thread t;
 	private ArrayList<Observeur> listObserveurs = new ArrayList<Observeur>();
 	private ArrayList<AttackObserver> attackobservers = new ArrayList<AttackObserver>();
@@ -72,18 +71,6 @@ public class Ennemy extends AbstractEnnemy implements ExplodableObserver,Attack,
    	 }
     }
     @Override
-    public void collision(Obstacle o,int x,int y){
-		if(!this.getStateDemisable()){
-    		GameObject go=(GameObject) o;
-			int distX=this.getPositionX()-(go.getPositionX()+x);
-			int distY=this.getPositionY()-(go.getPositionY()+y);
-			//System.out.println(distX + "et" + distY);
-			if(distX==0 && distY==0){
-				go.setStateObstacle(true);
-			}
-		}	
-	}
-    @Override
 	public void addObserver(Observeur o) {
 	     listObserveurs.add(o);
 	}
@@ -102,16 +89,5 @@ public class Ennemy extends AbstractEnnemy implements ExplodableObserver,Attack,
 			observeur.update();
 		}
 		
-	}
-	@Override
-	public void attackedByPlayer(PlayerAttack pa,int x,int y){
-		GameObject attacker=(GameObject)pa;
-		int distX=this.getPositionX()-(attacker.getPositionX()+x);
-		int distY=this.getPositionY()-(attacker.getPositionY()+y);
-		if(distX==0 && distY==0){
-			this.setLife(this.getLife()-1);
-			attacker.setStateAttack(true);
-
-		}
 	}
 }

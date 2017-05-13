@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 
-public abstract class Personnage extends GameObject implements Demisable { // demisableObservable non? MoveableObserver,
+public abstract class Personnage extends GameObject implements ObstacleObserver, Demisable { // demisableObservable non? MoveableObserver,
 	//--> Tous les personnages peuvent mourir
 	private int life; 
 	private Double dmg;
@@ -80,6 +80,19 @@ public abstract class Personnage extends GameObject implements Demisable { // de
 			po.demise(this, null);
 		}
 		this.setStateDemisable(true);
+	}
+	
+	@Override
+	public void collision(Obstacle o,int x,int y){
+		if((!this.getStateDemisable())){
+			GameObject go=(GameObject) o;
+			int distX=this.getPositionX()-(go.getPositionX()+x);
+			int distY=this.getPositionY()-(go.getPositionY()+y);
+			//System.out.println(distX + "et" + distY);
+			if(distX==0 && distY==0){
+				go.setStateObstacle(true);
+			}
+		}	
 	}
 	
 	///

@@ -3,8 +3,7 @@ package modele;
 import java.awt.Color;
 import java.util.ArrayList;
 
-public class BlockBreakable extends Case implements ExplodableObserver,Demisable,ObstacleObserver,PlayerAttackObserver,
-AttackObserver{
+public class BlockBreakable extends Case implements ExplodableObserver,Demisable,ObstacleObserver,PlayerAttackObserver,AttackObserver{
 	protected ArrayList<DemisableObserver> demisableobservers =new ArrayList<DemisableObserver>();
 	private int life;
 	//commentaire dans block, Donjonbis sur eclipse 

@@ -56,7 +56,7 @@ public abstract class GameObject implements Serializable{
 	}
 	public void move(int X, int Y){
 		this.setPositionX(this.getPositionX() + X);
-		this.position[1] = this.getPositionY() + Y;
+		this.setPositionY(this.getPositionY() + Y);
 	}
 	public double distance (GameObject A){
 		return Math.sqrt(Math.pow(A.getPositionX()-this.getPositionX(),2)+Math.pow(A.getPositionY()-

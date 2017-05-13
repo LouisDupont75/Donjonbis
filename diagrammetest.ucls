@@ -1,0 +1,1157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.0" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <interface id="1" language="java" name="modele.ObstacleObserver" project="Donjonbis" 
+    file="/Donjonbis/modele/ObstacleObserver.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="166" x="776" y="3252"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="2" language="java" name="modele.AttackObserver" project="Donjonbis" 
+    file="/Donjonbis/modele/AttackObserver.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="157" x="2869" y="3252"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="3" language="java" name="modele.Inventaire" project="Donjonbis" file="/Donjonbis/modele/Inventaire.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="259" x="2141" y="240"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="modele.Bow" project="Donjonbis" file="/Donjonbis/modele/Bow.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="99" width="116" x="3303" y="3252"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="5" language="java" name="modele.Observable" project="Donjonbis" 
+    file="/Donjonbis/modele/Observable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="184" x="2645" y="3252"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="6" language="java" name="modele.CarteObserver" project="Donjonbis" 
+    file="/Donjonbis/modele/CarteObserver.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="172" x="545" y="3252"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="7" language="java" name="modele.CarteObservable" project="Donjonbis" 
+    file="/Donjonbis/modele/CarteObservable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="230" x="109" y="240"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="8" language="java" name="modele.Case" project="Donjonbis" file="/Donjonbis/modele/Case.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="81" width="104" x="525" y="1809"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="9" language="java" name="modele.DemisableObserver" project="Donjonbis" 
+    file="/Donjonbis/modele/DemisableObserver.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="259" x="2325" y="2861"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="10" language="java" name="modele.CreationObserver" project="Donjonbis" 
+    file="/Donjonbis/modele/CreationObserver.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="193" x="3898" y="3252"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="11" language="java" name="modele.Archer" project="Donjonbis" file="/Donjonbis/modele/Archer.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="229" x="3131" y="2861"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="12" language="java" name="modele.PlayerMovement" project="Donjonbis" 
+    file="/Donjonbis/modele/PlayerMovement.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="228" x="3712" y="2861"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="13" language="java" name="modele.Demisable" project="Donjonbis" file="/Donjonbis/modele/Demisable.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="239" x="2046" y="2861"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="14" language="java" name="modele.Explodable" project="Donjonbis" 
+    file="/Donjonbis/modele/Explodable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="239" x="1355" y="2861"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="15" language="java" name="modele.Obstacle" project="Donjonbis" file="/Donjonbis/modele/Obstacle.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="219" x="1808" y="3252"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="16" language="java" name="modele.Player" project="Donjonbis" file="/Donjonbis/modele/Player.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="585" width="299" x="3110" y="2236"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="modele.Arrow" project="Donjonbis" file="/Donjonbis/modele/Arrow.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="567" width="257" x="2461" y="1202"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="modele.BlockMoveable" project="Donjonbis" 
+    file="/Donjonbis/modele/BlockMoveable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="219" x="1075" y="2861"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="modele.BlockBreakable" project="Donjonbis" 
+    file="/Donjonbis/modele/BlockBreakable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="297" width="239" x="1197" y="2236"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="modele.InversionKeyboard" project="Donjonbis" 
+    file="/Donjonbis/modele/InversionKeyboard.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="168" x="3110" y="1809"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="21" language="java" name="modele.Attack" project="Donjonbis" file="/Donjonbis/modele/Attack.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="197" x="3066" y="3252"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="22" language="java" name="modele.Poursuiveur" project="Donjonbis" file="/Donjonbis/modele/Poursuiveur.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="315" width="219" x="816" y="2861"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="modele.Bomb" project="Donjonbis" file="/Donjonbis/modele/Bomb.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="369" width="311" x="1476" y="2236"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="modele.Model" project="Donjonbis" file="/Donjonbis/modele/Model.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="747" width="259" x="2421" y="-547"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="modele.Pathfinding" project="Donjonbis" file="/Donjonbis/modele/Pathfinding.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="261" width="225" x="33" y="2861"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="modele.AbstractEnnemy" project="Donjonbis" 
+    file="/Donjonbis/modele/AbstractEnnemy.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="299" x="2511" y="2236"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="27" language="java" name="modele.PlayerAttackObserver" project="Donjonbis" 
+    file="/Donjonbis/modele/PlayerAttackObserver.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="230" x="3400" y="2861"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="28" language="java" name="modele.MapGeneration" project="Donjonbis" 
+    file="/Donjonbis/modele/MapGeneration.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="549" width="263" x="565" y="433"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="modele.Ennemy" project="Donjonbis" file="/Donjonbis/modele/Ennemy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="351" width="299" x="2645" y="2861"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="modele.ThrMoveEnnemy" project="Donjonbis" 
+    file="/Donjonbis/modele/ThrMoveEnnemy.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="172" x="2772" y="1809"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="modele.Personnage" project="Donjonbis" file="/Donjonbis/modele/Personnage.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="387" width="311" x="2421" y="1809"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="32" language="java" name="modele.PlayerMovementObserver" project="Donjonbis" 
+    file="/Donjonbis/modele/PlayerMovementObserver.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="172" x="4544" y="2861"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="33" language="java" name="modele.Creation" project="Donjonbis" file="/Donjonbis/modele/Creation.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="229" x="3629" y="3252"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="34" language="java" name="modele.ExplodableObserver" project="Donjonbis" 
+    file="/Donjonbis/modele/ExplodableObserver.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="153" x="1634" y="2861"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="35" language="java" name="modele.Explosion" project="Donjonbis" file="/Donjonbis/modele/Explosion.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="239" x="2148" y="2236"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="modele.Object" project="Donjonbis" file="/Donjonbis/modele/Object.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="239" x="1869" y="2236"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="37" language="java" name="modele.PlayerAttack" project="Donjonbis" 
+    file="/Donjonbis/modele/PlayerAttack.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="257" x="4247" y="2861"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="38" language="java" name="modele.GameObject" project="Donjonbis" file="/Donjonbis/modele/GameObject.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="729" width="262" x="2421" y="433"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="modele.ThreadPoursuit" project="Donjonbis" 
+    file="/Donjonbis/modele/ThreadPoursuit.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="306" x="33" y="2236"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="40" language="java" name="modele.Map" project="Donjonbis" file="/Donjonbis/modele/Map.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="192" x="565" y="240"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="41" language="java" name="modele.Observeur" project="Donjonbis" file="/Donjonbis/modele/Observeur.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="103" x="402" y="3252"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="42" language="java" name="modele.Coffre" project="Donjonbis" file="/Donjonbis/modele/Coffre.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="229" x="526" y="2861"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="43" language="java" name="modele.Node" project="Donjonbis" file="/Donjonbis/modele/Node.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="315" width="165" x="33" y="3252"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="44" language="java" name="modele.Potion" project="Donjonbis" file="/Donjonbis/modele/Potion.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="116" x="1869" y="2861"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="45" language="java" name="modele.Moveable" project="Donjonbis" file="/Donjonbis/modele/Moveable.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="227" x="3980" y="2861"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="46" language="java" name="modele.MoveableObserver" project="Donjonbis" 
+    file="/Donjonbis/modele/MoveableObserver.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="163" x="2442" y="3252"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="47" language="java" name="modele.BlockUnbreakable" project="Donjonbis" 
+    file="/Donjonbis/modele/BlockUnbreakable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="166" x="463" y="2236"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <generalization id="48">    
+    <end type="SOURCE" refId="44"/>    
+    <end type="TARGET" refId="36"/>  
+  </generalization>  
+  <realization id="49">    
+    <bendpoint x="3037" y="1809"/>    
+    <bendpoint x="3037" y="2236"/>    
+    <bendpoint x="3037" y="2861"/>    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <association id="50">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="51" name="explodableObservers"/>      
+      <multiplicity id="52" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="53">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="46"/>  
+  </realization>  
+  <association id="54">    
+    <bendpoint x="3439" y="1809"/>    
+    <bendpoint x="3439" y="2236"/>    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="55" name="playerattackobservers"/>      
+      <multiplicity id="56" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="57">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="19"/>  
+  </generalization>  
+  <generalization id="58">    
+    <bendpoint x="2430" y="1202"/>    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="38"/>  
+  </generalization>  
+  <association id="59">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="60" name="observers"/>      
+      <multiplicity id="61" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="62">    
+    <bendpoint x="2480" y="2236"/>    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="63" name="demisableobservers"/>      
+      <multiplicity id="64" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="65">    
+    <bendpoint x="2459" y="2236"/>    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <association id="66">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="67" name="listObserveurs"/>      
+      <multiplicity id="68" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="41" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="69">    
+    <bendpoint x="680" y="1809"/>    
+    <bendpoint x="680" y="2236"/>    
+    <bendpoint x="495" y="2861"/>    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <association id="70">    
+    <bendpoint x="411" y="240"/>    
+    <bendpoint x="411" y="433"/>    
+    <bendpoint x="411" y="1202"/>    
+    <bendpoint x="411" y="1809"/>    
+    <bendpoint x="411" y="2236"/>    
+    <bendpoint x="432" y="2861"/>    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="71" name="carteObserveurs"/>      
+      <multiplicity id="72" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="73">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <association id="74">    
+    <bendpoint x="534" y="433"/>    
+    <bendpoint x="534" y="1202"/>    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="75" name="blocList"/>      
+      <multiplicity id="76" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="77">    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <association id="78">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="79" name="inventaire"/>      
+      <multiplicity id="80" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="81">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="82" name="finishNode"/>      
+      <multiplicity id="83" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="43" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="84">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="21"/>  
+  </realization>  
+  <realization id="85">    
+    <bendpoint x="2995" y="2861"/>    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="15"/>  
+  </realization>  
+  <association id="86">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="87" name="listObserveurs"/>      
+      <multiplicity id="88" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="41" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="89">    
+    <bendpoint x="2995" y="240"/>    
+    <bendpoint x="2995" y="433"/>    
+    <bendpoint x="2995" y="1202"/>    
+    <bendpoint x="2995" y="1809"/>    
+    <bendpoint x="2995" y="2236"/>    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <generalization id="90">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="26"/>  
+  </generalization>  
+  <generalization id="91">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="31"/>  
+  </generalization>  
+  <association id="92">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="93" name="demisableobservers"/>      
+      <multiplicity id="94" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="95">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="96" name="playerMovementObserverList"/>      
+      <multiplicity id="97" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="32" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="98">    
+    <bendpoint x="2974" y="1809"/>    
+    <bendpoint x="2974" y="2236"/>    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="99" name="demisableobservers"/>      
+      <multiplicity id="100" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="101">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="102" name="objectslist"/>      
+      <multiplicity id="103" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="104">    
+    <bendpoint x="453" y="2861"/>    
+    <end type="SOURCE" refId="47"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <realization id="105">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="15"/>  
+  </realization>  
+  <realization id="106">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="21"/>  
+  </realization>  
+  <association id="107">    
+    <end type="SOURCE" refId="43" navigable="false">      
+      <attribute id="108" name="previous"/>      
+      <multiplicity id="109" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="43" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="110">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="111" name="demisableObservers"/>      
+      <multiplicity id="112" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="113">    
+    <end type="SOURCE" refId="47"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <association id="114">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="115" name="player"/>      
+      <multiplicity id="116" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="117">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="38"/>  
+  </generalization>  
+  <realization id="118">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <realization id="119">    
+    <bendpoint x="2390" y="1809"/>    
+    <bendpoint x="2417" y="2236"/>    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <generalization id="120">    
+    <end type="SOURCE" refId="42"/>    
+    <end type="TARGET" refId="19"/>  
+  </generalization>  
+  <association id="121">    
+    <bendpoint x="2430" y="240"/>    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="122" name="gameobjects"/>      
+      <multiplicity id="123" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="124">    
+    <bendpoint x="4746" y="240"/>    
+    <bendpoint x="4746" y="433"/>    
+    <bendpoint x="4746" y="1202"/>    
+    <bendpoint x="4746" y="1809"/>    
+    <bendpoint x="4746" y="2236"/>    
+    <bendpoint x="4746" y="2861"/>    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
+  <realization id="125">    
+    <bendpoint x="3660" y="2861"/>    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="33"/>  
+  </realization>  
+  <association id="126">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="127" name="path"/>      
+      <multiplicity id="128" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="129">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="130" name="reachable"/>      
+      <multiplicity id="131" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="43" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="132">    
+    <bendpoint x="1817" y="1809"/>    
+    <bendpoint x="1817" y="2236"/>    
+    <bendpoint x="1817" y="2861"/>    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="15"/>  
+  </realization>  
+  <realization id="133">    
+    <bendpoint x="3079" y="2861"/>    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="134">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="15"/>  
+  </realization>  
+  <generalization id="135">    
+    <bendpoint x="1482" y="1202"/>    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="38"/>  
+  </generalization>  
+  <realization id="136">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <realization id="137">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="12"/>  
+  </realization>  
+  <generalization id="138">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="26"/>  
+  </generalization>  
+  <association id="139">    
+    <bendpoint x="2451" y="240"/>    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="140" name="objects"/>      
+      <multiplicity id="141" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="142">    
+    <bendpoint x="390" y="240"/>    
+    <bendpoint x="390" y="433"/>    
+    <bendpoint x="390" y="1202"/>    
+    <bendpoint x="390" y="1809"/>    
+    <bendpoint x="390" y="2236"/>    
+    <bendpoint x="390" y="2861"/>    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="41"/>  
+  </realization>  
+  <realization id="143">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="27"/>  
+  </realization>  
+  <association id="144">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="145" name="demisableobservers"/>      
+      <multiplicity id="146" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="147">    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="148" name="map1"/>      
+      <multiplicity id="149" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="150">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="151" name="map"/>      
+      <multiplicity id="152" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="43" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="153">    
+    <bendpoint x="1324" y="2861"/>    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <generalization id="154">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="31"/>  
+  </generalization>  
+  <association id="155">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="156" name="demisableobservers"/>      
+      <multiplicity id="157" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="158">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <realization id="159">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="34"/>  
+  </realization>  
+  <association id="160">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="161" name="sujet"/>      
+      <multiplicity id="162" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="163">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="164" name="map"/>      
+      <multiplicity id="165" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="166">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="167" name="attackobservers"/>      
+      <multiplicity id="168" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="169">    
+    <bendpoint x="2614" y="2861"/>    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="170" name="obstacleobservers"/>      
+      <multiplicity id="171" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="172">    
+    <bendpoint x="3492" y="240"/>    
+    <bendpoint x="3492" y="433"/>    
+    <bendpoint x="3492" y="1202"/>    
+    <bendpoint x="3492" y="1809"/>    
+    <bendpoint x="3492" y="2236"/>    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="32"/>  
+  </realization>  
+  <realization id="173">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="7"/>  
+  </realization>  
+  <association id="174">    
+    <bendpoint x="369" y="240"/>    
+    <bendpoint x="369" y="433"/>    
+    <bendpoint x="369" y="1202"/>    
+    <bendpoint x="369" y="1809"/>    
+    <bendpoint x="369" y="2236"/>    
+    <bendpoint x="369" y="2861"/>    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="175" name="listObserveurs"/>      
+      <multiplicity id="176" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="41" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="177">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="178" name="creationobservers"/>      
+      <multiplicity id="179" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="180">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="15"/>  
+  </realization>  
+  <generalization id="181">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <association id="182">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="183" name="obstacleobservers"/>      
+      <multiplicity id="184" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="185">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <realization id="186">    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <realization id="187">    
+    <end type="SOURCE" refId="35"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <realization id="188">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <realization id="189">    
+    <bendpoint x="3079" y="240"/>    
+    <bendpoint x="3079" y="433"/>    
+    <bendpoint x="3079" y="1202"/>    
+    <bendpoint x="3079" y="1809"/>    
+    <bendpoint x="3058" y="2236"/>    
+    <bendpoint x="3058" y="2861"/>    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <association id="190">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="191" name="attackobservers"/>      
+      <multiplicity id="192" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="193">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="194" name="obstacleobservers"/>      
+      <multiplicity id="195" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="196">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="27"/>  
+  </realization>  
+  <generalization id="197">    
+    <bendpoint x="2015" y="2861"/>    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="36"/>  
+  </generalization>  
+  <association id="198">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="199" name="ennemy"/>      
+      <multiplicity id="200" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="201">    
+    <bendpoint x="288" y="2861"/>    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="202" name="noeudOccupe"/>      
+      <multiplicity id="203" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="43" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="204">    
+    <bendpoint x="1838" y="2236"/>    
+    <bendpoint x="1838" y="2861"/>    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <generalization id="205">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <association id="206">    
+    <bendpoint x="3016" y="1809"/>    
+    <bendpoint x="3016" y="2236"/>    
+    <bendpoint x="2974" y="2861"/>    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="207" name="attackobservers"/>      
+      <multiplicity id="208" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="209">    
+    <bendpoint x="2369" y="433"/>    
+    <bendpoint x="2369" y="1202"/>    
+    <bendpoint x="2369" y="1809"/>    
+    <bendpoint x="2438" y="2236"/>    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <association id="210">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="211" name="obstacleobservers"/>      
+      <multiplicity id="212" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="213">    
+    <bendpoint x="3460" y="1809"/>    
+    <bendpoint x="3460" y="2236"/>    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="37"/>  
+  </realization>  
+  <realization id="214">    
+    <bendpoint x="785" y="2861"/>    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <association id="215">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="216" name="bow"/>      
+      <multiplicity id="217" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="218">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="219" name="playerattackobservers"/>      
+      <multiplicity id="220" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="221">    
+    <bendpoint x="3681" y="2861"/>    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="222" name="creationobservers"/>      
+      <multiplicity id="223" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="224">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="225" name="listObserveurs"/>      
+      <multiplicity id="226" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="41" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="227">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="37"/>  
+  </realization>  
+  <generalization id="228">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="26"/>  
+  </generalization>  
+  <association id="229">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="230" name="explored"/>      
+      <multiplicity id="231" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="43" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="232">    
+    <bendpoint x="3058" y="1809"/>    
+    <bendpoint x="3079" y="2236"/>    
+    <bendpoint x="3100" y="2861"/>    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="21"/>  
+  </realization>  
+  <association id="233">    
+    <bendpoint x="659" y="1809"/>    
+    <bendpoint x="659" y="2236"/>    
+    <bendpoint x="474" y="2861"/>    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="234" name="obstacleobservers"/>      
+      <multiplicity id="235" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="236">    
+    <bendpoint x="3016" y="2861"/>    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="237" name="moveableobservers"/>      
+      <multiplicity id="238" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="46" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="239">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="240" name="perso"/>      
+      <multiplicity id="241" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="242">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="243" name="node"/>      
+      <multiplicity id="244" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="43" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="245">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="33"/>  
+  </realization>  
+  <realization id="246">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="14"/>  
+  </realization>  
+  <association id="247">    
+    <bendpoint x="432" y="1809"/>    
+    <bendpoint x="432" y="2236"/>    
+    <bendpoint x="411" y="2861"/>    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="248" name="listObserveurs"/>      
+      <multiplicity id="249" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="41" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="250">    
+    <bendpoint x="1796" y="1809"/>    
+    <bendpoint x="1796" y="1202"/>    
+    <end type="SOURCE" refId="35"/>    
+    <end type="TARGET" refId="38"/>  
+  </generalization>  
+  <realization id="251">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="45"/>  
+  </realization>  
+  <realization id="252">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="34"/>  
+  </realization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

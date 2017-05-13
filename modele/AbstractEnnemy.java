@@ -3,7 +3,7 @@ package modele;
 import java.awt.Color;
 import java.util.ArrayList;
 
-public abstract class AbstractEnnemy extends Personnage  implements ExplodableObserver  {
+public abstract class AbstractEnnemy extends Personnage  implements ExplodableObserver,PlayerAttackObserver  {
 	protected transient Thread t;
 	protected ArrayList<DemisableObserver> demisableobservers = new ArrayList<DemisableObserver>();
 
@@ -39,8 +39,19 @@ public abstract class AbstractEnnemy extends Personnage  implements ExplodableOb
 			
 		}
 	}
-	public void moveEnnemy(int x, int y){
-		//TODO ajouter un comportement et notifier le modèle a l'aide d'un design pattern
+	
+	@Override
+	public void attackedByPlayer(PlayerAttack pa,int x,int y){
+		GameObject attacker=(GameObject)pa;
+		int distX=this.getPositionX()-(attacker.getPositionX()+x);
+		int distY=this.getPositionY()-(attacker.getPositionY()+y);
+		if(distX==0 && distY==0){
+			this.setLife(this.getLife()-1);
+			attacker.setStateAttack(true);
+		}
+	}
+
+	public void moveEnnemy(int i, int j) {		
 	}
 
 }

@@ -3,7 +3,7 @@ package modele;
 import java.awt.Color;
 import java.util.ArrayList;
 
-public class Archer extends AbstractEnnemy implements Runnable,ObstacleObserver,Creation,PlayerAttackObserver  {
+public class Archer extends AbstractEnnemy implements Runnable,Creation  {
 	private Bow bow;
 	private transient Thread t;
 	private ArrayList<CreationObserver> creationobservers = new ArrayList<CreationObserver>();
@@ -11,21 +11,22 @@ public class Archer extends AbstractEnnemy implements Runnable,ObstacleObserver,
 		super(life,dmg,position,color,direction);
 		this.bow=new Bow(new int[]{this.getPositionX(),this.getPositionY()},Color.ORANGE);
 		t=new Thread(this);
+		t.start();
 	}
 	public Archer(int[] position) {
 		super(3,1.0,position,Color.BLUE,0);
 		//this.bow=new Bow(new int[]{this.getPositionX(),this.getPositionY()},Color.ORANGE);
 		//model.getObjects().add(bow);//Ajout à la liste d'objets destinés à l'inventaire
 		//bow.demisableAttach(model);
-		Thread t=new Thread(this);
+		t=new Thread(this);
 		t.start();
 	}
 	public void changeDirection(){
-		if(this.getDirection()<4){
+		if(this.getDirection()<3){
 			this.setDirection(this.getDirection()+1);
 		}
-		else if (this.getDirection()==4){
-			this.setDirection(1);
+		else if (this.getDirection()==3){
+			this.setDirection(0);
 		}
 	}
 	public void shootArrow(){
@@ -61,18 +62,7 @@ public class Archer extends AbstractEnnemy implements Runnable,ObstacleObserver,
 			}
 		}
 	}
-	@Override
-	public void collision(Obstacle o,int x,int y){
-		if((!this.getStateDemisable())){
-			GameObject go=(GameObject) o;
-			int distX=this.getPositionX()-(go.getPositionX()+x);
-			int distY=this.getPositionY()-(go.getPositionY()+y);
-			//System.out.println(distX + "et" + distY);
-			if(distX==0 && distY==0){
-				go.setStateObstacle(true);
-			}
-		}	
-	}
+	
 	@Override
 	public void creationAttach(CreationObserver co){
 		creationobservers.add(co);
@@ -83,14 +73,5 @@ public class Archer extends AbstractEnnemy implements Runnable,ObstacleObserver,
 			co.initializeCreation(go);
 		}
 	}
-	@Override
-	public void attackedByPlayer(PlayerAttack pa,int x,int y){
-		GameObject attacker=(GameObject)pa;
-		int distX=this.getPositionX()-(attacker.getPositionX()+x);
-		int distY=this.getPositionY()-(attacker.getPositionY()+y);
-		if(distX==0 && distY==0){
-			this.setLife(this.getLife()-1);
-			attacker.setStateAttack(true);
-		}
-	}
+	
 }

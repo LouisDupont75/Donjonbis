@@ -3,14 +3,14 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 
-public class Player extends Personnage implements Moveable,AttackObserver,Creation,Observable,PlayerAttack,Obstacle {
+public class Player extends Personnage implements Moveable,AttackObserver,Creation,PlayerAttack,Obstacle,PlayerMovement{
 	private boolean bowEquiped=false;
 	private boolean keyboardInversion=false;
 	private int life;
+	private ArrayList<PlayerMovementObserver> playerMovementObserverList = new ArrayList<>();
 	private ArrayList<MoveableObserver> moveableobservers =new ArrayList<MoveableObserver>();
 	private ArrayList<CreationObserver> creationobservers = new ArrayList<CreationObserver>();
 	private ArrayList<PlayerAttackObserver> playerattackobservers = new ArrayList<PlayerAttackObserver>();
-	private ArrayList<Observeur> listObserveurs = new ArrayList<Observeur>();
 	private ArrayList<ObstacleObserver> obstacleobservers = new ArrayList<ObstacleObserver>();
 	public Player(int life,Double dmg,int[] position,Color color,int direction) {
 		super(life,dmg,position,color,direction);
@@ -61,7 +61,7 @@ public class Player extends Personnage implements Moveable,AttackObserver,Creati
 			else{
 				this.move(X, Y);
 			}
-			this.notifyObserver();
+			this.notifyPlayerMovementObserver();
 		}
 	}
 	public void launchAttack(){
@@ -134,26 +134,7 @@ public class Player extends Personnage implements Moveable,AttackObserver,Creati
 			pao.attackedByPlayer(this,x,y);
 		}
 	}
-	@Override
-	public void addObserver(Observeur o) {
-	     listObserveurs.add(o);
-	}
 
-	@Override
-	public void deleteObserver(Observeur o) {
-		listObserveurs.remove(o);
-	}
-	@Override
-	public void clearObserver(){
-		listObserveurs.clear();
-	}
-	@Override
-	public void notifyObserver() {
-		for (Observeur observeur:listObserveurs){
-			observeur.update();
-		}
-		
-	}
 	@Override
     public void obstacleNotifyObserver(int x,int y){
    	 for(ObstacleObserver oo:obstacleobservers){
@@ -174,4 +155,12 @@ public class Player extends Personnage implements Moveable,AttackObserver,Creati
    		 mo.moved(this,x,y);
    	 }
     }
+	@Override
+	public void addPlayerMovementObserver(Model model) {
+		playerMovementObserverList.add(model);
+	}
+	@Override
+	public void notifyPlayerMovementObserver() {
+		playerMovementObserverList.get(0).updatePlayerMovement();
+	}
 }

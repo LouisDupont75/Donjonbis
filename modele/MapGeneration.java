@@ -373,10 +373,14 @@ public class MapGeneration{
 				}
 				else {
 					matriceCarte[i][j]=2;
-					int x= aleatoire(1,84);
+					int x= aleatoire(1,52);
 					if (x==1) {
 						matriceCarte[i][j]=5;
 					}
+					/*int y=aleatoire(1,20);
+					if(y==1){
+						matriceCarte[i][j]=6;
+					}*/
 				}
 				enleverElementANonVisite(new int[] {i,j});
 			}
